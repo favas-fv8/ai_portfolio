@@ -3,7 +3,7 @@ services:
     name: portfolio-cms-api
     runtime: python
     rootDir: backend
-    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate && python manage.py init_superuser
     startCommand: gunicorn config.wsgi:application --bind 0.0.0.0:$PORT
     envVars:
       - key: SECRET_KEY
@@ -34,6 +34,10 @@ services:
           property: port
       - key: USE_SQLITE
         value: "False"
+      - key: DJANGO_SUPERUSER_EMAIL
+        value: "admin@portfolio.com"
+      - key: DJANGO_SUPERUSER_PASSWORD
+        value: "Admin@12345"
       - key: CORS_ALLOWED_ORIGINS
         value: "https://your-app.vercel.app"
       - key: JWT_ACCESS_TOKEN_LIFETIME_MINUTES
