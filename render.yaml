@@ -47,7 +47,7 @@ services:
     healthCheckPath: /api/schema/
     autoDeploy: true
 
-  - type: postgresql
+  - type: postgres
     name: portfolio-cms-db
     plan: free
     databaseName: portfolio_cms
