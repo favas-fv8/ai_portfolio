@@ -1,0 +1,48 @@
+services:
+  - type: web
+    name: portfolio-cms-api
+    runtime: python
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate
+    startCommand: gunicorn config.wsgi:application --bind 0.0.0.0:$PORT
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com"
+      - key: DB_NAME
+        fromDatabase:
+          name: portfolio-cms-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: portfolio-cms-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: portfolio-cms-db
+          property: password
+      - key: DB_HOST
+        fromDatabase:
+          name: portfolio-cms-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: portfolio-cms-db
+          property: port
+      - key: USE_SQLITE
+        value: "False"
+      - key: CORS_ALLOWED_ORIGINS
+        value: "https://your-app.vercel.app"
+      - key: JWT_ACCESS_TOKEN_LIFETIME_MINUTES
+        value: "30"
+      - key: JWT_REFRESH_TOKEN_LIFETIME_DAYS
+        value: "7"
+    healthCheckPath: /api/schema/
+    autoDeploy: true
+
+  - type: postgresql
+    name: portfolio-cms-db
+    plan: free
+    databaseName: portfolio_cms
