@@ -17,7 +17,6 @@ ENV/
 # ── Django ──
 db.sqlite3
 *.log
-backend/staticfiles/
 backend/media/
 
 # ── Environment variables ──
