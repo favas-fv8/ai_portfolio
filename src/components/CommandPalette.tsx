@@ -25,7 +25,7 @@ export default function CommandPalette() {
         setOpen(false)
       },
     })),
-    { label: 'Resume', description: 'Download resume', action: () => { window.open('/ai-portfolio/resume.pdf') ; setOpen(false) } },
+    { label: 'Resume', description: 'Download resume', action: () => { window.open('/ai_portfolio/resume.pdf') ; setOpen(false) } },
     { label: 'GitHub', description: 'Open GitHub profile', action: () => { window.open('https://github.com/favas-fv8') ; setOpen(false) } },
     { label: 'LinkedIn', description: 'Open LinkedIn profile', action: () => { window.open('https://linkedin.com/in/favas-fv8') ; setOpen(false) } },
     { label: 'Contact', description: 'Scroll to contact section', action: () => { document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }) ; setOpen(false) } },

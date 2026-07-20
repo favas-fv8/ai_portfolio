@@ -6,10 +6,10 @@ export const siteConfig = {
   phone: '+91 00000 00000',
   location: 'Kerala, India',
   available: true,
-  resumeUrl: '/ai-portfolio/resume.pdf',
+  resumeUrl: '/ai_portfolio/resume.pdf',
   github: 'https://github.com/favas-fv8',
   linkedin: 'https://linkedin.com/in/favas-fv8',
   twitter: 'https://twitter.com/favas-fv8',
-  repo: 'ai-portfolio',
-  url: 'https://favas-fv8.github.io/ai-portfolio',
+  repo: 'ai_portfolio',
+  url: 'https://favas-fv8.github.io/ai_portfolio',
 } as const

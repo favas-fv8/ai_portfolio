@@ -6,7 +6,7 @@ import App from '@/App'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter basename="/ai-portfolio">
+    <BrowserRouter basename="/ai_portfolio">
       <App />
     </BrowserRouter>
   </StrictMode>,
