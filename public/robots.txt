@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://favas-fv8.github.io/ai_portfolio/sitemap.xml
+Sitemap: https://favas-fv8.github.io/ai-portfolio/sitemap.xml

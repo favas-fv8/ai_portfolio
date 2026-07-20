@@ -5,7 +5,7 @@
     "issuer": "Amazon Web Services",
     "date": "2024-06",
     "credentialUrl": "https://aws.amazon.com/certification/",
-    "image": "/ai_portfolio/images/cert-1.jpg"
+    "image": "/ai-portfolio/images/cert-1.jpg"
   },
   {
     "id": "cert-2",
@@ -13,7 +13,7 @@
     "issuer": "Meta",
     "date": "2024-03",
     "credentialUrl": "https://www.coursera.org/meta",
-    "image": "/ai_portfolio/images/cert-2.jpg"
+    "image": "/ai-portfolio/images/cert-2.jpg"
   },
   {
     "id": "cert-3",
@@ -21,6 +21,6 @@
     "issuer": "Google Cloud",
     "date": "2023-11",
     "credentialUrl": "https://cloud.google.com/certification/",
-    "image": "/ai_portfolio/images/cert-3.jpg"
+    "image": "/ai-portfolio/images/cert-3.jpg"
   }
 ]
