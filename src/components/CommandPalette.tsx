@@ -59,31 +59,31 @@ export default function CommandPalette() {
 
   return (
     <div
-      className="fixed inset-0 z-[1000] flex items-start justify-center pt-[15vh]"
+      className="fixed inset-0 z-[1000] flex items-start justify-center pt-[15vh] bg-black/30"
       onClick={() => setOpen(false)}
     >
       <div
-        className="w-full max-w-lg glass rounded-2xl shadow-elevated overflow-hidden"
+        className="w-full max-w-lg bg-white/90 backdrop-blur-xl rounded-2xl shadow-xl border border-white/30 overflow-hidden"
         onClick={e => e.stopPropagation()}
       >
-        <div className="flex items-center gap-3 px-4 py-3 border-b border-border">
-          <Search size={18} className="text-dark-400" />
+        <div className="flex items-center gap-3 px-4 py-3 border-b border-gray-200/50">
+          <Search size={18} className="text-gray-400" />
           <input
             ref={inputRef}
             type="text"
             value={query}
             onChange={e => setQuery(e.target.value)}
             placeholder="Search..."
-            className="flex-1 bg-transparent text-text-primary placeholder:text-dark-400 outline-none text-sm"
+            className="flex-1 bg-transparent text-gray-800 placeholder:text-gray-400 outline-none text-sm"
           />
-          <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-1 text-xs text-dark-400 bg-dark-800 rounded">
+          <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-1 text-xs text-gray-400 bg-gray-100 rounded">
             <Command size={12} />K
           </kbd>
         </div>
 
         <div className="max-h-72 overflow-y-auto p-2">
           {filtered.length === 0 && (
-            <p className="text-sm text-dark-400 text-center py-8">No results found</p>
+            <p className="text-sm text-gray-400 text-center py-8">No results found</p>
           )}
           {filtered.map(item => (
             <button
@@ -91,12 +91,12 @@ export default function CommandPalette() {
               onClick={item.action}
               className={cn(
                 'w-full flex items-center justify-between px-3 py-2.5 rounded-lg',
-                'text-sm text-text-primary hover:bg-dark-700 transition-colors duration-200',
+                'text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-200',
                 'group',
               )}
             >
               <span>{item.label}</span>
-              <span className="text-xs text-dark-400 group-hover:text-dark-300 transition-colors">
+              <span className="text-xs text-gray-400 group-hover:text-gray-500 transition-colors">
                 {item.description}
               </span>
             </button>

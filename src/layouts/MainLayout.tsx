@@ -16,7 +16,6 @@ const Services = lazy(() => import('@/sections/Services'))
 const Experience = lazy(() => import('@/sections/Experience'))
 const Education = lazy(() => import('@/sections/Education'))
 const Certifications = lazy(() => import('@/sections/Certifications'))
-const Testimonials = lazy(() => import('@/sections/Testimonials'))
 const Contact = lazy(() => import('@/sections/Contact'))
 
 const sectionLoader = <div className="h-64 flex items-center justify-center text-dark-400">Loading...</div>
@@ -48,7 +47,6 @@ export default function MainLayout() {
         <Suspense fallback={sectionLoader}><Experience /></Suspense>
         <Suspense fallback={sectionLoader}><Education /></Suspense>
         <Suspense fallback={sectionLoader}><Certifications /></Suspense>
-        <Suspense fallback={sectionLoader}><Testimonials /></Suspense>
         <Suspense fallback={sectionLoader}><Contact /></Suspense>
       </main>
 

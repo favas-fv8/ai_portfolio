@@ -5,17 +5,63 @@ import { GithubIcon, LinkedinIcon, TwitterIcon } from '@/components/ui/SocialIco
 import SectionLayout from '@/layouts/SectionLayout'
 import { siteConfig } from '@/config/site'
 import { SECTION_IDS } from '@/constants'
-import { useTextReveal } from '@/hooks/useTextReveal'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 const Scene3D = lazy(() => import('@/components/three/Scene3D'))
 
+const nameContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.04,
+      delayChildren: 0.3,
+    },
+  },
+}
+
+const letterVariant = {
+  hidden: { opacity: 0, y: 40, rotateX: -30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
+  },
+}
+
+function AnimatedName() {
+  const name = siteConfig.name
+  const first = name.split(' ')[0]
+  const rest = name.split(' ').slice(1).join(' ')
+
+  return (
+    <motion.h1
+      className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight"
+      variants={nameContainer}
+      initial="hidden"
+      animate="visible"
+    >
+      <span className="text-gradient">
+        {first.split('').map((char, i) => (
+          <motion.span key={`${char}-${i}`} className="inline-block" variants={letterVariant}>
+            {char === ' ' ? '\u00A0' : char}
+          </motion.span>
+        ))}
+      </span>
+      <br />
+      <span>
+        {rest.split('').map((char, i) => (
+          <motion.span key={`${char}-${i}`} className="inline-block" variants={letterVariant}>
+            {char === ' ' ? '\u00A0' : char}
+          </motion.span>
+        ))}
+      </span>
+    </motion.h1>
+  )
+}
+
 export default function Hero() {
-  const titleRef = useTextReveal<HTMLHeadingElement>({
-    type: 'chars',
-    stagger: 0.03,
-    duration: 0.8,
-  })
   const reduced = useReducedMotion()
 
   const scrollToAbout = () => {
@@ -47,14 +93,15 @@ export default function Hero() {
           {siteConfig.title}
         </motion.p>
 
-        <h1
-          ref={titleRef}
-          className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight"
-        >
-          <span className="text-gradient">{siteConfig.name.split(' ')[0]}</span>
-          <br />
-          <span>{siteConfig.name.split(' ').slice(1).join(' ')}</span>
-        </h1>
+        {reduced ? (
+          <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight">
+            <span className="text-gradient">{siteConfig.name.split(' ')[0]}</span>
+            <br />
+            <span>{siteConfig.name.split(' ').slice(1).join(' ')}</span>
+          </h1>
+        ) : (
+          <AnimatedName />
+        )}
 
         <motion.p
           className="max-w-xl text-lg text-dark-300 leading-relaxed"
