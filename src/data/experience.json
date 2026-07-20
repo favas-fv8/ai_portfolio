@@ -1,0 +1,51 @@
+[
+  {
+    "id": "exp-1",
+    "company": "Tech Corp",
+    "role": "Senior Fullstack Developer",
+    "location": "Remote",
+    "startDate": "2023-01",
+    "endDate": null,
+    "current": true,
+    "description": "Leading development of enterprise web applications and mentoring junior developers.",
+    "achievements": [
+      "Architected microservices system reducing API response time by 60%",
+      "Led migration from legacy codebase to React + TypeScript",
+      "Established CI/CD pipeline reducing deployment time by 80%",
+      "Mentored 4 junior developers through structured code reviews"
+    ],
+    "technologies": ["React", "TypeScript", "Node.js", "AWS", "Docker"]
+  },
+  {
+    "id": "exp-2",
+    "company": "Digital Agency",
+    "role": "Fullstack Developer",
+    "location": "Kerala, India",
+    "startDate": "2021-03",
+    "endDate": "2022-12",
+    "current": false,
+    "description": "Built client-facing web applications and collaborated with design team.",
+    "achievements": [
+      "Delivered 12+ client projects on time and within budget",
+      "Implemented responsive designs improving mobile traffic by 40%",
+      "Developed reusable component library used across all projects"
+    ],
+    "technologies": ["React", "Next.js", "Node.js", "MongoDB", "Tailwind CSS"]
+  },
+  {
+    "id": "exp-3",
+    "company": "StartupXYZ",
+    "role": "Junior Developer",
+    "location": "Kerala, India",
+    "startDate": "2020-01",
+    "endDate": "2021-02",
+    "current": false,
+    "description": "Contributed to the development of a SaaS platform from the ground up.",
+    "achievements": [
+      "Built RESTful APIs serving 10k+ daily requests",
+      "Implemented automated testing achieving 90% code coverage",
+      "Optimized database queries reducing load times by 35%"
+    ],
+    "technologies": ["JavaScript", "Node.js", "Express", "PostgreSQL", "React"]
+  }
+]

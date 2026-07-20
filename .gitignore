@@ -1,54 +1,24 @@
-# ── Python ──
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-*.egg-info/
-dist/
-build/
-*.egg
-
-# ── Virtual environments ──
-backend/venv/
-.venv/
-env/
-ENV/
-
-# ── Django ──
-db.sqlite3
+# Logs
+logs
 *.log
-backend/media/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# ── Environment variables ──
-.env
-.env.local
-.env.production
+node_modules
+dist
+dist-ssr
+*.local
 
-# ── IDEs ──
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
 .DS_Store
-Thumbs.db
-
-# ── Node (frontend) ──
-frontend/node_modules/
-frontend/dist/
-frontend/.vite/
-
-# ── OS ──
-.DS_Store
-Thumbs.db
-Desktop.ini
-
-# ── Coverage ──
-htmlcov/
-.coverage
-.coverage.*
-coverage.xml
-
-# ── Misc ──
-*.bak
-*.tmp
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

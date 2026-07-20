@@ -1,0 +1,22 @@
+[
+  {
+    "id": "faq-1",
+    "question": "What technologies do you specialize in?",
+    "answer": "I specialize in React, TypeScript, Node.js, and modern web technologies. I work extensively with the JavaScript/TypeScript ecosystem and have experience with various databases, cloud services, and DevOps tools."
+  },
+  {
+    "id": "faq-2",
+    "question": "Are you available for freelance work?",
+    "answer": "Yes, I'm currently available for freelance projects and collaborations. Feel free to reach out via the contact form or email."
+  },
+  {
+    "id": "faq-3",
+    "question": "What is your development process?",
+    "answer": "I follow an agile approach with regular communication, iterative development, and continuous feedback loops. Projects start with requirements gathering, followed by design, development, testing, and deployment."
+  },
+  {
+    "id": "faq-4",
+    "question": "How long does a typical project take?",
+    "answer": "Project timelines vary based on complexity. A typical web application can take 4-12 weeks. I provide detailed timelines during the initial consultation."
+  }
+]

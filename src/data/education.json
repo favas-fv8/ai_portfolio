@@ -1,0 +1,17 @@
+[
+  {
+    "id": "edu-1",
+    "institution": "University of Technology",
+    "degree": "Bachelor of Technology",
+    "field": "Computer Science",
+    "location": "Kerala, India",
+    "startDate": "2016",
+    "endDate": "2020",
+    "grade": "8.5 CGPA",
+    "achievements": [
+      "Dean's List for academic excellence",
+      "Led university tech club with 200+ members",
+      "Won hackathon for building accessibility tools"
+    ]
+  }
+]

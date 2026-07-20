@@ -1,0 +1,52 @@
+[
+  {
+    "id": "project-1",
+    "title": "E-Commerce Platform",
+    "description": "A full-featured e-commerce platform with real-time inventory management.",
+    "longDescription": "Built a scalable e-commerce solution featuring real-time inventory tracking, payment integration, and an admin dashboard. Implemented server-side rendering for optimal SEO and performance.",
+    "image": "/ai_portfolio/images/project-1.jpg",
+    "technologies": ["React", "TypeScript", "Node.js", "PostgreSQL", "Stripe"],
+    "category": "fullstack",
+    "featured": true,
+    "githubUrl": "https://github.com/favas-fv8/ecommerce",
+    "liveUrl": "https://example.com",
+    "year": 2025
+  },
+  {
+    "id": "project-2",
+    "title": "Real-Time Dashboard",
+    "description": "Analytics dashboard with real-time data visualization and reporting.",
+    "longDescription": "Developed a comprehensive analytics dashboard with real-time data streaming, interactive charts, and exportable reports. Features customizable widgets and role-based access.",
+    "image": "/ai_portfolio/images/project-2.jpg",
+    "technologies": ["React", "D3.js", "Socket.io", "Express", "MongoDB"],
+    "category": "frontend",
+    "featured": true,
+    "githubUrl": "https://github.com/favas-fv8/dashboard",
+    "liveUrl": "https://example.com",
+    "year": 2024
+  },
+  {
+    "id": "project-3",
+    "title": "Task Management App",
+    "description": "Collaborative task management tool with real-time updates.",
+    "longDescription": "Created a project management application featuring kanban boards, Gantt charts, time tracking, and team collaboration tools with real-time synchronization.",
+    "image": "/ai_portfolio/images/project-3.jpg",
+    "technologies": ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Tailwind"],
+    "category": "fullstack",
+    "featured": false,
+    "githubUrl": "https://github.com/favas-fv8/taskmanager",
+    "year": 2024
+  },
+  {
+    "id": "project-4",
+    "title": "API Gateway Service",
+    "description": "Microservices API gateway with rate limiting and authentication.",
+    "longDescription": "Designed and implemented an API gateway for microservices architecture with rate limiting, JWT authentication, request logging, and service discovery.",
+    "image": "/ai_portfolio/images/project-4.jpg",
+    "technologies": ["Node.js", "Express", "Redis", "Docker", "Nginx"],
+    "category": "backend",
+    "featured": false,
+    "githubUrl": "https://github.com/favas-fv8/api-gateway",
+    "year": 2023
+  }
+]

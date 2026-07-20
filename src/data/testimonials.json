@@ -1,0 +1,29 @@
+[
+  {
+    "id": "test-1",
+    "name": "Sarah Johnson",
+    "role": "CTO",
+    "company": "Tech Corp",
+    "avatar": "/ai_portfolio/images/avatar-1.jpg",
+    "content": "Exceptional developer with a keen eye for detail. Delivered our platform ahead of schedule with outstanding quality.",
+    "rating": 5
+  },
+  {
+    "id": "test-2",
+    "name": "Alex Chen",
+    "role": "Product Manager",
+    "company": "Digital Agency",
+    "avatar": "/ai_portfolio/images/avatar-2.jpg",
+    "content": "One of the most talented developers I've worked with. His problem-solving skills and technical expertise are remarkable.",
+    "rating": 5
+  },
+  {
+    "id": "test-3",
+    "name": "Priya Sharma",
+    "role": "Engineering Lead",
+    "company": "StartupXYZ",
+    "avatar": "/ai_portfolio/images/avatar-3.jpg",
+    "content": "A true fullstack professional who excels at both frontend and backend. A valuable asset to any team.",
+    "rating": 5
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "svc-1",
+    "title": "Web Development",
+    "description": "Building modern, responsive web applications using cutting-edge technologies.",
+    "icon": "Globe",
+    "features": ["React/Next.js Applications", "RESTful & GraphQL APIs", "Responsive Design", "Performance Optimization"]
+  },
+  {
+    "id": "svc-2",
+    "title": "UI/UX Design",
+    "description": "Creating intuitive and beautiful user interfaces with a focus on user experience.",
+    "icon": "Palette",
+    "features": ["Wireframing & Prototyping", "Design Systems", "Interaction Design", "Usability Testing"]
+  },
+  {
+    "id": "svc-3",
+    "title": "Backend Architecture",
+    "description": "Designing scalable server architectures and database systems.",
+    "icon": "Server",
+    "features": ["Microservices Architecture", "Database Design", "Cloud Infrastructure", "API Development"]
+  },
+  {
+    "id": "svc-4",
+    "title": "Technical Consulting",
+    "description": "Providing expert guidance on technology stack, architecture, and best practices.",
+    "icon": "Lightbulb",
+    "features": ["Code Review", "Architecture Planning", "Technology Strategy", "Performance Audits"]
+  }
+]

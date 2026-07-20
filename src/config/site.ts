@@ -1,0 +1,15 @@
+export const siteConfig = {
+  name: 'MOHAMMED FAVAS KS',
+  title: 'Fullstack Web Developer',
+  tagline: 'Crafting digital experiences with code & creativity',
+  email: 'hello@favas.dev',
+  phone: '+91 00000 00000',
+  location: 'Kerala, India',
+  available: true,
+  resumeUrl: '/ai_portfolio/resume.pdf',
+  github: 'https://github.com/favas-fv8',
+  linkedin: 'https://linkedin.com/in/favas-fv8',
+  twitter: 'https://twitter.com/favas-fv8',
+  repo: 'ai_portfolio',
+  url: 'https://favas-fv8.github.io/ai_portfolio',
+} as const
