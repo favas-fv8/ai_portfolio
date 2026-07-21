@@ -160,7 +160,7 @@ const patterns: WeightedMatch[] = [
 export function findBestResponse(input: string): string {
   const lower = input.toLowerCase().replace(/[?.,!]/g, '')
 
-  if (lower === 'how can i contact you') {
+  if (lower.includes('contact you') || lower.includes('how can i contact')) {
     return `You can reach ${displayName} via:\n- Email: ${siteConfig.email}\n- Location: ${siteConfig.location}\n\nOr use the contact form on this site to send a direct message.`
   }
 

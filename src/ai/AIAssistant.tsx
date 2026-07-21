@@ -255,6 +255,7 @@ export default function AIAssistant() {
             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
           >
             <div
+              onWheel={e => e.stopPropagation()}
               className="relative overflow-hidden rounded-2xl border border-white/10"
               style={{
                 background: 'rgba(16,16,26,0.85)',
@@ -300,7 +301,7 @@ export default function AIAssistant() {
               </div>
 
               {/* messages */}
-              <div className="h-[340px] overflow-y-auto p-4 space-y-3 scroll-smooth" style={{ overscrollBehavior: 'contain' }}>
+              <div className="h-[340px] overflow-y-auto p-4 space-y-3 scroll-smooth">
                 {messages.map((msg, i) => (
                   <motion.div
                     key={i}
