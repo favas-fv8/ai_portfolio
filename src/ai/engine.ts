@@ -13,6 +13,12 @@ export interface Message {
   content: string
 }
 
+/* Resume & avatar should be placed in: public/resume.pdf, public/images/avatar.jpg */
+
+const displayName = profile.name.split(' ').map(
+  w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()
+).join(' ')
+
 interface WeightedMatch {
   keywords: string[]
   weight: number
@@ -23,19 +29,19 @@ const patterns: WeightedMatch[] = [
   {
     keywords: ['who', 'are', 'you', 'yourself', 'about'],
     weight: 10,
-    response: () => `I'm ${profile.name}, a ${profile.title}. ${profile.bio[0]}`,
+    response: () => `I'm ${displayName}, a ${profile.title}. ${profile.bio[0]}`,
   },
   {
     keywords: ['hello', 'hi', 'hey', 'greetings'],
     weight: 8,
-    response: `Hello! I'm ${profile.name}'s portfolio assistant. How can I help you today?`,
+    response: `Hello! I'm ${displayName}'s portfolio assistant. How can I help you today?`,
   },
   {
     keywords: ['skill', 'technologies', 'tech', 'stack', 'know', 'proficient'],
     weight: 9,
     response: () => {
       const names = skills.map(s => s.name).join(', ')
-      return `${profile.name} is proficient in: ${names}. Top skills include React (${skills.find(s => s.id === 'react')?.level}%), TypeScript (${skills.find(s => s.id === 'typescript')?.level}%), and JavaScript (${skills.find(s => s.id === 'javascript')?.level}%).`
+      return `${displayName} is proficient in: ${names}. Top skills include React (${skills.find(s => s.id === 'react')?.level}%), TypeScript (${skills.find(s => s.id === 'typescript')?.level}%), and JavaScript (${skills.find(s => s.id === 'javascript')?.level}%).`
     },
   },
   {
@@ -43,7 +49,7 @@ const patterns: WeightedMatch[] = [
     weight: 9,
     response: () => {
       const list = projects.map(p => `- ${p.title}: ${p.description}`).join('\n')
-      return `Here are ${profile.name}'s projects:\n${list}`
+      return `Here are ${displayName}'s projects:\n${list}`
     },
   },
   {
@@ -84,7 +90,7 @@ const patterns: WeightedMatch[] = [
       const list = experience.map(e =>
         `- ${e.role} at ${e.company} (${e.startDate} - ${e.current ? 'Present' : e.endDate})`,
       ).join('\n')
-      return `${profile.name} has ${profile.experience}+ years of experience:\n${list}`
+      return `${displayName} has ${profile.experience}+ years of experience:\n${list}`
     },
   },
   {
@@ -118,7 +124,7 @@ const patterns: WeightedMatch[] = [
   {
     keywords: ['contact', 'email', 'reach', 'phone', 'message'],
     weight: 9,
-    response: `You can contact ${profile.name} via:\n- Email: ${siteConfig.email}\n- Phone: ${siteConfig.phone}\n- Location: ${siteConfig.location}`,
+    response: `You can reach ${displayName} via:\n- Email: ${siteConfig.email}\n- Location: ${siteConfig.location}\n\nOr use the contact form on this site to send a direct message.`,
   },
   {
     keywords: ['resume', 'cv', 'download'],
@@ -147,7 +153,7 @@ const patterns: WeightedMatch[] = [
   {
     keywords: ['available', 'freelance', 'hire', 'hiring'],
     weight: 7,
-    response: `${profile.name} is currently ${profile.available ? 'available' : 'not available'} for opportunities.`,
+    response: `${displayName} is currently ${profile.available ? 'available' : 'not available'} for opportunities.`,
   },
 ]
 
@@ -178,7 +184,7 @@ export function findBestResponse(input: string): string {
     )
     if (faq) return faq.answer
 
-    return `I'm not sure how to answer that. Try asking about ${profile.name}'s skills, projects, experience, or contact information.`
+    return `I'm not sure how to answer that. Try asking about ${displayName}'s skills, projects, experience, or contact information.`
   }
 
   return bestResponse!

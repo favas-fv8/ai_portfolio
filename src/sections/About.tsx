@@ -1,9 +1,12 @@
-import { Download, Award, Briefcase, Code, Users } from 'lucide-react'
+import { useState } from 'react'
+import { Download, Award, Briefcase, Code, Users, User } from 'lucide-react'
 import { motion } from 'framer-motion'
 import SectionLayout from '@/layouts/SectionLayout'
 import { SECTION_IDS } from '@/constants'
 import profile from '@/data/profile.json'
 import AnimatedSection from '@/components/ui/AnimatedSection'
+
+/* Upload your profile image to: public/images/avatar.jpg */
 
 const stats = [
   { icon: Briefcase, label: 'Years Experience', value: profile.experience },
@@ -13,6 +16,7 @@ const stats = [
 ]
 
 export default function About() {
+  const [imgError, setImgError] = useState(false)
   return (
     <SectionLayout id={SECTION_IDS.about}>
       <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -43,12 +47,18 @@ export default function About() {
         <div className="flex flex-col gap-6">
           <div className="relative mx-auto w-48 h-48 rounded-2xl overflow-hidden glass group">
             <div className="absolute inset-0 bg-gradient-to-br from-accent-500/20 to-transparent z-10" />
-            <img
-              src={profile.avatar}
-              alt={profile.name}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
-            />
+            {!imgError ? (
+              <img
+                src={profile.avatar}
+                alt={profile.name}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                onError={() => setImgError(true)}
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-accent-600/30 to-dark-800">
+                <User size={48} className="text-accent-400/60" />
+              </div>
+            )}
             <div className="absolute inset-0 rounded-2xl ring-1 ring-accent-500/20 z-20 pointer-events-none" />
           </div>
 

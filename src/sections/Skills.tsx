@@ -107,18 +107,20 @@ export default function Skills() {
             key={skill.id}
             className="glass rounded-2xl p-5 glass-hover group"
           >
-            <div className="flex items-center gap-2 mb-3">
-              <SkillIcon name={skill.icon} color={skill.color} />
+            <div className="flex items-center justify-between mb-2">
               <span className="text-sm font-medium text-text-primary">{skill.name}</span>
-              <span className="ml-auto text-xs font-mono text-dark-400">{skill.level}%</span>
+              <span className="text-xs font-mono text-dark-400">{skill.level}%</span>
             </div>
-            <div className="h-1.5 bg-dark-800 rounded-full overflow-hidden">
-              <div
-                className="skill-bar-fill h-full rounded-full transition-all duration-700 group-hover:shadow-glow-sm"
-                style={{
-                  backgroundColor: skill.color,
-                }}
-              />
+            <div className="flex items-center gap-2">
+              <SkillIcon name={skill.icon} color={skill.color} />
+              <div className="flex-1 h-1.5 bg-dark-800 rounded-full overflow-hidden">
+                <div
+                  className="skill-bar-fill h-full rounded-full transition-all duration-700 group-hover:shadow-glow-sm"
+                  style={{
+                    backgroundColor: skill.color,
+                  }}
+                />
+              </div>
             </div>
           </div>
         ))}
