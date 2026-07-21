@@ -27,6 +27,11 @@ interface WeightedMatch {
 
 const patterns: WeightedMatch[] = [
   {
+    keywords: ['contact', 'email', 'reach', 'phone', 'message'],
+    weight: 10,
+    response: `You can reach ${displayName} via:\n- Email: ${siteConfig.email}\n- Location: ${siteConfig.location}\n\nOr use the contact form on this site to send a direct message.`,
+  },
+  {
     keywords: ['who', 'are', 'you', 'yourself', 'about'],
     weight: 10,
     response: () => `I'm ${displayName}, a ${profile.title}. ${profile.bio[0]}`,
@@ -120,11 +125,6 @@ const patterns: WeightedMatch[] = [
       const list = services.map(s => `- ${s.title}: ${s.description}`).join('\n')
       return `Services offered:\n${list}`
     },
-  },
-  {
-    keywords: ['contact', 'email', 'reach', 'phone', 'message'],
-    weight: 9,
-    response: `You can reach ${displayName} via:\n- Email: ${siteConfig.email}\n- Location: ${siteConfig.location}\n\nOr use the contact form on this site to send a direct message.`,
   },
   {
     keywords: ['resume', 'cv', 'download'],
