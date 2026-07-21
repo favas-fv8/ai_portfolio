@@ -5,6 +5,7 @@ import SectionLayout from '@/layouts/SectionLayout'
 import { SECTION_IDS } from '@/constants'
 import { siteConfig } from '@/config/site'
 import socialsData from '@/data/socials.json'
+import AnimatedSection from '@/components/ui/AnimatedSection'
 
 const iconMap: Record<string, React.ComponentType<{ size?: number }>> = {
   Github: GithubIcon, Linkedin: LinkedinIcon, Twitter: TwitterIcon, Mail,
@@ -29,14 +30,14 @@ function CopyButton({ text }: { text: string }) {
 export default function Contact() {
   return (
     <SectionLayout id={SECTION_IDS.contact}>
-      <div className="text-center mb-16">
+      <AnimatedSection className="text-center mb-16">
         <p className="text-sm font-mono text-accent-400 tracking-widest uppercase mb-4">
           Contact
         </p>
         <h2 className="text-4xl md:text-5xl font-bold">
           Get In <span className="text-gradient">Touch</span>
         </h2>
-      </div>
+      </AnimatedSection>
 
       <div className="max-w-2xl mx-auto">
         <div className="glass rounded-2xl p-8 md:p-10">

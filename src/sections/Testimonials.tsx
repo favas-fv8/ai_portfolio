@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight, Star } from 'lucide-react'
 import SectionLayout from '@/layouts/SectionLayout'
 import { SECTION_IDS } from '@/constants'
 import testimonialsData from '@/data/testimonials.json'
+import AnimatedSection from '@/components/ui/AnimatedSection'
 
 export default function Testimonials() {
   const [current, setCurrent] = useState(0)
@@ -26,14 +27,14 @@ export default function Testimonials() {
 
   return (
     <SectionLayout id={SECTION_IDS.testimonials}>
-      <div className="text-center mb-16">
+      <AnimatedSection className="text-center mb-16">
         <p className="text-sm font-mono text-accent-400 tracking-widest uppercase mb-4">
           Testimonials
         </p>
         <h2 className="text-4xl md:text-5xl font-bold">
           What People <span className="text-gradient">Say</span>
         </h2>
-      </div>
+      </AnimatedSection>
 
       <div className="max-w-2xl mx-auto">
         <div className="glass rounded-2xl p-8 md:p-12 text-center">

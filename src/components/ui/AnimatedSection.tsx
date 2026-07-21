@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion'
-import { useReducedMotion } from '@/hooks/useReducedMotion'
+import { useEffect, useRef, useState } from 'react'
+import { cn } from '@/utils/cn'
 
 interface AnimatedSectionProps {
   children: React.ReactNode
@@ -8,25 +8,37 @@ interface AnimatedSectionProps {
 }
 
 export default function AnimatedSection({ children, className, delay = 0 }: AnimatedSectionProps) {
-  const reduced = useReducedMotion()
+  const ref = useRef<HTMLDivElement>(null!)
+  const [visible, setVisible] = useState(false)
 
-  if (reduced) {
-    return <div className={className}>{children}</div>
-  }
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true)
+          observer.unobserve(el)
+        }
+      },
+      { threshold: 0.08 },
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  const delayClass = delay > 0
+    ? `zoom-reveal-delay-${Math.min(Math.round(delay / 0.1), 5)}`
+    : ''
 
   return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{
-        duration: 0.7,
-        delay,
-        ease: [0.16, 1, 0.3, 1],
-      }}
+    <div
+      ref={ref}
+      className={cn('zoom-reveal', visible && 'visible', delayClass, className)}
     >
       {children}
-    </motion.div>
+    </div>
   )
 }

@@ -5,7 +5,7 @@
   { "id": "nextjs", "name": "Next.js", "category": "frontend", "level": 88, "icon": "SiNextdotjs", "color": "#000000" },
   { "id": "tailwind", "name": "Tailwind CSS", "category": "frontend", "level": 92, "icon": "SiTailwindcss", "color": "#06B6D4" },
   { "id": "html", "name": "HTML5", "category": "frontend", "level": 98, "icon": "SiHtml5", "color": "#E34F26" },
-  { "id": "css", "name": "CSS3", "category": "frontend", "level": 95, "icon": "SiCss3", "color": "#1572B6" },
+  { "id": "css", "name": "CSS3", "category": "frontend", "level": 95, "icon": "SiCss", "color": "#1572B6" },
   { "id": "nodejs", "name": "Node.js", "category": "backend", "level": 88, "icon": "SiNodedotjs", "color": "#339933" },
   { "id": "python", "name": "Python", "category": "backend", "level": 82, "icon": "SiPython", "color": "#3776AB" },
   { "id": "postgresql", "name": "PostgreSQL", "category": "backend", "level": 80, "icon": "SiPostgresql", "color": "#4169E1" },

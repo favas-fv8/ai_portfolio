@@ -1,5 +1,4 @@
 import { Download, Award, Briefcase, Code, Users } from 'lucide-react'
-import { motion } from 'framer-motion'
 import SectionLayout from '@/layouts/SectionLayout'
 import { SECTION_IDS } from '@/constants'
 import profile from '@/data/profile.json'
@@ -42,20 +41,15 @@ export default function About() {
 
         <div className="grid grid-cols-2 gap-4">
           {stats.map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              className="glass rounded-2xl p-6 text-center hover:bg-surface-hover transition-colors duration-300"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-            >
-              <stat.icon className="mx-auto mb-3 text-accent-400" size={28} />
-              <div className="text-3xl font-bold text-text-primary mb-1">
-                {stat.value}+
+            <AnimatedSection key={stat.label} delay={i * 0.1}>
+              <div className="glass rounded-2xl p-6 text-center hover:bg-surface-hover transition-colors duration-300">
+                <stat.icon className="mx-auto mb-3 text-accent-400" size={28} />
+                <div className="text-3xl font-bold text-text-primary mb-1">
+                  {stat.value}+
+                </div>
+                <div className="text-sm text-dark-400">{stat.label}</div>
               </div>
-              <div className="text-sm text-dark-400">{stat.label}</div>
-            </motion.div>
+            </AnimatedSection>
           ))}
         </div>
       </div>
