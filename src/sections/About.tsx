@@ -39,18 +39,33 @@ export default function About() {
           </a>
         </AnimatedSection>
 
-        <div className="grid grid-cols-2 gap-4">
-          {stats.map((stat, i) => (
-            <AnimatedSection key={stat.label} delay={i * 0.1}>
-              <div className="glass rounded-2xl p-6 text-center hover:bg-surface-hover transition-colors duration-300">
-                <stat.icon className="mx-auto mb-3 text-accent-400" size={28} />
-                <div className="text-3xl font-bold text-text-primary mb-1">
-                  {stat.value}+
+        <div className="flex flex-col gap-6">
+          <AnimatedSection delay={0.1}>
+            <div className="relative mx-auto w-48 h-48 rounded-2xl overflow-hidden glass group">
+              <div className="absolute inset-0 bg-gradient-to-br from-accent-500/20 to-transparent z-10" />
+              <img
+                src={profile.avatar}
+                alt={profile.name}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
+              />
+              <div className="absolute inset-0 rounded-2xl ring-1 ring-accent-500/20 z-20 pointer-events-none" />
+            </div>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-2 gap-4">
+            {stats.map((stat, i) => (
+              <AnimatedSection key={stat.label} delay={i * 0.1}>
+                <div className="glass rounded-2xl p-6 text-center hover:bg-surface-hover transition-colors duration-300">
+                  <stat.icon className="mx-auto mb-3 text-accent-400" size={28} />
+                  <div className="text-3xl font-bold text-text-primary mb-1">
+                    {stat.value}+
+                  </div>
+                  <div className="text-sm text-dark-400">{stat.label}</div>
                 </div>
-                <div className="text-sm text-dark-400">{stat.label}</div>
-              </div>
-            </AnimatedSection>
-          ))}
+              </AnimatedSection>
+            ))}
+          </div>
         </div>
       </div>
     </SectionLayout>

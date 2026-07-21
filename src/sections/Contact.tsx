@@ -1,6 +1,6 @@
 import { Mail, MapPin, Phone, Copy, Check } from 'lucide-react'
 import { useState } from 'react'
-import { GithubIcon, LinkedinIcon, TwitterIcon } from '@/components/ui/SocialIcon'
+import { GithubIcon, LinkedinIcon, TwitterIcon, InstagramIcon } from '@/components/ui/SocialIcon'
 import SectionLayout from '@/layouts/SectionLayout'
 import { SECTION_IDS } from '@/constants'
 import { siteConfig } from '@/config/site'
@@ -8,7 +8,7 @@ import socialsData from '@/data/socials.json'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
 const iconMap: Record<string, React.ComponentType<{ size?: number }>> = {
-  Github: GithubIcon, Linkedin: LinkedinIcon, Twitter: TwitterIcon, Mail,
+  Github: GithubIcon, Linkedin: LinkedinIcon, Twitter: TwitterIcon, Instagram: InstagramIcon, Mail,
 }
 
 function CopyButton({ text }: { text: string }) {
