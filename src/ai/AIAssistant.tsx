@@ -300,7 +300,7 @@ export default function AIAssistant() {
               </div>
 
               {/* messages */}
-              <div className="h-[340px] overflow-y-auto p-4 space-y-3 scroll-smooth">
+              <div className="h-[340px] overflow-y-auto p-4 space-y-3 scroll-smooth" style={{ overscrollBehavior: 'contain' }}>
                 {messages.map((msg, i) => (
                   <motion.div
                     key={i}
