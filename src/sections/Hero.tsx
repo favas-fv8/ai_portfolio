@@ -1,5 +1,6 @@
-import { lazy, Suspense, useEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useEffect, useRef } from 'react'
 import { ArrowDown } from 'lucide-react'
+import gsap from 'gsap'
 import { GithubIcon, LinkedinIcon, TwitterIcon } from '@/components/ui/SocialIcon'
 import SectionLayout from '@/layouts/SectionLayout'
 import { siteConfig } from '@/config/site'
@@ -8,11 +9,45 @@ import { SECTION_IDS } from '@/constants'
 const Scene3D = lazy(() => import('@/components/three/Scene3D'))
 
 export default function Hero() {
-  const [loaded, setLoaded] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null!)
+  const taglineRef = useRef<HTMLParagraphElement>(null!)
+  const buttonsRef = useRef<HTMLDivElement>(null!)
+  const socialsRef = useRef<HTMLDivElement>(null!)
+  const arrowRef = useRef<HTMLButtonElement>(null!)
+  const subtitleRef = useRef<HTMLParagraphElement>(null!)
 
   useEffect(() => {
-    requestAnimationFrame(() => setLoaded(true))
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+
+    tl.fromTo(containerRef.current,
+      { opacity: 0, scale: 0.85, y: 40 },
+      { opacity: 1, scale: 1, y: 0, duration: 1.2 },
+    )
+    .fromTo(subtitleRef.current,
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.7 },
+      '-=0.6',
+    )
+    .fromTo(taglineRef.current,
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.7 },
+      '-=0.5',
+    )
+    .fromTo(buttonsRef.current,
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.7 },
+      '-=0.4',
+    )
+    .fromTo(socialsRef.current,
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.6 },
+      '-=0.3',
+    )
+    .fromTo(arrowRef.current,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.6 },
+      '-=0.2',
+    )
   }, [])
 
   const scrollToAbout = () => {
@@ -32,19 +67,10 @@ export default function Hero() {
       <div
         ref={containerRef}
         className="relative z-10 flex flex-col items-center text-center gap-8"
-        style={{
-          opacity: loaded ? 1 : 0,
-          transform: loaded ? 'scale(1)' : 'scale(0.92)',
-          transition: 'opacity 1s ease, transform 1s cubic-bezier(0.16, 1, 0.3, 1)',
-        }}
       >
         <p
+          ref={subtitleRef}
           className="text-sm font-mono text-accent-400 tracking-widest uppercase"
-          style={{
-            opacity: loaded ? 1 : 0,
-            transform: loaded ? 'translateY(0)' : 'translateY(20px)',
-            transition: 'opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s',
-          }}
         >
           {siteConfig.title}
         </p>
@@ -56,24 +82,13 @@ export default function Hero() {
         </h1>
 
         <p
+          ref={taglineRef}
           className="max-w-xl text-lg text-dark-300 leading-relaxed"
-          style={{
-            opacity: loaded ? 1 : 0,
-            transform: loaded ? 'translateY(0)' : 'translateY(20px)',
-            transition: 'opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s',
-          }}
         >
           {siteConfig.tagline}
         </p>
 
-        <div
-          className="flex items-center gap-4"
-          style={{
-            opacity: loaded ? 1 : 0,
-            transform: loaded ? 'translateY(0)' : 'translateY(20px)',
-            transition: 'opacity 0.6s ease 0.6s, transform 0.6s ease 0.6s',
-          }}
-        >
+        <div ref={buttonsRef} className="flex items-center gap-4">
           <button
             onClick={scrollToAbout}
             className="px-8 py-3 bg-accent-600 hover:bg-accent-500 text-white rounded-full text-sm font-medium transition-all duration-300 hover:shadow-glow hover:scale-105 active:scale-95"
@@ -90,13 +105,7 @@ export default function Hero() {
           </a>
         </div>
 
-        <div
-          className="flex items-center gap-6 mt-4"
-          style={{
-            opacity: loaded ? 1 : 0,
-            transition: 'opacity 0.6s ease 0.8s',
-          }}
-        >
+        <div ref={socialsRef} className="flex items-center gap-6 mt-4">
           <a href={siteConfig.github} target="_blank" rel="noopener noreferrer" className="text-dark-400 hover:text-accent-400 transition-colors hover:scale-110 inline-block" aria-label="GitHub">
             <GithubIcon size={20} />
           </a>
@@ -110,13 +119,10 @@ export default function Hero() {
       </div>
 
       <button
+        ref={arrowRef}
         onClick={scrollToAbout}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 text-dark-400 hover:text-text-primary transition-colors"
         aria-label="Scroll down"
-        style={{
-          opacity: loaded ? 1 : 0,
-          transition: 'opacity 0.6s ease 1.2s',
-        }}
       >
         <ArrowDown size={24} className="animate-bounce" />
       </button>

@@ -1,5 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { cn } from '@/utils/cn'
+
+gsap.registerPlugin(ScrollTrigger)
 
 interface AnimatedSectionProps {
   children: React.ReactNode
@@ -9,35 +13,45 @@ interface AnimatedSectionProps {
 
 export default function AnimatedSection({ children, className, delay = 0 }: AnimatedSectionProps) {
   const ref = useRef<HTMLDivElement>(null!)
-  const [visible, setVisible] = useState(false)
 
   useEffect(() => {
     const el = ref.current
     if (!el) return
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true)
-          observer.unobserve(el)
-        }
-      },
-      { threshold: 0.08 },
-    )
+    const start = delay > 0.2 ? 'top 85%' : 'top 90%'
 
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
+    const ctx = gsap.context(() => {
+      gsap.fromTo(el,
+        {
+          opacity: 0,
+          scale: 0.65,
+          rotateX: 30,
+          y: 80,
+          transformPerspective: 1200,
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          rotateX: 0,
+          y: 0,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start,
+            end: 'top 25%',
+            scrub: 1.2,
+          },
+        },
+      )
+    })
 
-  const delayClass = delay > 0
-    ? `zoom-reveal-delay-${Math.min(Math.round(delay / 0.1), 5)}`
-    : ''
+    return () => {
+      ctx.revert()
+    }
+  }, [delay])
 
   return (
-    <div
-      ref={ref}
-      className={cn('zoom-reveal', visible && 'visible', delayClass, className)}
-    >
+    <div ref={ref} className={cn(className)}>
       {children}
     </div>
   )

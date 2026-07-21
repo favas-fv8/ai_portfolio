@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from 'react'
+import { lazy, Suspense } from 'react'
 import Loader from '@/components/Loader'
 import CustomCursor from '@/components/cursor/CustomCursor'
 import Navigation from '@/components/Navigation'
@@ -22,12 +22,6 @@ const sectionLoader = <div className="h-64 flex items-center justify-center text
 
 export default function MainLayout() {
   useLenis()
-  const [ready, setReady] = useState(false)
-
-  useEffect(() => {
-    const timer = setTimeout(() => setReady(true), 100)
-    return () => clearTimeout(timer)
-  }, [])
 
   return (
     <>
@@ -44,14 +38,7 @@ export default function MainLayout() {
       <Navigation />
       <ScrollProgress />
 
-      <main
-        id="main-content"
-        style={{
-          opacity: ready ? 1 : 0,
-          transform: ready ? 'scale(1)' : 'scale(0.95)',
-          transition: 'opacity 1s ease, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1)',
-        }}
-      >
+      <main id="main-content">
         <Suspense fallback={sectionLoader}><Hero /></Suspense>
         <Suspense fallback={sectionLoader}><About /></Suspense>
         <Suspense fallback={sectionLoader}><Skills /></Suspense>
