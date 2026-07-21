@@ -1,4 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
+import {
+  SiReact, SiTypescript, SiJavascript, SiNextdotjs, SiTailwindcss,
+  SiHtml5, SiCss, SiNodedotjs, SiPython, SiPostgresql,
+  SiMongodb, SiGraphql, SiFigma, SiGit, SiDocker,
+} from 'react-icons/si'
+import { FaAws } from 'react-icons/fa'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import SectionLayout from '@/layouts/SectionLayout'
@@ -8,6 +14,26 @@ import { cn } from '@/utils/cn'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
 gsap.registerPlugin(ScrollTrigger)
+
+const iconMap: Record<string, React.ComponentType<{ size?: number; color?: string }>> = {
+  SiReact, SiTypescript, SiJavascript, SiNextdotjs, SiTailwindcss,
+  SiHtml5, SiCss, SiNodedotjs, SiPython, SiPostgresql,
+  SiMongodb, SiGraphql, SiFigma, SiGit, SiDocker,
+  SiAmazonwebservices: FaAws,
+}
+
+function SkillIcon({ name, color }: { name: string; color: string }) {
+  const Icon = iconMap[name]
+  if (!Icon) return null
+  return (
+    <div
+      className="w-5 h-5 flex items-center justify-center rounded shrink-0"
+      style={{ backgroundColor: `${color}20` }}
+    >
+      <Icon size={12} color={color} />
+    </div>
+  )
+}
 
 const categories = [
   { key: 'frontend', label: 'Frontend' },
@@ -81,9 +107,10 @@ export default function Skills() {
             key={skill.id}
             className="glass rounded-2xl p-5 glass-hover group"
           >
-            <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2 mb-3">
+              <SkillIcon name={skill.icon} color={skill.color} />
               <span className="text-sm font-medium text-text-primary">{skill.name}</span>
-              <span className="text-xs font-mono text-dark-400">{skill.level}%</span>
+              <span className="ml-auto text-xs font-mono text-dark-400">{skill.level}%</span>
             </div>
             <div className="h-1.5 bg-dark-800 rounded-full overflow-hidden">
               <div
