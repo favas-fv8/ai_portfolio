@@ -1,53 +1,48 @@
-import { lazy, Suspense, useEffect, useRef, useState } from 'react'
-import { ArrowDown } from 'lucide-react'
+import { lazy, Suspense, useEffect, useRef, useState, useCallback } from 'react'
+import { ArrowDown, ChevronDown } from 'lucide-react'
 import { motion } from 'framer-motion'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { GithubIcon, LinkedinIcon, TwitterIcon, InstagramIcon } from '@/components/ui/SocialIcon'
 import SectionLayout from '@/layouts/SectionLayout'
 import { siteConfig } from '@/config/site'
-import { SECTION_IDS } from '@/constants'
+import { SECTION_IDS, ANIMATION } from '@/constants'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const Scene3D = lazy(() => import('@/components/three/Scene3D'))
-const CinematicIntro = lazy(() => import('@/components/three/CinematicIntro'))
 
-/* ----------- Staggered text variants ----------- */
+/* ---------- easing & duration constants ---------- */
+const EASE = ANIMATION.easing.easeOut
+
+/* ---------- Framer Motion variants ---------- */
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.035, delayChildren: 0.2 },
+    transition: { staggerChildren: 0.035, delayChildren: 0.3 },
   },
 }
 
 const letterVariants = {
   hidden: { opacity: 0, y: 60, rotateX: -40 },
   visible: {
-    opacity: 1,
-    y: 0,
-    rotateX: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
+    opacity: 1, y: 0, rotateX: 0,
+    transition: { duration: 0.6, ease: EASE },
   },
 }
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, delay: 0.3 + i * 0.12, ease: [0.16, 1, 0.3, 1] as const },
+    opacity: 1, y: 0,
+    transition: { duration: 0.6, delay: 0.3 + i * 0.12, ease: EASE },
   }),
 }
 
-/* ----------- Animated name with letters ----------- */
+/* ---------- Animated name ---------- */
 function AnimatedName() {
-  const name = siteConfig.name
-  const parts = name.split(' ')
-  const first = parts[0]
-  const rest = parts.slice(1).join(' ')
-
+  const [first, ...rest] = siteConfig.name.split(' ')
   return (
     <motion.h1
       className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight"
@@ -64,7 +59,7 @@ function AnimatedName() {
       </span>
       <br />
       <span>
-        {rest.split('').map((ch, i) => (
+        {rest.join(' ').split('').map((ch, i) => (
           <motion.span key={`${ch}-${i}`} className="inline-block" variants={letterVariants}>
             {ch === ' ' ? '\u00A0' : ch}
           </motion.span>
@@ -74,7 +69,7 @@ function AnimatedName() {
   )
 }
 
-/* ----------- Glow orbs decoration ----------- */
+/* ---------- Glowing orbs ---------- */
 function GlowOrbs() {
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
@@ -85,8 +80,161 @@ function GlowOrbs() {
   )
 }
 
+/* ---------- Floating decorative elements ---------- */
+function FloatingElements() {
+  const ref = useRef<HTMLDivElement>(null!)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const els = ref.current.querySelectorAll('.float-el')
+      els.forEach((el, i) => {
+        gsap.to(el, {
+          y: `${[-20, 15, -25, 20][i % 4]}px`,
+          x: `${[10, -15, 20, -10][i % 4]}px`,
+          rotate: `${[-5, 8, -10, 6][i % 4]}`,
+          duration: 4 + (i * 0.5),
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut',
+        })
+      })
+    })
+    return () => ctx.revert()
+  }, [])
+
+  return (
+    <div ref={ref} className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
+      <div className="float-el absolute top-[15%] left-[10%] w-2 h-2 rounded-full bg-accent-400/30" />
+      <div className="float-el absolute top-[30%] right-[15%] w-3 h-3 rounded-full bg-purple-400/20" />
+      <div className="float-el absolute bottom-[25%] left-[20%] w-1.5 h-1.5 rounded-full bg-accent-300/25" />
+      <div className="float-el absolute bottom-[35%] right-[10%] w-2.5 h-2.5 rounded-full bg-indigo-400/20" />
+    </div>
+  )
+}
+
 /* ================================================================ */
-/*  Main Hero export                                                 */
+/*  IMAGE CINEMATIC INTRO                                            */
+/* ================================================================ */
+const IMG_PATH = '/ai_portfolio/images/person_lap.png'
+
+function CinematicIntro({ onComplete }: { onComplete: () => void }) {
+  const wrapperRef = useRef<HTMLDivElement>(null!)
+  const imgRef = useRef<HTMLImageElement>(null!)
+  const overlayRef = useRef<HTMLDivElement>(null!)
+  const mouse = useRef({ x: 0, y: 0 })
+  const completed = useRef(false)
+
+  /* ---- GSAP timeline ---- */
+  useEffect(() => {
+    const img = imgRef.current
+    const wrapper = wrapperRef.current
+    if (!img || !wrapper) return
+
+    /* ---------- breathing ambient ---------- */
+    gsap.to(img, {
+      scale: 1.015,
+      duration: 4,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut',
+    })
+
+    /* ---------- main zoom timeline ---------- */
+    const tl = gsap.timeline({
+      onComplete: () => {
+        completed.current = true
+        onComplete()
+      },
+    })
+
+    tl.set(img, { transformOrigin: '52% 38%', willChange: 'transform' })
+      .to(img, {
+        scale: 1.8,
+        duration: 5,
+        ease: 'power2.inOut',
+      }, 1.5)
+      .to(img, {
+        scale: 4.2,
+        duration: 4,
+        ease: 'power3.in',
+      }, '-=0.5')
+
+    /* ---------- vignette fade-out ---------- */
+    tl.to(overlayRef.current, {
+      opacity: 0,
+      duration: 1.5,
+      ease: 'power2.inOut',
+    }, '-=2')
+
+    /* ---------- parallax mouse ---------- */
+    const onMouse = (e: MouseEvent) => {
+      mouse.current.x = (e.clientX / window.innerWidth - 0.5) * 0.04
+      mouse.current.y = (e.clientY / window.innerHeight - 0.5) * 0.04
+    }
+    window.addEventListener('mousemove', onMouse)
+
+    return () => {
+      window.removeEventListener('mousemove', onMouse)
+      tl.kill()
+    }
+  }, [onComplete])
+
+  /* ---- subtle breathing frame via rAF ---- */
+  useEffect(() => {
+    let id: number
+    const tick = () => {
+      if (!completed.current && imgRef.current) {
+        imgRef.current.style.setProperty('--mx', `${mouse.current.x}px`)
+        imgRef.current.style.setProperty('--my', `${mouse.current.y}px`)
+      }
+      id = requestAnimationFrame(tick)
+    }
+    id = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(id)
+  }, [])
+
+  return (
+    <div
+      ref={wrapperRef}
+      className="fixed inset-0 z-[650] overflow-hidden bg-dark-950"
+    >
+      {/* ---- image ---- */}
+      <img
+        ref={imgRef}
+        src={IMG_PATH}
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{
+          transform: 'scale(1) translate(var(--mx, 0px), var(--my, 0px))',
+          willChange: 'transform',
+        }}
+        draggable={false}
+      />
+
+      {/* ---- gradient overlay ---- */}
+      <div
+        ref={overlayRef}
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            radial-gradient(ellipse 70% 60% at 52% 38%, transparent 30%, rgba(10,10,15,0.85) 100%)
+          `,
+        }}
+      />
+
+      {/* ---- bottom hint ---- */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+        <ChevronDown
+          size={20}
+          className="text-white/30 animate-bounce"
+        />
+      </div>
+    </div>
+  )
+}
+
+/* ================================================================ */
+/*  MAIN HERO                                                       */
 /* ================================================================ */
 export default function Hero() {
   const [introDone, setIntroDone] = useState(false)
@@ -98,36 +246,36 @@ export default function Hero() {
   const subtitleRef = useRef<HTMLParagraphElement>(null!)
   const taglineRef = useRef<HTMLParagraphElement>(null!)
 
-  /* ---- Cinematic intro callback ---- */
-  const handleIntroComplete = () => {
+  const handleIntroComplete = useCallback(() => {
     setIntroDone(true)
-    setTimeout(() => setShowContent(true), 100)
-  }
+    requestAnimationFrame(() => setShowContent(true))
+  }, [])
 
   /* ---- GSAP entrance after intro ---- */
   useEffect(() => {
     if (!showContent) return
 
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
-    tl.fromTo(containerRef.current, { opacity: 0 }, { opacity: 1, duration: 0.4 })
-      .fromTo(subtitleRef.current, { opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.2')
+    tl.fromTo(containerRef.current, { opacity: 0, scale: 0.92 }, { opacity: 1, scale: 1, duration: 0.6 })
+      .fromTo(subtitleRef.current, { opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.3')
       .fromTo(taglineRef.current, { opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.4')
       .fromTo(buttonsRef.current, { opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.4')
       .fromTo(socialsRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 }, '-=0.3')
       .fromTo(arrowRef.current, { opacity: 0 }, { opacity: 1, duration: 0.5 }, '-=0.2')
 
-    /* ---- Scroll-triggered parallax ---- */
-    ScrollTrigger.create({
+    const st = ScrollTrigger.create({
       trigger: containerRef.current,
       start: 'top top',
       end: 'bottom top',
       onUpdate: (self) => {
-        const progress = self.progress
-        gsap.set(containerRef.current, { y: progress * 80, opacity: 1 - progress * 0.5 })
+        gsap.set(containerRef.current, {
+          y: self.progress * 80,
+          opacity: 1 - self.progress * 0.5,
+        })
       },
     })
 
-    return () => { ScrollTrigger.getAll().forEach(st => st.kill()) }
+    return () => { tl.kill(); st.kill() }
   }, [showContent])
 
   const scrollToAbout = () => {
@@ -136,14 +284,10 @@ export default function Hero() {
 
   return (
     <>
-      {/* ---- Cinematic intro 3D scene ---- */}
-      {!introDone && (
-        <Suspense fallback={null}>
-          <CinematicIntro onComplete={handleIntroComplete} />
-        </Suspense>
-      )}
+      {/* ---- cinematic intro ---- */}
+      {!introDone && <CinematicIntro onComplete={handleIntroComplete} />}
 
-      {/* ---- Hero content ---- */}
+      {/* ---- hero content ---- */}
       <SectionLayout
         id={SECTION_IDS.hero}
         className="relative min-h-screen flex items-center mesh-gradient"
@@ -154,11 +298,12 @@ export default function Hero() {
         </Suspense>
 
         <GlowOrbs />
+        <FloatingElements />
 
         <div
           ref={containerRef}
           className="relative z-10 flex flex-col items-center text-center gap-8"
-          style={{ opacity: showContent ? 1 : 0 }}
+          style={{ opacity: showContent ? 1 : 0, scale: showContent ? 1 : 0.92 }}
         >
           <motion.p
             ref={subtitleRef}
@@ -222,18 +367,19 @@ export default function Hero() {
             initial="hidden"
             animate={showContent ? 'visible' : 'hidden'}
           >
-            <a href={siteConfig.github} target="_blank" rel="noopener noreferrer" className="text-dark-400 hover:text-accent-400 transition-colors hover:scale-110 inline-block" aria-label="GitHub">
-              <GithubIcon size={20} />
-            </a>
-            <a href={siteConfig.linkedin} target="_blank" rel="noopener noreferrer" className="text-dark-400 hover:text-accent-400 transition-colors hover:scale-110 inline-block" aria-label="LinkedIn">
-              <LinkedinIcon size={20} />
-            </a>
-            <a href={siteConfig.twitter} target="_blank" rel="noopener noreferrer" className="text-dark-400 hover:text-accent-400 transition-colors hover:scale-110 inline-block" aria-label="Twitter">
-              <TwitterIcon size={20} />
-            </a>
-            <a href={siteConfig.instagram} target="_blank" rel="noopener noreferrer" className="text-dark-400 hover:text-accent-400 transition-colors hover:scale-110 inline-block" aria-label="Instagram">
-              <InstagramIcon size={20} />
-            </a>
+            {([
+              { href: siteConfig.github, label: 'GitHub', Icon: GithubIcon },
+              { href: siteConfig.linkedin, label: 'LinkedIn', Icon: LinkedinIcon },
+              { href: siteConfig.twitter, label: 'Twitter', Icon: TwitterIcon },
+              { href: siteConfig.instagram, label: 'Instagram', Icon: InstagramIcon },
+            ] as const).map(({ href, label, Icon }) => (
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer"
+                className="text-dark-400 hover:text-accent-400 transition-colors hover:scale-110 inline-block"
+                aria-label={label}
+              >
+                <Icon size={20} />
+              </a>
+            ))}
           </motion.div>
         </div>
 
