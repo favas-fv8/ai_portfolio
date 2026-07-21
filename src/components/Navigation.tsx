@@ -41,7 +41,7 @@ export default function Navigation() {
           className="text-xl font-bold tracking-wider text-gradient"
           aria-label="Go to top"
         >
-          MF
+          Fv.8
         </button>
 
         <ul className="hidden md:flex items-center gap-8">

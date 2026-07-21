@@ -6,7 +6,7 @@ import AnimatedSection from '@/components/ui/AnimatedSection'
 
 export default function Certifications() {
   return (
-    <SectionLayout id={SECTION_IDS.certifications}>
+    <SectionLayout id={SECTION_IDS.certifications} className="bg-dark-900">
       <AnimatedSection className="text-center mb-16">
         <p className="text-sm font-mono text-accent-400 tracking-widest uppercase mb-4">
           Certifications

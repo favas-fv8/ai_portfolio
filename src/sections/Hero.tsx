@@ -15,7 +15,7 @@ export default function Hero() {
   return (
     <SectionLayout
       id={SECTION_IDS.hero}
-      className="relative min-h-screen flex items-center mesh-gradient"
+      className="relative min-h-screen flex items-center mesh-gradient bg-dark-950"
       containerClassName="w-full"
     >
       <Suspense fallback={null}>

@@ -17,7 +17,7 @@ export default function Projects() {
     : projectsData.filter(p => p.category === active)
 
   return (
-    <SectionLayout id={SECTION_IDS.projects}>
+    <SectionLayout id={SECTION_IDS.projects} className="bg-dark-900">
       <AnimatedSection className="text-center mb-16">
         <p className="text-sm font-mono text-accent-400 tracking-widest uppercase mb-4">
           Portfolio

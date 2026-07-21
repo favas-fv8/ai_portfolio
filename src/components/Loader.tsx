@@ -50,7 +50,7 @@ export default function Loader() {
       )}
     >
       <div ref={textRef} className="text-4xl font-bold text-gradient mb-8 tracking-wider">
-        MF
+        Fv.8
       </div>
       <div className="w-48 h-1 bg-dark-700 rounded-full overflow-hidden">
         <div

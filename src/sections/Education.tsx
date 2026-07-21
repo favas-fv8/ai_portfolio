@@ -6,7 +6,7 @@ import AnimatedSection from '@/components/ui/AnimatedSection'
 
 export default function Education() {
   return (
-    <SectionLayout id={SECTION_IDS.education}>
+    <SectionLayout id={SECTION_IDS.education} className="bg-dark-950">
       <AnimatedSection className="text-center mb-16">
         <p className="text-sm font-mono text-accent-400 tracking-widest uppercase mb-4">
           Education

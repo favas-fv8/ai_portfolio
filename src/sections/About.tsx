@@ -18,7 +18,7 @@ const stats = [
 export default function About() {
   const [imgError, setImgError] = useState(false)
   return (
-    <SectionLayout id={SECTION_IDS.about}>
+    <SectionLayout id={SECTION_IDS.about} className="bg-dark-900">
       <div className="grid lg:grid-cols-2 gap-16 items-center">
         <AnimatedSection>
           <p className="text-sm font-mono text-accent-400 tracking-widest uppercase mb-4">
@@ -45,21 +45,27 @@ export default function About() {
         </AnimatedSection>
 
         <div className="flex flex-col gap-6">
-          <div className="relative mx-auto w-48 h-48 rounded-2xl overflow-hidden glass group">
+          <div className="relative mx-auto w-56 h-56 rounded-2xl overflow-hidden glass group">
             <div className="absolute inset-0 bg-gradient-to-br from-accent-500/20 to-transparent z-10" />
+            <div className="absolute -inset-1 bg-gradient-to-br from-accent-400 via-accent-600 to-purple-700 rounded-3xl opacity-30 blur-xl group-hover:opacity-60 transition-opacity duration-700 -z-10" />
+            <div className="absolute inset-0 rounded-2xl ring-1 ring-accent-500/30 z-20 pointer-events-none group-hover:ring-accent-400/60 transition-all duration-500" />
+            <div className="absolute inset-0 rounded-2xl ring-2 ring-accent-400/0 group-hover:ring-accent-400/30 scale-[1.02] z-20 pointer-events-none transition-all duration-500" />
             {!imgError ? (
               <img
                 src={profile.avatar}
                 alt={profile.name}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-1"
                 onError={() => setImgError(true)}
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-accent-600/30 to-dark-800">
-                <User size={48} className="text-accent-400/60" />
+              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-accent-600/30 to-dark-800 group-hover:scale-110 transition-transform duration-700">
+                <User size={56} className="text-accent-400/60 group-hover:text-accent-400/80 transition-colors duration-500" />
               </div>
             )}
-            <div className="absolute inset-0 rounded-2xl ring-1 ring-accent-500/20 z-20 pointer-events-none" />
+          </div>
+          <div className="text-center mt-4">
+            <p className="text-sm font-medium text-text-primary">{profile.name.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ')}</p>
+            <p className="text-xs text-dark-400 mt-0.5">{profile.title}</p>
           </div>
 
           <div className="grid grid-cols-2 gap-4">

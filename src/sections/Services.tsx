@@ -10,7 +10,7 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; className?: s
 
 export default function Services() {
   return (
-    <SectionLayout id={SECTION_IDS.services}>
+    <SectionLayout id={SECTION_IDS.services} className="bg-dark-950">
       <AnimatedSection className="text-center mb-16">
         <p className="text-sm font-mono text-accent-400 tracking-widest uppercase mb-4">
           What I Do

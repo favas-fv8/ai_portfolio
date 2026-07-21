@@ -18,7 +18,7 @@ export default function Footer() {
           className="text-xl font-bold tracking-wider text-gradient"
           aria-label="Back to top"
         >
-          MF
+          Fv.8
         </button>
 
         <div className="flex items-center gap-4">

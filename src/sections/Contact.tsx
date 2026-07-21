@@ -29,7 +29,7 @@ function CopyButton({ text }: { text: string }) {
 
 export default function Contact() {
   return (
-    <SectionLayout id={SECTION_IDS.contact}>
+    <SectionLayout id={SECTION_IDS.contact} className="bg-dark-950">
       <AnimatedSection className="text-center mb-16">
         <p className="text-sm font-mono text-accent-400 tracking-widest uppercase mb-4">
           Contact

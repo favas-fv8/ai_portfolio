@@ -27,10 +27,10 @@ function SkillIcon({ name, color }: { name: string; color: string }) {
   if (!Icon) return null
   return (
     <div
-      className="w-5 h-5 flex items-center justify-center rounded shrink-0"
+      className="w-9 h-9 flex items-center justify-center rounded-lg shrink-0"
       style={{ backgroundColor: `${color}20` }}
     >
-      <Icon size={12} color={color} />
+      <Icon size={18} color={color} />
     </div>
   )
 }
@@ -74,7 +74,7 @@ export default function Skills() {
   }, [filtered])
 
   return (
-    <SectionLayout id={SECTION_IDS.skills}>
+    <SectionLayout id={SECTION_IDS.skills} className="bg-dark-950">
       <AnimatedSection className="text-center mb-16">
         <p className="text-sm font-mono text-accent-400 tracking-widest uppercase mb-4">
           Skills & Expertise
