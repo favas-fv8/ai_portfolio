@@ -1,9 +1,5 @@
-import { useEffect, useRef } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { cn } from '@/utils/cn'
-
-gsap.registerPlugin(ScrollTrigger)
+import { motion } from 'framer-motion'
+import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 interface AnimatedSectionProps {
   children: React.ReactNode
@@ -12,47 +8,25 @@ interface AnimatedSectionProps {
 }
 
 export default function AnimatedSection({ children, className, delay = 0 }: AnimatedSectionProps) {
-  const ref = useRef<HTMLDivElement>(null!)
+  const reduced = useReducedMotion()
 
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-
-    const start = delay > 0.2 ? 'top 85%' : 'top 90%'
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(el,
-        {
-          opacity: 0,
-          scale: 0.65,
-          rotateX: 30,
-          y: 80,
-          transformPerspective: 1200,
-        },
-        {
-          opacity: 1,
-          scale: 1,
-          rotateX: 0,
-          y: 0,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: el,
-            start,
-            end: 'top 25%',
-            scrub: 1.2,
-          },
-        },
-      )
-    })
-
-    return () => {
-      ctx.revert()
-    }
-  }, [delay])
+  if (reduced) {
+    return <div className={className}>{children}</div>
+  }
 
   return (
-    <div ref={ref} className={cn(className)}>
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{
+        duration: 0.7,
+        delay,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+    >
       {children}
-    </div>
+    </motion.div>
   )
 }
