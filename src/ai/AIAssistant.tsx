@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Send, Sparkles, X } from 'lucide-react'
+import { Send, X } from 'lucide-react'
 import gsap from 'gsap'
 import { cn } from '@/utils/cn'
 import { findBestResponse, suggestedQuestions, type Message } from './engine'
@@ -11,21 +11,71 @@ import { findBestResponse, suggestedQuestions, type Message } from './engine'
 function OrbitalParticles() {
   return (
     <div className="absolute inset-0 pointer-events-none" aria-hidden>
-      {[0, 1, 2].map((i) => (
+      {[0, 1, 2, 3].map((i) => (
         <div
           key={i}
-          className="absolute top-1/2 left-1/2 w-1 h-1 rounded-full bg-accent-400"
+          className="absolute top-1/2 left-1/2 w-1.5 h-1.5 rounded-full bg-accent-400"
           style={{
-            animation: `orbit-particle 4s ${i * 1.2}s linear infinite`,
-            opacity: 0.5,
+            animation: `orbit-particle 4s ${i * 1}s linear infinite`,
+            opacity: 0.6,
           }}
         />
       ))}
       <style>{`
         @keyframes orbit-particle {
-          0%   { transform: translate(-50%, -50%) rotate(0deg) translateX(28px) scale(1); opacity: 0.6; }
-          50%  { opacity: 0.2; }
-          100% { transform: translate(-50%, -50%) rotate(360deg) translateX(28px) scale(0.4); opacity: 0.6; }
+          0%   { transform: translate(-50%, -50%) rotate(0deg) translateX(38px) scale(1); opacity: 0.7; }
+          50%  { opacity: 0.25; }
+          100% { transform: translate(-50%, -50%) rotate(360deg) translateX(38px) scale(0.4); opacity: 0.7; }
+        }
+      `}</style>
+    </div>
+  )
+}
+
+/* ---------- AI stars ---------- */
+function AIStars() {
+  return (
+    <div className="absolute inset-0 pointer-events-none z-30" aria-hidden>
+      {/* outer orbiting stars */}
+      {[0, 1, 2, 3, 4].map((i) => (
+        <div
+          key={`outer-${i}`}
+          className="absolute top-1/2 left-1/2 text-accent-200 drop-shadow-[0_0_4px_rgba(99,102,241,0.8)]"
+          style={{
+            animation: `star-orbit-outer 5s ${i * 1}s linear infinite`,
+          }}
+        >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2l1.5 6.5L20 9l-5 4.5L16.5 20 12 16l-4.5 4L8 13.5 3 9l6.5-0.5z" fill="currentColor" />
+          </svg>
+        </div>
+      ))}
+      {/* inner orbiting stars over the cutout */}
+      {[0, 1, 2].map((i) => (
+        <div
+          key={`inner-${i}`}
+          className="absolute top-1/2 left-1/2 text-accent-100 drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]"
+          style={{
+            animation: `star-orbit-inner 3s ${i * 1}s linear infinite`,
+          }}
+        >
+          <svg width="8" height="8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2l1.5 6.5L20 9l-5 4.5L16.5 20 12 16l-4.5 4L8 13.5 3 9l6.5-0.5z" fill="currentColor" />
+          </svg>
+        </div>
+      ))}
+      <style>{`
+        @keyframes star-orbit-outer {
+          0%   { transform: translate(-50%, -50%) rotate(0deg) translateX(50px) scale(0.2); opacity: 0; }
+          20%  { opacity: 1; }
+          80%  { opacity: 1; }
+          100% { transform: translate(-50%, -50%) rotate(360deg) translateX(50px) scale(0.5); opacity: 0; }
+        }
+        @keyframes star-orbit-inner {
+          0%   { transform: translate(-50%, -50%) rotate(0deg) translateX(16px) scale(0.4); opacity: 0; }
+          25%  { opacity: 1; }
+          75%  { opacity: 1; }
+          100% { transform: translate(-50%, -50%) rotate(360deg) translateX(16px) scale(0.8); opacity: 0; }
         }
       `}</style>
     </div>
@@ -68,33 +118,63 @@ function AIOrb({ onClick, label }: { onClick: () => void; label: string }) {
       <button
         ref={ref}
         onClick={onClick}
-        className="relative w-14 h-14 rounded-full flex items-center justify-center outline-none group"
+        className="relative w-20 h-20 rounded-full flex items-center justify-center outline-none group"
         aria-label={label}
       >
         {/* outer glow */}
         <div className="absolute inset-0 rounded-full bg-accent-500/20 animate-pulse" style={{ animationDuration: '3s' }} />
 
-        {/* gradient orb */}
+        {/* gradient orb background */}
         <div
-          className="absolute inset-1 rounded-full"
+          className="absolute inset-0 rounded-full"
           style={{
             background: 'linear-gradient(135deg, #6366f1, #8b5cf6, #4f46e5)',
-            boxShadow: '0 0 30px rgba(99,102,241,0.3), inset 0 0 20px rgba(255,255,255,0.1)',
-            animation: 'float-orb 4s ease-in-out infinite',
+            boxShadow: '0 0 40px rgba(99,102,241,0.4)',
           }}
         />
+
+        {/* image orb */}
+        <div
+          className="absolute inset-0 rounded-full overflow-hidden ring-2 ring-white/30 z-10"
+          style={{
+            animation: 'float-orb 4s ease-in-out infinite',
+            boxShadow: '0 0 30px rgba(99,102,241,0.3)',
+          }}
+        >
+          <img
+            src="/ai_portfolio/images/robot.png"
+            alt="AI"
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        {/* rotating outer ring - front */}
+        <div
+          className="absolute -inset-1 rounded-full pointer-events-none border border-white/20 z-20"
+          style={{ animation: 'spin-ring 8s linear infinite' }}
+        />
+        {/* counter-rotating inner ring - front */}
+        <div
+          className="absolute inset-[2px] rounded-full pointer-events-none border border-accent-300/30 z-20"
+          style={{ animation: 'spin-ring 12s linear infinite reverse' }}
+        />
+
+        <AIStars />
+
         <style>{`
           @keyframes float-orb {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-6px); }
           }
+          @keyframes spin-ring {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
         `}</style>
-
-        <Sparkles size={20} className="relative z-10 text-white drop-shadow-lg" />
         <OrbitalParticles />
 
         {/* hover scale */}
-        <div className="absolute inset-0 rounded-full transition-transform duration-500 group-hover:scale-110 group-hover:opacity-60 bg-accent-400/20 blur-xl" />
+        <div className="absolute inset-0 rounded-full transition-transform duration-500 group-hover:scale-110 group-hover:opacity-60 bg-accent-400/15 blur-xl pointer-events-none" />
       </button>
     </div>
   )
@@ -279,9 +359,13 @@ export default function AIAssistant() {
               {/* header */}
               <div className="relative flex items-center justify-between px-4 py-3 border-b border-white/5">
                 <div className="flex items-center gap-2.5">
-                  <div className="relative w-7 h-7 rounded-full bg-gradient-to-br from-accent-400 to-accent-600 flex items-center justify-center">
-                    <Sparkles size={12} className="text-white" />
-                    <div className="absolute inset-0 rounded-full animate-pulse bg-accent-400/30" />
+                  <div className="relative w-7 h-7 rounded-full overflow-hidden ring-1 ring-white/20">
+                    <img
+                      src="/ai_portfolio/images/robot.png"
+                      alt="AI"
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 rounded-full animate-pulse bg-accent-400/20" />
                   </div>
                   <div>
                     <p className="text-sm font-medium text-white">AI Assistant</p>
