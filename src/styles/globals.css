@@ -498,7 +498,7 @@
   top: 32px;
   width: 185px;
   height: 390px;
-  border-radius: 0 22px 22px 22px;
+  border-radius: 0 22px 22px 100px;
   z-index: 5;
 }
 
@@ -624,7 +624,7 @@
   left: 35px;
   width: 185px;
   height: 390px;
-  border-radius: 0 22px 22px 80px;
+  border-radius: 0 22px 22px 50px;
   opacity: .22;
   z-index: 2;
 }
@@ -638,64 +638,64 @@
   opacity: .13;
 }
 
-.cert-card.yellow::before {
-  background: linear-gradient(180deg, #FFC600 0%, #FFD600 55%, #FFD000 100%);
+.cert-card.indigo::before {
+  background: linear-gradient(180deg, #818cf8 0%, #6366f1 55%, #4f46e5 100%);
 }
 
-.cert-card.yellow::after {
-  background: #FFD400;
+.cert-card.indigo::after {
+  background: #4f46e5;
 }
 
-.cert-card.yellow .layer {
-  background: #FFD000;
+.cert-card.indigo .layer {
+  background: #6366f1;
 }
 
-.cert-card.yellow .badge-inner {
-  background: linear-gradient(180deg, #FFC000, #FFCF00);
+.cert-card.indigo .badge-inner {
+  background: linear-gradient(180deg, #6366f1, #4f46e5);
 }
 
-.cert-card.yellow .top-strip span {
-  color: #E5AF00;
+.cert-card.indigo .top-strip span {
+  color: #3730a3;
 }
 
 .cert-card.purple::before {
-  background: linear-gradient(180deg, #8E79C8, #A394DB);
+  background: linear-gradient(180deg, #a855f7, #9333ea);
 }
 
 .cert-card.purple::after {
-  background: #856DBD;
+  background: #7e22ce;
 }
 
 .cert-card.purple .layer {
-  background: #7F67B8;
+  background: #9333ea;
 }
 
 .cert-card.purple .badge-inner {
-  background: linear-gradient(180deg, #7A65BB, #8D79C9);
+  background: linear-gradient(180deg, #9333ea, #7e22ce);
 }
 
 .cert-card.purple .top-strip span {
-  color: #7A65BB;
+  color: #6b21a8;
 }
 
-.cert-card.pink::before {
-  background: linear-gradient(180deg, #F15E71, #F45667);
+.cert-card.cyan::before {
+  background: linear-gradient(180deg, #22d3ee, #06b6d4);
 }
 
-.cert-card.pink::after {
-  background: #F04F63;
+.cert-card.cyan::after {
+  background: #0891b2;
 }
 
-.cert-card.pink .layer {
-  background: #EF5568;
+.cert-card.cyan .layer {
+  background: #06b6d4;
 }
 
-.cert-card.pink .badge-inner {
-  background: linear-gradient(180deg, #EC5C70, #F17281);
+.cert-card.cyan .badge-inner {
+  background: linear-gradient(180deg, #06b6d4, #0891b2);
 }
 
-.cert-card.pink .top-strip span {
-  color: #EA6A76;
+.cert-card.cyan .top-strip span {
+  color: #0e7490;
 }
 
 .contact-card-parent {

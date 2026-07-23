@@ -4,7 +4,7 @@ import { SECTION_IDS } from '@/constants'
 import certificationsData from '@/data/certifications.json'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
-const themes = ['yellow', 'purple', 'pink']
+const themes = ['indigo', 'purple', 'cyan']
 
 export default function Certifications() {
   return (
