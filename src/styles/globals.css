@@ -509,7 +509,7 @@
   bottom: -5px;
   width: 185px;
   height: 80px;
-  border-radius: 0 0 26px 26px;
+  border-radius: 0 0 26px 100px;
   z-index: 4;
 }
 
@@ -624,7 +624,7 @@
   left: 35px;
   width: 185px;
   height: 390px;
-  border-radius: 0 22px 22px 50px;
+  border-radius: 0 22px 22px 100px;
   opacity: .22;
   z-index: 2;
 }
