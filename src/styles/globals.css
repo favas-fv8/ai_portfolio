@@ -665,11 +665,12 @@
   font-size: 0.8rem;
   color: var(--color-dark-300);
   text-decoration: none;
-  transition: color 0.3s;
+  transition: color 0.3s, filter 0.3s;
 }
 
 .project-link:hover {
-  color: var(--color-text-primary);
+  color: var(--color-accent-400);
+  filter: drop-shadow(0 0 6px var(--color-accent-400));
 }
 
 .cert-scroll {
@@ -876,11 +877,12 @@
   color: inherit;
   opacity: .85;
   text-decoration: none;
-  transition: opacity .3s;
+  transition: opacity .3s, filter .3s;
 }
 
 .cert-card .content .credential-link:hover {
   opacity: 1;
+  filter: drop-shadow(0 0 6px currentColor);
 }
 
 .cert-card .layer {
