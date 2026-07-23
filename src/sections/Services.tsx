@@ -25,20 +25,25 @@ export default function Services() {
           const Icon = iconMap[service.icon]
           return (
             <AnimatedSection key={service.id} delay={i * 0.1}>
-              <div className="glass rounded-2xl p-6 glass-hover group">
-                <div className="mb-4 text-accent-400 group-hover:scale-110 transition-transform duration-300">
-                  {Icon && <Icon size={32} />}
+              <div className="flip-card">
+                <div className="flip-card-inner">
+                  <div className="flip-card-front">
+                    <div className="mb-4" style={{ color: 'var(--color-accent-400)' }}>
+                      {Icon && <Icon size={40} />}
+                    </div>
+                    <p className="flip-title">{service.title}</p>
+                    <p className="flip-hint">Hover Me</p>
+                  </div>
+                  <div className="flip-card-back">
+                    <p className="flip-title">{service.title}</p>
+                    <p className="flip-desc">{service.description}</p>
+                    <ul className="flip-features">
+                      {service.features.map(feature => (
+                        <li key={feature}>{feature}</li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-                <h3 className="text-lg font-semibold mb-2">{service.title}</h3>
-                <p className="text-sm text-dark-400 mb-4">{service.description}</p>
-                <ul className="space-y-2">
-                  {service.features.map(feature => (
-                    <li key={feature} className="text-xs text-dark-300 flex items-start gap-2">
-                      <span className="text-accent-400 mt-0.5">&#x2022;</span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
               </div>
             </AnimatedSection>
           )

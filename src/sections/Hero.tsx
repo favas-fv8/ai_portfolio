@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import { ArrowDown } from 'lucide-react'
+import { ArrowDown, Mail } from 'lucide-react'
 import { GithubIcon, LinkedinIcon, TwitterIcon, InstagramIcon } from '@/components/ui/SocialIcon'
 import SectionLayout from '@/layouts/SectionLayout'
 import { siteConfig } from '@/config/site'
@@ -55,17 +55,20 @@ export default function Hero() {
         </div>
 
         <div className="flex items-center gap-6 mt-4">
-          <a href={siteConfig.github} target="_blank" rel="noopener noreferrer" className="text-dark-400 hover:text-accent-400 transition-colors hover:scale-110 inline-block" aria-label="GitHub">
+          <a href={siteConfig.github} target="_blank" rel="noopener noreferrer" className="icon-glow text-dark-400" aria-label="GitHub">
             <GithubIcon size={20} />
           </a>
-          <a href={siteConfig.linkedin} target="_blank" rel="noopener noreferrer" className="text-dark-400 hover:text-accent-400 transition-colors hover:scale-110 inline-block" aria-label="LinkedIn">
+          <a href={siteConfig.linkedin} target="_blank" rel="noopener noreferrer" className="icon-glow text-dark-400" aria-label="LinkedIn">
             <LinkedinIcon size={20} />
           </a>
-          <a href={siteConfig.twitter} target="_blank" rel="noopener noreferrer" className="text-dark-400 hover:text-accent-400 transition-colors hover:scale-110 inline-block" aria-label="Twitter">
+          <a href={siteConfig.twitter} target="_blank" rel="noopener noreferrer" className="icon-glow text-dark-400" aria-label="X">
             <TwitterIcon size={20} />
           </a>
-          <a href={siteConfig.instagram} target="_blank" rel="noopener noreferrer" className="text-dark-400 hover:text-accent-400 transition-colors hover:scale-110 inline-block" aria-label="Instagram">
+          <a href={siteConfig.instagram} target="_blank" rel="noopener noreferrer" className="icon-glow text-dark-400" aria-label="Instagram">
             <InstagramIcon size={20} />
+          </a>
+          <a href={`mailto:${siteConfig.email}`} className="icon-glow text-dark-400" aria-label="Email">
+            <Mail size={20} />
           </a>
         </div>
       </div>

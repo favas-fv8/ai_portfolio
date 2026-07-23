@@ -9,7 +9,7 @@ export const siteConfig = {
   resumeUrl: '/ai_portfolio/resume.pdf',
   github: 'https://github.com/favas-fv8',
   linkedin: 'https://linkedin.com/in/favas-fv8',
-  twitter: 'https://twitter.com/favas-fv8',
+  twitter: 'https://x.com/favas-fv8',
   instagram: 'https://instagram.com/favas-fv8',
   repo: 'ai_portfolio',
   url: 'https://favas-fv8.github.io/ai_portfolio',

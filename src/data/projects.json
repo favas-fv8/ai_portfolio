@@ -35,6 +35,7 @@
     "category": "fullstack",
     "featured": false,
     "githubUrl": "https://github.com/favas-fv8/taskmanager",
+    "liveUrl": "https://example.com",
     "year": 2024
   },
   {
@@ -47,6 +48,33 @@
     "category": "backend",
     "featured": false,
     "githubUrl": "https://github.com/favas-fv8/api-gateway",
+    "liveUrl": "https://example.com",
     "year": 2023
+  },
+  {
+    "id": "project-5",
+    "title": "AI Chat Application",
+    "description": "Real-time AI-powered chat application with natural language processing.",
+    "longDescription": "Built a chat application integrating LLM APIs for intelligent conversations, with streaming responses, conversation history, and multi-language support.",
+    "image": "/ai_portfolio/images/project-5.jpg",
+    "technologies": ["React", "Python", "FastAPI", "WebSocket", "OpenAI"],
+    "category": "fullstack",
+    "featured": true,
+    "githubUrl": "https://github.com/favas-fv8/ai-chat",
+    "liveUrl": "https://example.com",
+    "year": 2025
+  },
+  {
+    "id": "project-6",
+    "title": "DevOps Pipeline Tool",
+    "description": "CI/CD pipeline management tool with automated deployment workflows.",
+    "longDescription": "Developed a DevOps tool for managing CI/CD pipelines with GitHub Actions integration, Docker containerization, automated testing, and deployment monitoring.",
+    "image": "/ai_portfolio/images/project-6.jpg",
+    "technologies": ["TypeScript", "Docker", "GitHub Actions", "AWS", "Terraform"],
+    "category": "backend",
+    "featured": false,
+    "githubUrl": "https://github.com/favas-fv8/devops-tool",
+    "liveUrl": "https://example.com",
+    "year": 2024
   }
 ]

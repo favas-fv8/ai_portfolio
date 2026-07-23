@@ -1,10 +1,10 @@
 import { Mail } from 'lucide-react'
-import { GithubIcon, LinkedinIcon, TwitterIcon } from '@/components/ui/SocialIcon'
+import { GithubIcon, LinkedinIcon, TwitterIcon, InstagramIcon } from '@/components/ui/SocialIcon'
 import { siteConfig } from '@/config/site'
 import socialsData from '@/data/socials.json'
 
 const iconMap: Record<string, React.ComponentType<{ size?: number }>> = {
-  Github: GithubIcon, Linkedin: LinkedinIcon, Twitter: TwitterIcon, Mail,
+  Github: GithubIcon, Linkedin: LinkedinIcon, Twitter: TwitterIcon, Instagram: InstagramIcon, Mail,
 }
 
 export default function Footer() {
@@ -30,7 +30,7 @@ export default function Footer() {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-dark-400 hover:text-accent-400 transition-colors duration-300"
+                className="icon-glow text-dark-400"
                 aria-label={social.name}
               >
                 <Icon size={20} />
