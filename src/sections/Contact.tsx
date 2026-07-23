@@ -13,14 +13,6 @@ const socialIcons: Record<string, string> = {
   Mail: 'M0 3v18h24V3H0zm21.518 2L12 12.713 2.482 5h19.036zM2 19V7.183l10 8.104 10-8.104V19H2z',
 }
 
-const socialLabels: Record<string, string> = {
-  Github: 'GitHub',
-  Linkedin: 'LinkedIn',
-  Twitter: 'X',
-  Instagram: 'Instagram',
-  Mail: 'Email',
-}
-
 const contactInfo = [
   { icon: Mail, label: 'Email', value: siteConfig.email },
   { icon: Phone, label: 'Phone', value: siteConfig.phone },
