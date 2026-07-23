@@ -25,7 +25,7 @@
   },
   {
     "id": "cert-4",
-    "title": "Microsoft Azure Developer",
+    "title": "Microsoft Azure AI Engineer",
     "issuer": "Microsoft",
     "date": "2023-08",
     "credentialUrl": "https://learn.microsoft.com/certifications/",
@@ -33,10 +33,10 @@
   },
   {
     "id": "cert-5",
-    "title": "Python for Data Science",
-    "issuer": "IBM",
+    "title": "Scrum Master Professional",
+    "issuer": "Scrum Alliance",
     "date": "2023-05",
-    "credentialUrl": "https://www.ibm.com/training/",
+    "credentialUrl": "https://www.scrumalliance.org/certifications/",
     "image": "/ai_portfolio/images/cert-5.jpg"
   }
 ]

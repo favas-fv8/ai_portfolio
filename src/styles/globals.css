@@ -495,7 +495,7 @@
   content: "";
   position: absolute;
   left: 35px;
-  top: 0;
+  top: 32px;
   width: 185px;
   height: 390px;
   border-radius: 0 22px 22px 100px;
@@ -633,6 +633,11 @@
   bottom: -18px;
 }
 
+.cert-card .layer2 {
+  bottom: -35px;
+  opacity: .13;
+}
+
 .cert-card.indigo::before {
   background: linear-gradient(180deg, #818cf8 0%, #6366f1 55%, #4f46e5 100%);
 }
@@ -691,6 +696,46 @@
 
 .cert-card.cyan .top-strip span {
   color: #0e7490;
+}
+
+.cert-card.emerald::before {
+  background: linear-gradient(180deg, #34d399, #10b981);
+}
+
+.cert-card.emerald::after {
+  background: #059669;
+}
+
+.cert-card.emerald .layer {
+  background: #10b981;
+}
+
+.cert-card.emerald .badge-inner {
+  background: linear-gradient(180deg, #10b981, #059669);
+}
+
+.cert-card.emerald .top-strip span {
+  color: #047857;
+}
+
+.cert-card.rose::before {
+  background: linear-gradient(180deg, #fb7185, #f43f5e);
+}
+
+.cert-card.rose::after {
+  background: #e11d48;
+}
+
+.cert-card.rose .layer {
+  background: #f43f5e;
+}
+
+.cert-card.rose .badge-inner {
+  background: linear-gradient(180deg, #f43f5e, #e11d48);
+}
+
+.cert-card.rose .top-strip span {
+  color: #be123c;
 }
 
 .contact-card-parent {
