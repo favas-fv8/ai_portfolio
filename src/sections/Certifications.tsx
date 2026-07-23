@@ -4,7 +4,7 @@ import { SECTION_IDS } from '@/constants'
 import certificationsData from '@/data/certifications.json'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
-const themes = ['indigo', 'purple', 'cyan', 'emerald', 'rose']
+const themes = ['indigo', 'purple', 'cyan', 'indigo', 'purple']
 
 export default function Certifications() {
   return (
@@ -18,12 +18,12 @@ export default function Certifications() {
         </h2>
       </AnimatedSection>
 
-      <div className="flex flex-wrap justify-center gap-12">
+      <div className="cert-scroll flex gap-12 overflow-x-auto pb-4 px-4" style={{ scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch' }}>
         {certificationsData.map((cert, i) => {
           const theme = themes[i % themes.length]
           return (
             <AnimatedSection key={cert.id} delay={i * 0.1}>
-              <div className={`cert-card ${theme}`}>
+              <div className={`cert-card ${theme}`} style={{ scrollSnapAlign: 'start' }}>
                 <div className="top-strip">
                   <span>{cert.issuer}</span>
                 </div>

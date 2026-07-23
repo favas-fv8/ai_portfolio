@@ -25,18 +25,18 @@
   },
   {
     "id": "cert-4",
-    "title": "Microsoft Azure AI Engineer",
+    "title": "Microsoft Azure Administrator",
     "issuer": "Microsoft",
     "date": "2023-08",
-    "credentialUrl": "https://learn.microsoft.com/certifications/",
+    "credentialUrl": "https://learn.microsoft.com/en-us/certifications/",
     "image": "/ai_portfolio/images/cert-4.jpg"
   },
   {
     "id": "cert-5",
-    "title": "Scrum Master Professional",
-    "issuer": "Scrum Alliance",
+    "title": "Oracle Cloud Infrastructure",
+    "issuer": "Oracle",
     "date": "2023-05",
-    "credentialUrl": "https://www.scrumalliance.org/certifications/",
+    "credentialUrl": "https://education.oracle.com/",
     "image": "/ai_portfolio/images/cert-5.jpg"
   }
 ]
