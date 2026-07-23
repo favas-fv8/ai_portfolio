@@ -11,7 +11,7 @@ export default function Certifications() {
   const scrollRef = useRef<HTMLDivElement>(null!)
   const rafRef = useRef<number>(0)
   const pausedRef = useRef(false)
-  const resumeTimerRef = useRef<ReturnType<typeof setTimeout>>()
+  const resumeTimerRef = useRef<number>(0)
 
   const pauseAndResume = () => {
     pausedRef.current = true

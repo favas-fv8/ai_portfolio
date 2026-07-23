@@ -16,7 +16,7 @@ export default function Projects() {
   const rafRef = useRef<number>(0)
   const pausedRef = useRef(false)
   const posRef = useRef(0)
-  const resumeTimerRef = useRef<ReturnType<typeof setTimeout>>()
+  const resumeTimerRef = useRef<number>(0)
 
   const filtered = active === 'all'
     ? projectsData
