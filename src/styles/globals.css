@@ -495,7 +495,7 @@
   content: "";
   position: absolute;
   left: 35px;
-  top: 32px;
+  top: 0;
   width: 185px;
   height: 390px;
   border-radius: 0 22px 22px 100px;
@@ -631,11 +631,6 @@
 
 .cert-card .layer1 {
   bottom: -18px;
-}
-
-.cert-card .layer2 {
-  bottom: -35px;
-  opacity: .13;
 }
 
 .cert-card.indigo::before {

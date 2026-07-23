@@ -22,5 +22,21 @@
     "date": "2023-11",
     "credentialUrl": "https://cloud.google.com/certification/",
     "image": "/ai_portfolio/images/cert-3.jpg"
+  },
+  {
+    "id": "cert-4",
+    "title": "Microsoft Azure Developer",
+    "issuer": "Microsoft",
+    "date": "2023-08",
+    "credentialUrl": "https://learn.microsoft.com/certifications/",
+    "image": "/ai_portfolio/images/cert-4.jpg"
+  },
+  {
+    "id": "cert-5",
+    "title": "Python for Data Science",
+    "issuer": "IBM",
+    "date": "2023-05",
+    "credentialUrl": "https://www.ibm.com/training/",
+    "image": "/ai_portfolio/images/cert-5.jpg"
   }
 ]

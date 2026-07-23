@@ -4,7 +4,7 @@ import { SECTION_IDS } from '@/constants'
 import certificationsData from '@/data/certifications.json'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
-const themes = ['indigo', 'purple', 'cyan']
+const themes = ['indigo', 'purple', 'cyan', 'indigo', 'purple']
 
 export default function Certifications() {
   return (
@@ -54,7 +54,6 @@ export default function Certifications() {
                 </div>
 
                 <div className="layer layer1" />
-                <div className="layer layer2" />
               </div>
             </AnimatedSection>
           )
