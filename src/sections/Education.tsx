@@ -16,30 +16,35 @@ export default function Education() {
         </h2>
       </AnimatedSection>
 
-      <div className="max-w-3xl mx-auto space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {educationData.map((edu, i) => (
           <AnimatedSection key={edu.id} delay={i * 0.1}>
-            <div className="glass rounded-2xl p-6 glass-hover">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-xl bg-accent-500/10 text-accent-400 shrink-0">
-                  <GraduationCap size={24} />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold">{edu.degree} in {edu.field}</h3>
-                  <p className="text-sm text-accent-400 mb-1">{edu.institution}</p>
-                  <p className="text-xs text-dark-400 font-mono mb-3">
-                    {edu.startDate} — {edu.endDate} {edu.grade && `| ${edu.grade}`}
-                  </p>
-                  {edu.achievements.length > 0 && (
-                    <ul className="space-y-1">
-                      {edu.achievements.map((a, i) => (
-                        <li key={i} className="text-sm text-dark-300 flex items-start gap-2">
-                          <span className="text-accent-400 mt-1">&#x2022;</span>
-                          {a}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+            <div className="edu-card glass-hover h-full">
+              <div className="blob" />
+              <div className="bg">
+                <div style={{ transform: 'skewX(5deg)' }}>
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 rounded-xl bg-accent-500/10 text-accent-400 shrink-0">
+                      <GraduationCap size={24} />
+                    </div>
+                    <div className="min-w-0">
+                      <h3 className="text-lg font-semibold">{edu.degree}{edu.field ? ` in ${edu.field}` : ''}</h3>
+                      <p className="text-sm text-accent-400 mb-1">{edu.institution}</p>
+                      <p className="text-xs text-dark-400 font-mono mb-3">
+                        {edu.startDate} — {edu.endDate} {edu.grade && `| ${edu.grade}`}
+                      </p>
+                      {edu.achievements.length > 0 && (
+                        <ul className="space-y-1">
+                          {edu.achievements.map((a, i) => (
+                            <li key={i} className="text-sm text-dark-300 flex items-start gap-2">
+                              <span className="text-accent-400 mt-1 shrink-0">&#x2022;</span>
+                              <span>{a}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

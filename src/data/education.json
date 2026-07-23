@@ -13,5 +13,33 @@
       "Led university tech club with 200+ members",
       "Won hackathon for building accessibility tools"
     ]
+  },
+  {
+    "id": "edu-2",
+    "institution": "Kerala State Board",
+    "degree": "Higher Secondary (12th)",
+    "field": "Science",
+    "location": "Kerala, India",
+    "startDate": "2014",
+    "endDate": "2016",
+    "grade": "92%",
+    "achievements": [
+      "State-level science fair participant",
+      "Mathematics club coordinator"
+    ]
+  },
+  {
+    "id": "edu-3",
+    "institution": "Kerala State Board",
+    "degree": "SSLC (10th)",
+    "field": "",
+    "location": "Kerala, India",
+    "startDate": "2014",
+    "endDate": "2014",
+    "grade": "9.2 CGPA",
+    "achievements": [
+      "School topper in Mathematics",
+      "National Science Olympiad qualifier"
+    ]
   }
 ]

@@ -6,14 +6,8 @@ export default function Loader() {
   const [loading, setLoading] = useState(true)
   const [progress, setProgress] = useState(0)
   const loaderRef = useRef<HTMLDivElement>(null!)
-  const textRef = useRef<HTMLDivElement>(null!)
 
   useEffect(() => {
-    gsap.fromTo(textRef.current,
-      { opacity: 0, scale: 0.8 },
-      { opacity: 1, scale: 1, duration: 0.6, ease: 'power3.out' },
-    )
-
     const interval = setInterval(() => {
       setProgress(prev => {
         if (prev >= 100) {
@@ -49,10 +43,15 @@ export default function Loader() {
         'bg-dark-950',
       )}
     >
-      <div ref={textRef} className="text-4xl font-bold text-gradient mb-8 tracking-wider">
-        Fv.8
+      <div className="loader">
+        <div id="first">
+          <div id="second">
+            <div id="third">
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="w-48 h-1 bg-dark-700 rounded-full overflow-hidden">
+      <div className="mt-16 w-48 h-1 bg-dark-700 rounded-full overflow-hidden">
         <div
           className="h-full bg-accent-500 rounded-full transition-all duration-300 ease-flux"
           style={{ width: `${Math.min(progress, 100)}%` }}
@@ -61,6 +60,118 @@ export default function Loader() {
       <span className="mt-4 text-sm text-dark-400 font-mono">
         {Math.round(progress)}%
       </span>
+      <style>{`
+        .loader {
+          position: relative;
+          width: 2.5em;
+          height: 2.5em;
+          transform-origin: center;
+          border-radius: 50px;
+          box-shadow: inset 0px 0px 10px purple,
+          inset 5px 5px 12px rgba(44, 0, 114, 0.8),
+          inset 8px 8px 1px rgba(160, 120, 255, 0.7),
+          0px 0px 1px rgba(160, 120, 255, 0.6);
+          animation: 1.2s linear infinite 0s running first682;
+        }
+
+        .loader div {
+          width: inherit;
+          height: inherit;
+          position: absolute;
+        }
+
+        #first {
+          transform: rotate(90deg)
+        }
+
+        #first::before {
+          --width: 1em;
+          --height: 1em;
+          content: "";
+          position: absolute;
+          top: 100%;
+          left: calc(50% - var(--width)/2);
+          width: 1em;
+          height: 1em;
+          background-color: rgb(44, 0, 114);
+          box-shadow: inset 5px 5px 10px rgb(160, 120, 255),
+          0px 0px 2px white;
+          border-radius: 50px;
+          animation: 0.8s ease-in 0s infinite running jump2;
+        }
+
+        #second {
+          transform: rotate(90deg);
+        }
+
+        #second::before {
+          --width: 1em;
+          --height: 1em;
+          content: "";
+          position: absolute;
+          top: 100%;
+          left: calc(50% - var(--width)/2);
+          width: 1em;
+          height: 1em;
+          background-color: rgb(44, 0, 114);
+          box-shadow: inset 5px 5px 10px rgb(160, 120, 255),
+          0px 0px 2px white;
+          border-radius: 50px;
+          animation: 1.5s ease-in 0s infinite running jump2;
+        }
+
+        #third {
+          transform: rotate(90deg)
+        }
+
+        #third::before {
+          --width: 1em;
+          --height: 1em;
+          content: "";
+          position: absolute;
+          top: 100%;
+          left: calc(50% - var(--width)/2);
+          width: 1em;
+          height: 1em;
+          background-color: rgb(44, 0, 114);
+          box-shadow: inset 5px 5px 10px rgb(160, 120, 255),
+          0px 0px 2px white;
+          border-radius: 50px;
+          animation: 1.6s ease-in 0s infinite running jump2;
+        }
+
+        .loader::after {
+          --width: 1em;
+          --height: 1em;
+          content: "";
+          position: absolute;
+          top: 100%;
+          left: calc(50% - var(--width)/2);
+          width: 1em;
+          height: 1em;
+          background-color: rgb(44, 0, 114);
+          box-shadow: inset 5px 5px 10px rgb(160, 120, 255),
+          0px 0px 2px white;
+          border-radius: 50px;
+          animation: 1.2s ease-in 1s alternate infinite running jump2;
+        }
+
+        @keyframes first682 {
+          0% { transform: rotate(0deg); }
+          25% { transform: rotate(90deg); }
+          50% { transform: rotate(180deg); }
+          75% { transform: rotate(270deg); }
+          100% { transform: rotate(360deg); }
+        }
+
+        @keyframes jump2 {
+          0% { top: 100%; }
+          25% { top: 230%; }
+          50% { top: 100%; }
+          75% { height: 0.6em; }
+          100% { height: 1em; }
+        }
+      `}</style>
     </div>
   )
 }

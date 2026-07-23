@@ -4,6 +4,8 @@ import { SECTION_IDS } from '@/constants'
 import certificationsData from '@/data/certifications.json'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
+const themes = ['yellow', 'purple', 'pink']
+
 export default function Certifications() {
   return (
     <SectionLayout id={SECTION_IDS.certifications} className="bg-dark-900">
@@ -16,29 +18,47 @@ export default function Certifications() {
         </h2>
       </AnimatedSection>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {certificationsData.map((cert, i) => (
-          <AnimatedSection key={cert.id} delay={i * 0.1}>
-            <div className="glass rounded-2xl p-6 glass-hover group">
-              <div className="mb-4 text-accent-400">
-                <Award size={32} />
+      <div className="flex flex-wrap justify-center gap-12">
+        {certificationsData.map((cert, i) => {
+          const theme = themes[i % themes.length]
+          return (
+            <AnimatedSection key={cert.id} delay={i * 0.1}>
+              <div className={`cert-card ${theme}`}>
+                <div className="top-strip">
+                  <span>{cert.issuer}</span>
+                </div>
+
+                <div className="badge">
+                  <div className="badge-inner">{String(i + 1).padStart(2, '0')}</div>
+                </div>
+
+                <div className="content">
+                  <div className="icon-wrap">
+                    <Award size={40} />
+                  </div>
+
+                  <h3>{cert.title}</h3>
+
+                  <p className="date">{cert.date}</p>
+
+                  {cert.credentialUrl && (
+                    <a
+                      href={cert.credentialUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="credential-link"
+                    >
+                      View Credential <ExternalLink size={12} />
+                    </a>
+                  )}
+                </div>
+
+                <div className="layer layer1" />
+                <div className="layer layer2" />
               </div>
-              <h3 className="text-lg font-semibold mb-1">{cert.title}</h3>
-              <p className="text-sm text-accent-400 mb-1">{cert.issuer}</p>
-              <p className="text-xs text-dark-400 font-mono mb-4">{cert.date}</p>
-              {cert.credentialUrl && (
-                <a
-                  href={cert.credentialUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm text-dark-300 hover:text-accent-400 transition-colors"
-                >
-                  View Credential <ExternalLink size={14} />
-                </a>
-              )}
-            </div>
-          </AnimatedSection>
-        ))}
+            </AnimatedSection>
+          )
+        })}
       </div>
     </SectionLayout>
   )
