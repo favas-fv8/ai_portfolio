@@ -575,8 +575,8 @@
 .cert-card .content .icon-wrap {
   font-size: 40px;
   margin-bottom: 20px;
-  display: block;
-  text-align: center;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .cert-card .content h3 {
