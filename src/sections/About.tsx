@@ -361,12 +361,15 @@ export default function About() {
             {stats.map((stat, i) => (
               <motion.div
                 key={stat.label}
-                className="glass rounded-2xl p-6 text-center hover:bg-surface-hover transition-colors duration-300"
+                className="group relative glass rounded-2xl p-6 text-center overflow-hidden transition-all duration-300 hover:shadow-[0_0_25px_rgba(99,102,241,0.25)]"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
               >
+                <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.06] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                </div>
                 <stat.icon className="mx-auto mb-3 text-accent-400" size={28} />
                 <div className="text-3xl font-bold text-text-primary mb-1">
                   {stat.value}+

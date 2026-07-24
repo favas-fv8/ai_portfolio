@@ -31,7 +31,10 @@ export default function Experience() {
                       : 'bg-dark-900 border-dark-600',
                   )}
                 />
-                <div className="glass rounded-2xl p-6 glass-hover">
+                <div className="group relative glass rounded-2xl p-6 overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(99,102,241,0.2)]">
+                  <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.06] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                  </div>
                   <div className="flex items-start justify-between mb-2 flex-wrap gap-2">
                     <div>
                       <h3 className="text-lg font-semibold">{exp.role}</h3>

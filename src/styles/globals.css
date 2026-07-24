@@ -512,7 +512,8 @@
 }
 
 .project-scroll {
-  overflow: visible;
+  overflow-x: hidden;
+  overflow-y: visible;
   width: 100%;
   padding: 3rem 0;
   touch-action: none;

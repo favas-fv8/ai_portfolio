@@ -142,7 +142,7 @@ function AIOrb({ onClick, label }: { onClick: () => void; label: string }) {
           }}
         >
           <img
-            src="/ai_portfolio/images/robot.png"
+            src="/ai_portfolio/images/ai/robot.png"
             alt="AI"
             className="w-full h-full object-cover"
           />
@@ -361,7 +361,7 @@ export default function AIAssistant() {
                 <div className="flex items-center gap-2.5">
                   <div className="relative w-7 h-7 rounded-full overflow-hidden ring-1 ring-white/20">
                     <img
-                      src="/ai_portfolio/images/robot.png"
+                      src="/ai_portfolio/images/ai/robot.png"
                       alt="AI"
                       className="w-full h-full object-cover"
                     />

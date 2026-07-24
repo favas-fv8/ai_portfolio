@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react'
-import { Award, ExternalLink } from 'lucide-react'
+import { Award, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react'
 import SectionLayout from '@/layouts/SectionLayout'
 import { SECTION_IDS } from '@/constants'
 import certificationsData from '@/data/certifications.json'
@@ -11,21 +11,21 @@ export default function Certifications() {
   const scrollRef = useRef<HTMLDivElement>(null!)
   const rafRef = useRef<number>(0)
   const pausedRef = useRef(false)
-  const resumeTimerRef = useRef<number>(0)
 
-  const pauseAndResume = () => {
-    pausedRef.current = true
-    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
-    resumeTimerRef.current = setTimeout(() => {
-      pausedRef.current = false
-    }, 2000)
+  const scrollBy = (dir: number) => {
+    const el = scrollRef.current
+    if (!el) return
+    const cardWidth = 220
+    const gap = 48
+    const step = (cardWidth + gap) * dir
+    el.scrollLeft += step
   }
 
   useEffect(() => {
     const el = scrollRef.current
     if (!el) return
 
-    const scroll = () => {
+    rafRef.current = requestAnimationFrame(function scroll() {
       if (!pausedRef.current) {
         el.scrollLeft += 0.8
         if (el.scrollLeft + el.clientWidth >= el.scrollWidth) {
@@ -33,53 +33,16 @@ export default function Certifications() {
         }
       }
       rafRef.current = requestAnimationFrame(scroll)
-    }
-
-    rafRef.current = requestAnimationFrame(scroll)
-
-    const onWheel = (e: WheelEvent) => {
-      e.preventDefault()
-      const delta = e.deltaX || e.deltaY
-      el.scrollLeft += delta * 0.5
-      pauseAndResume()
-    }
-
-    let touchStartX = 0
-    const onTouchStart = (e: TouchEvent) => {
-      touchStartX = e.touches[0].clientX
-      pausedRef.current = true
-      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
-    }
-
-    const onTouchMove = (e: TouchEvent) => {
-      const delta = touchStartX - e.touches[0].clientX
-      touchStartX = e.touches[0].clientX
-      el.scrollLeft += delta
-    }
-
-    const onTouchEnd = () => {
-      resumeTimerRef.current = setTimeout(() => {
-        pausedRef.current = false
-      }, 2000)
-    }
+    })
 
     const onEnter = () => { pausedRef.current = true }
     const onLeave = () => { pausedRef.current = false }
 
-    el.addEventListener('wheel', onWheel, { passive: false })
-    el.addEventListener('touchstart', onTouchStart, { passive: true })
-    el.addEventListener('touchmove', onTouchMove, { passive: true })
-    el.addEventListener('touchend', onTouchEnd, { passive: true })
     el.addEventListener('mouseenter', onEnter)
     el.addEventListener('mouseleave', onLeave)
 
     return () => {
       cancelAnimationFrame(rafRef.current)
-      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
-      el.removeEventListener('wheel', onWheel)
-      el.removeEventListener('touchstart', onTouchStart)
-      el.removeEventListener('touchmove', onTouchMove)
-      el.removeEventListener('touchend', onTouchEnd)
       el.removeEventListener('mouseenter', onEnter)
       el.removeEventListener('mouseleave', onLeave)
     }
@@ -96,49 +59,63 @@ export default function Certifications() {
         </h2>
       </AnimatedSection>
 
-      <div
-        ref={scrollRef}
-        className="cert-scroll"
-      >
-        <div className="cert-track">
-          {[...certificationsData, ...certificationsData, ...certificationsData].map((cert, i) => {
-            const theme = themes[i % themes.length]
-            return (
-              <div key={`${cert.id}-${i}`} className={`cert-card ${theme} cert-card-hover`}>
-                <div className="top-strip">
-                  <span>{cert.issuer}</span>
-                </div>
+      <div className="relative">
+        <button
+          onClick={() => scrollBy(-1)}
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full glass text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 -ml-5"
+          aria-label="Scroll left"
+        >
+          <ChevronLeft size={20} />
+        </button>
+        <button
+          onClick={() => scrollBy(1)}
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full glass text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 -mr-5"
+          aria-label="Scroll right"
+        >
+          <ChevronRight size={20} />
+        </button>
 
-                <div className="badge">
-                  <div className="badge-inner">{String((i % certificationsData.length) + 1).padStart(2, '0')}</div>
-                </div>
-
-                <div className="content">
-                  <div className="icon-wrap">
-                    <Award size={40} />
+        <div ref={scrollRef} className="cert-scroll">
+          <div className="cert-track">
+            {[...certificationsData, ...certificationsData, ...certificationsData].map((cert, i) => {
+              const theme = themes[i % themes.length]
+              return (
+                <div key={`${cert.id}-${i}`} className={`cert-card ${theme} cert-card-hover`}>
+                  <div className="top-strip">
+                    <span>{cert.issuer}</span>
                   </div>
 
-                  <h3>{cert.title}</h3>
+                  <div className="badge">
+                    <div className="badge-inner">{String((i % certificationsData.length) + 1).padStart(2, '0')}</div>
+                  </div>
 
-                  <p className="date">{cert.date}</p>
+                  <div className="content">
+                    <div className="icon-wrap">
+                      <Award size={40} />
+                    </div>
 
-                  {cert.credentialUrl && (
-                    <a
-                      href={cert.credentialUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="credential-link"
-                    >
-                      View Credential <ExternalLink size={12} />
-                    </a>
-                  )}
+                    <h3>{cert.title}</h3>
+
+                    <p className="date">{cert.date}</p>
+
+                    {cert.credentialUrl && (
+                      <a
+                        href={cert.credentialUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="credential-link"
+                      >
+                        View Credential <ExternalLink size={12} />
+                      </a>
+                    )}
+                  </div>
+
+                  <div className="layer layer1" />
+                  <div className="layer layer2" />
                 </div>
-
-                <div className="layer layer1" />
-                <div className="layer layer2" />
-              </div>
-            )
-          })}
+              )
+            })}
+          </div>
         </div>
       </div>
     </SectionLayout>

@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from 'react'
-import { ExternalLink, Image as ImageIcon } from 'lucide-react'
+import { useState, useRef, useEffect, useCallback } from 'react'
+import { ExternalLink, Image as ImageIcon, ChevronLeft, ChevronRight } from 'lucide-react'
 import { GithubIcon } from '@/components/ui/SocialIcon'
 import SectionLayout from '@/layouts/SectionLayout'
 import { SECTION_IDS } from '@/constants'
@@ -16,25 +16,30 @@ export default function Projects() {
   const rafRef = useRef<number>(0)
   const pausedRef = useRef(false)
   const posRef = useRef(0)
-  const resumeTimerRef = useRef<number>(0)
 
   const filtered = active === 'all'
     ? projectsData
     : projectsData.filter(p => p.category === active)
 
-  const pauseAndResume = () => {
-    pausedRef.current = true
-    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
-    resumeTimerRef.current = setTimeout(() => {
-      pausedRef.current = false
-    }, 2000)
-  }
+  const scrollBy = useCallback((dir: number) => {
+    const track = trackRef.current
+    if (!track) return
+    const oneSet = track.scrollWidth / 3
+    const cardWidth = 340
+    const gap = 32
+    const step = (cardWidth + gap) * dir
+    posRef.current += step
+    if (posRef.current < -oneSet) posRef.current += oneSet
+    if (posRef.current > 0) posRef.current -= oneSet
+    track.style.transform = `translateX(${posRef.current}px)`
+  }, [])
 
   useEffect(() => {
     const track = trackRef.current
     if (!track) return
 
     posRef.current = 0
+    track.style.transform = 'translateX(0px)'
     const oneSet = track.scrollWidth / 3
 
     const scroll = () => {
@@ -50,77 +55,13 @@ export default function Projects() {
 
     rafRef.current = requestAnimationFrame(scroll)
 
-    const container = scrollRef.current
-    if (!container) return
-
-    const onWheel = (e: WheelEvent) => {
-      e.preventDefault()
-      const track = trackRef.current
-      if (!track) return
-
-      const delta = e.deltaX || e.deltaY
-      posRef.current -= delta * 0.5
-      track.style.transform = `translateX(${posRef.current}px)`
-      pauseAndResume()
-    }
-
-    let touchStartX = 0
-    const onTouchStart = (e: TouchEvent) => {
-      touchStartX = e.touches[0].clientX
-      pausedRef.current = true
-      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
-    }
-
-    const onTouchMove = (e: TouchEvent) => {
-      const track = trackRef.current
-      if (!track) return
-      const delta = touchStartX - e.touches[0].clientX
-      touchStartX = e.touches[0].clientX
-      posRef.current -= delta
-      track.style.transform = `translateX(${posRef.current}px)`
-    }
-
-    const onTouchEnd = () => {
-      resumeTimerRef.current = setTimeout(() => {
-        pausedRef.current = false
-      }, 2000)
-    }
-
-    container.addEventListener('wheel', onWheel, { passive: false })
-    container.addEventListener('touchstart', onTouchStart, { passive: true })
-    container.addEventListener('touchmove', onTouchMove, { passive: true })
-    container.addEventListener('touchend', onTouchEnd, { passive: true })
-
     return () => {
       cancelAnimationFrame(rafRef.current)
-      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
-      container.removeEventListener('wheel', onWheel)
-      container.removeEventListener('touchstart', onTouchStart)
-      container.removeEventListener('touchmove', onTouchMove)
-      container.removeEventListener('touchend', onTouchEnd)
     }
   }, [filtered])
 
-  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseEnter = () => {
     pausedRef.current = true
-
-    const container = scrollRef.current
-    const track = trackRef.current
-    const card = e.currentTarget
-    if (!container || !track || !card) return
-
-    const cardRect = card.getBoundingClientRect()
-    const containerRect = container.getBoundingClientRect()
-
-    const cardCenter = cardRect.left + cardRect.width / 2
-    const containerCenter = containerRect.left + containerRect.width / 2
-
-    const style = getComputedStyle(track)
-    const matrix = new DOMMatrixReadOnly(style.transform)
-    const currentX = matrix.m41
-
-    const centerOffset = cardCenter - containerCenter
-    track.style.transform = `translateX(${currentX - centerOffset}px)`
   }
 
   const handleMouseLeave = () => {
@@ -161,75 +102,92 @@ export default function Projects() {
         ))}
       </div>
 
-      <div
-        ref={scrollRef}
-        className="project-scroll"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <div ref={trackRef} className="project-track">
-          {[...filtered, ...filtered, ...filtered].map((project, i) => (
-            <div key={`${project.id}-${i}`} className="project-card-wrapper">
-              <div className="project-card-bg" />
-              <div className="project-card-cover">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="project-cover-img"
-                  loading="lazy"
-                  onError={e => {
-                    const img = e.target as HTMLImageElement
-                    img.style.display = 'none'
-                    const fallback = img.nextElementSibling
-                    if (fallback) fallback.classList.remove('hidden')
-                  }}
-                />
-                <div className="project-cover-fallback hidden">
-                  <ImageIcon size={32} className="text-dark-500" />
-                </div>
-              </div>
-              <div className="project-card">
-                <div className="project-content">
-                  <div className="flex items-center gap-2 mb-2 flex-wrap">
-                    {project.technologies.slice(0, 3).map(tech => (
-                      <span key={tech} className="project-tech-tag">
-                        {tech}
-                      </span>
-                    ))}
-                    {project.featured && (
-                      <span className="project-featured-tag">
-                        Featured
-                      </span>
-                    )}
-                  </div>
-                  <h3 className="project-title">{project.title}</h3>
-                  <p className="project-desc">{project.description}</p>
-                  <div className="flex items-center gap-4 mt-auto pt-3 border-t border-dark-700">
-                    {project.githubUrl && (
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="project-link"
-                      >
-                        <GithubIcon size={16} /> Code
-                      </a>
-                    )}
-                    {project.liveUrl && (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="project-link"
-                      >
-                        <ExternalLink size={16} /> Live Demo
-                      </a>
-                    )}
+      <div className="relative">
+        <button
+          onClick={() => scrollBy(-1)}
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full glass text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 -ml-5"
+          aria-label="Scroll left"
+        >
+          <ChevronLeft size={20} />
+        </button>
+        <button
+          onClick={() => scrollBy(1)}
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full glass text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 -mr-5"
+          aria-label="Scroll right"
+        >
+          <ChevronRight size={20} />
+        </button>
+
+        <div
+          ref={scrollRef}
+          className="project-scroll"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <div ref={trackRef} className="project-track">
+            {[...filtered, ...filtered, ...filtered].map((project, i) => (
+              <div key={`${project.id}-${i}`} className="project-card-wrapper">
+                <div className="project-card-bg" />
+                <div className="project-card-cover">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="project-cover-img"
+                    loading="lazy"
+                    onError={e => {
+                      const img = e.target as HTMLImageElement
+                      img.style.display = 'none'
+                      const fallback = img.nextElementSibling
+                      if (fallback) fallback.classList.remove('hidden')
+                    }}
+                  />
+                  <div className="project-cover-fallback hidden">
+                    <ImageIcon size={32} className="text-dark-500" />
                   </div>
                 </div>
+                <div className="project-card">
+                  <div className="project-content">
+                    <div className="flex items-center gap-2 mb-2 flex-wrap">
+                      {project.technologies.slice(0, 3).map(tech => (
+                        <span key={tech} className="project-tech-tag">
+                          {tech}
+                        </span>
+                      ))}
+                      {project.featured && (
+                        <span className="project-featured-tag">
+                          Featured
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="project-title">{project.title}</h3>
+                    <p className="project-desc">{project.description}</p>
+                    <div className="flex items-center gap-4 mt-auto pt-3 border-t border-dark-700">
+                      {project.githubUrl && (
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="project-link"
+                        >
+                          <GithubIcon size={16} /> Code
+                        </a>
+                      )}
+                      {project.liveUrl && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="project-link"
+                        >
+                          <ExternalLink size={16} /> Live Demo
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </SectionLayout>
