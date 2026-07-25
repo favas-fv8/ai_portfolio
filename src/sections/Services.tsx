@@ -21,7 +21,7 @@ export default function Services() {
       </AnimatedSection>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {servicesData.map((service, i) => {
+        {servicesData.map((service) => {
           const Icon = iconMap[service.icon]
           return (
               <div key={service.id} className="flip-card">

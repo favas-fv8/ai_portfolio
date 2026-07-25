@@ -17,7 +17,7 @@ export default function Education() {
       </AnimatedSection>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {educationData.map((edu, i) => (
+        {educationData.map((edu) => (
             <div key={edu.id} className="edu-card glass-hover h-full">
               <div className="blob" />
               <div className="bg">
