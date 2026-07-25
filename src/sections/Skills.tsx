@@ -62,15 +62,16 @@ function SkillCard({ skill, index }: { skill: typeof skillsData[number]; index: 
     setMag({ x: normX * 6, y: normY * 6 })
   }, [])
 
+  const initialOffset = ringCircumference * (1 - skill.level / 100)
+
   const handleMouseEnter = useCallback(() => {
     hoveredRef.current = true
     setHovered(true)
 
-    const targetOffset = ringCircumference * (1 - skill.level / 100)
     gsap.to(ringRef.current, {
-      strokeDashoffset: targetOffset,
-      duration: 1.3,
-      ease: 'power3.out',
+      strokeDashoffset: ringCircumference,
+      duration: 0.8,
+      ease: 'power3.inOut',
     })
 
     counterRef.current.value = 0
@@ -97,14 +98,14 @@ function SkillCard({ skill, index }: { skill: typeof skillsData[number]; index: 
     setDisplayedLevel(0)
     counterRef.current.value = 0
     gsap.to(ringRef.current, {
-      strokeDashoffset: ringCircumference,
+      strokeDashoffset: initialOffset,
       duration: 0.8,
       ease: 'power3.inOut',
     })
-  }, [])
+  }, [initialOffset])
 
   return (
-    <div className="flex flex-col items-center gap-2">
+    <div className="flex flex-col items-center">
       <div
         className="will-change-transform"
         style={{
@@ -158,7 +159,11 @@ function SkillCard({ skill, index }: { skill: typeof skillsData[number]; index: 
           <svg
             className="absolute inset-0 w-full h-full -rotate-90 z-10"
             viewBox={`0 0 ${cardSize} ${cardSize}`}
-            style={{ filter: 'drop-shadow(0 0 6px rgba(255,255,255,0.05))' }}
+            style={{
+              filter: 'drop-shadow(0 0 6px rgba(255,255,255,0.05))',
+              opacity: hovered ? 0 : 1,
+              transition: 'opacity 0.4s ease',
+            }}
           >
             <defs>
               <linearGradient id={`ring-${skill.id}`} x1="0%" y1="0%" x2="100%" y2="100%">
@@ -174,7 +179,7 @@ function SkillCard({ skill, index }: { skill: typeof skillsData[number]; index: 
               ref={ringRef}
               cx={cardSize / 2} cy={cardSize / 2} r={ringRadius}
               fill="none" stroke={`url(#ring-${skill.id})`} strokeWidth="6"
-              strokeDasharray={ringCircumference} strokeDashoffset={ringCircumference}
+              strokeDasharray={ringCircumference} strokeDashoffset={initialOffset}
               strokeLinecap="round"
               style={{ filter: `drop-shadow(0 0 6px ${skill.color}40)` }}
             />
@@ -252,7 +257,6 @@ function SkillCard({ skill, index }: { skill: typeof skillsData[number]; index: 
         }}
       >
         <span className="text-sm font-medium text-text-primary">{skill.name}</span>
-        <p className="text-xs font-mono text-dark-400 mt-0.5">{skill.experience}</p>
       </div>
     </div>
   )
@@ -292,7 +296,7 @@ export default function Skills() {
         ))}
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 sm:gap-5 lg:gap-6 justify-items-center">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-2 sm:gap-3 lg:gap-4 justify-items-center">
         <AnimatePresence initial={false} mode="popLayout">
           {filtered.map((skill, i) => (
             <motion.div

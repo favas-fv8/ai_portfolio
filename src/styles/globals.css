@@ -1218,3 +1218,82 @@
 .contact-card-parent:hover .contact-card .contact-circle5 {
   transform: translate3d(0, 0, 140px);
 }
+
+/* Career timeline scroll animation */
+@property --timeline-scroll-y {
+  syntax: "<percentage>";
+  initial-value: -10%;
+  inherits: false;
+}
+@property --timeline-glow-opacity {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+@property --timeline-active-card {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+.career-timeline {
+  position: relative;
+}
+
+.career-timeline::before {
+  content: "";
+  position: absolute;
+  left: 19px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: var(--timeline-glow-opacity);
+  background-image: radial-gradient(
+    circle at 0% var(--timeline-scroll-y),
+    rgb(112, 153, 255) 0%,
+    rgba(56, 106, 249, 0.79135) 10px,
+    rgba(10, 76, 242, 0.53) 20px,
+    rgba(255, 255, 255, 0) 40px,
+    rgba(49, 49, 49, 0) 100%
+  );
+  animation: timeline-scroll both linear;
+  animation-timeline: scroll(root);
+  animation-range: 20vh;
+  z-index: 1;
+}
+
+@keyframes timeline-scroll {
+  0% {
+    --timeline-scroll-y: -10%;
+    --timeline-glow-opacity: 0.1;
+  }
+  1% {
+    --timeline-glow-opacity: 0.3;
+  }
+  25% {
+    --timeline-scroll-y: 0%;
+    --timeline-glow-opacity: 0.7;
+    --timeline-active-card: 1;
+  }
+  50% {
+    --timeline-scroll-y: 50%;
+    --timeline-glow-opacity: 0.8;
+    --timeline-active-card: 2;
+  }
+  75% {
+    --timeline-scroll-y: 75%;
+    --timeline-glow-opacity: 0.9;
+    --timeline-active-card: 3;
+  }
+  100% {
+    --timeline-scroll-y: 105%;
+    --timeline-glow-opacity: 0.4;
+    --timeline-active-card: 4;
+  }
+}
+
+.career-card {
+  opacity: calc(var(--timeline-active-card, 0) * 1);
+  transform: translateY(calc((1 - var(--timeline-active-card, 0)) * 30px));
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}

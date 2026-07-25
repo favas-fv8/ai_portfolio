@@ -17,11 +17,11 @@ export default function AnimatedSection({ children, className, delay = 0 }: Anim
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
+      initial={{ opacity: 0, y: 80, scale: 0.95 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: false, margin: '-80px' }}
       transition={{
-        duration: 0.7,
+        duration: 0.8,
         delay,
         ease: [0.16, 1, 0.3, 1],
       }}

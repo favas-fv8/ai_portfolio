@@ -24,8 +24,7 @@ export default function Services() {
         {servicesData.map((service, i) => {
           const Icon = iconMap[service.icon]
           return (
-            <AnimatedSection key={service.id} delay={i * 0.1}>
-              <div className="flip-card">
+              <div key={service.id} className="flip-card">
                 <div className="flip-card-inner">
                   <div className="flip-card-front">
                     <div className="mb-4" style={{ color: 'var(--color-accent-400)' }}>
@@ -45,7 +44,6 @@ export default function Services() {
                   </div>
                 </div>
               </div>
-            </AnimatedSection>
           )
         })}
       </div>

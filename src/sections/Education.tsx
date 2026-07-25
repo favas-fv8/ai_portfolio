@@ -18,8 +18,7 @@ export default function Education() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {educationData.map((edu, i) => (
-          <AnimatedSection key={edu.id} delay={i * 0.1}>
-            <div className="edu-card glass-hover h-full">
+            <div key={edu.id} className="edu-card glass-hover h-full">
               <div className="blob" />
               <div className="bg">
                 <div style={{ transform: 'skewX(5deg)' }}>
@@ -48,7 +47,6 @@ export default function Education() {
                 </div>
               </div>
             </div>
-          </AnimatedSection>
         ))}
       </div>
     </SectionLayout>

@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Download, Award, Briefcase, Code, Users, User } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import SectionLayout from '@/layouts/SectionLayout'
 import { SECTION_IDS } from '@/constants'
 import profile from '@/data/profile.json'
@@ -15,19 +15,22 @@ const stats = [
 
 export default function About() {
   const [imgError, setImgError] = useState(false)
-  const [isHovered, setIsHovered] = useState(false)
+  const profileRef = useRef(null)
+  const isHovered = useInView(profileRef, { once: false, amount: 0.3 })
 
   return (
     <SectionLayout id={SECTION_IDS.about} className="bg-dark-900">
       <div className="grid lg:grid-cols-2 gap-16 items-center">
-        <AnimatedSection>
-          <p className="text-sm font-mono text-accent-400 tracking-widest uppercase mb-4">
-            About Me
-          </p>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Turning Ideas Into
-            <span className="text-gradient"> Digital Reality</span>
-          </h2>
+        <div>
+          <AnimatedSection>
+            <p className="text-sm font-mono text-accent-400 tracking-widest uppercase mb-4">
+              About Me
+            </p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Turning Ideas Into
+              <span className="text-gradient"> Digital Reality</span>
+            </h2>
+          </AnimatedSection>
           {profile.bio.map((paragraph, i) => (
             <p key={i} className="text-dark-300 leading-relaxed mb-4">
               {paragraph}
@@ -42,17 +45,16 @@ export default function About() {
             <Download size={16} />
             Download Resume
           </a>
-        </AnimatedSection>
+        </div>
 
         <div className="flex flex-col gap-6">
           <motion.div
+            ref={profileRef}
             initial={{ opacity: 0, y: 40, scale: 0.9, filter: 'blur(10px)' }}
             whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="relative mx-auto w-56 h-56 rounded-full group flex items-center justify-center"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
             style={{ perspective: '600px' }}
           >
             {/* Tilt group — glass bg + SVG ring + border tilt together backward */}

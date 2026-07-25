@@ -29,11 +29,13 @@ export default function Navigation() {
     el?.scrollIntoView({ behavior: 'smooth' })
   }
 
+  const isLight = theme === 'light'
+
   return (
     <header
       className={cn(
         'fixed top-0 left-0 right-0 z-[300] transition-all duration-500',
-        scrolled && 'glass',
+        scrolled && (isLight ? 'bg-[#e5e7eb]/80 backdrop-blur-xl border-b border-black/5' : 'glass'),
         hidden && '-translate-y-full',
       )}
     >
@@ -51,7 +53,10 @@ export default function Navigation() {
             <li key={item.sectionId}>
               <button
                 onClick={() => handleNavClick(item.sectionId)}
-                className="text-sm text-dark-300 hover:text-text-primary transition-colors duration-300"
+                className={cn(
+                  'text-sm transition-colors duration-300',
+                  isLight ? 'text-gray-900 font-bold hover:text-black' : 'text-dark-300 hover:text-text-primary',
+                )}
               >
                 {item.label}
               </button>
@@ -96,7 +101,7 @@ export default function Navigation() {
             </label>
           </div>
           <button
-            className="md:hidden text-text-primary"
+            className={cn('md:hidden', isLight ? 'text-gray-900' : 'text-text-primary')}
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           >
@@ -107,8 +112,9 @@ export default function Navigation() {
 
       <div
         className={cn(
-          'md:hidden glass transition-all duration-500 overflow-hidden',
+          'md:hidden transition-all duration-500 overflow-hidden',
           mobileOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0',
+          isLight ? 'bg-[#e5e7eb]/80 backdrop-blur-xl border-b border-black/5' : 'glass',
         )}
       >
         <ul className="flex flex-col px-6 pb-6 pt-2 gap-4">
@@ -116,7 +122,10 @@ export default function Navigation() {
             <li key={item.sectionId}>
               <button
                 onClick={() => handleNavClick(item.sectionId)}
-                className="text-base text-dark-300 hover:text-text-primary transition-colors"
+                className={cn(
+                  'text-base transition-colors',
+                  isLight ? 'text-gray-900 font-bold hover:text-black' : 'text-dark-300 hover:text-text-primary',
+                )}
               >
                 {item.label}
               </button>
