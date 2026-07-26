@@ -153,13 +153,7 @@ export default function Hero() {
             className="w-full h-full object-cover transition-opacity duration-700"
             style={{ opacity: isPreloaded ? 1 : 0 }}
           />
-          {/* White shade overlay on animation (light mode only) */}
-          {isLight && (
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{ background: 'rgba(255,255,255,0.15)' }}
-            />
-          )}
+
 
           {/* Edge fades: left */}
           <div

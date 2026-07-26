@@ -32,6 +32,59 @@ function OrbitalParticles() {
   )
 }
 
+/* ---------- Chat AI avatar with orbiting stars ---------- */
+function ChatAIAvatar() {
+  return (
+    <div className="relative w-6 h-6 flex-shrink-0">
+      <img
+        src="/ai_portfolio/images/ai/robot.png"
+        alt=""
+        className="w-6 h-6 rounded-full object-cover border border-white/10"
+      />
+      {/* orbiting stars */}
+      <div className="absolute -inset-2 pointer-events-none">
+        {[0, 1, 2, 3].map((i) => (
+          <div
+            key={i}
+            className="absolute top-1/2 left-1/2"
+            style={{
+              animation: `chat-star-orbit 3s ${i * 0.75}s linear infinite`,
+            }}
+          >
+            <svg width="6" height="6" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M12 2l1.5 6.5L20 9l-5 4.5L16.5 20 12 16l-4.5 4L8 13.5 3 9l6.5-0.5z"
+                fill={i % 2 === 0 ? '#ffffff' : '#60a5fa'}
+                opacity="0.9"
+              />
+            </svg>
+          </div>
+        ))}
+      </div>
+      <style>{`
+        @keyframes chat-star-orbit {
+          0%   { transform: translate(-50%, -50%) rotate(0deg) translateX(14px) scale(0.5); opacity: 0.3; }
+          25%  { opacity: 1; }
+          75%  { opacity: 1; }
+          100% { transform: translate(-50%, -50%) rotate(360deg) translateX(14px) scale(0.8); opacity: 0.3; }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+/* ---------- User avatar (grey) ---------- */
+function UserAvatar() {
+  return (
+    <div className="w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center bg-gray-500 border border-gray-400/50">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+      </svg>
+    </div>
+  );
+}
+
 /* ---------- AI stars ---------- */
 function AIStars() {
   return (
@@ -341,20 +394,32 @@ export default function AIAssistant() {
                 background: 'rgba(16,16,26,0.85)',
                 backdropFilter: 'blur(24px)',
                 WebkitBackdropFilter: 'blur(24px)',
-                boxShadow: '0 0 40px rgba(99,102,241,0.12), 0 8px 32px rgba(0,0,0,0.5)',
               }}
             >
-              {/* gradient border */}
+              {/* revolving light blob */}
               <div
-                className="absolute inset-0 rounded-2xl pointer-events-none"
+                className="absolute z-0 pointer-events-none"
                 style={{
-                  padding: '1px',
-                  background: 'linear-gradient(135deg, rgba(99,102,241,0.3), transparent, rgba(139,92,246,0.2))',
-                  WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                  WebkitMaskComposite: 'xor',
-                  maskComposite: 'exclude',
+                  top: '50%',
+                  left: '50%',
+                  width: '200px',
+                  height: '200px',
+                  borderRadius: '50%',
+                  background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
+                  opacity: 0.35,
+                  filter: 'blur(40px)',
+                  animation: 'chat-blob-orbit 6s infinite ease',
                 }}
               />
+              <style>{`
+                @keyframes chat-blob-orbit {
+                  0%   { transform: translate(-100%, -100%) translate3d(0, 0, 0); }
+                  25%  { transform: translate(-100%, -100%) translate3d(380px, 0, 0); }
+                  50%  { transform: translate(-100%, -100%) translate3d(380px, 100%, 0); }
+                  75%  { transform: translate(-100%, -100%) translate3d(0, 100%, 0); }
+                  100% { transform: translate(-100%, -100%) translate3d(0, 0, 0); }
+                }
+              `}</style>
 
               {/* header */}
               <div className="relative flex items-center justify-between px-4 py-3 border-b border-white/5">
@@ -393,13 +458,25 @@ export default function AIAssistant() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     transition={{ duration: 0.3 }}
                     className={cn(
-                      'text-sm leading-relaxed max-w-[88%] p-3 rounded-2xl',
-                      msg.role === 'user'
-                        ? 'bg-accent-600 text-white ml-auto rounded-br-md shadow-lg shadow-accent-600/20'
-                        : 'bg-white/5 text-gray-200 rounded-bl-md border border-white/5',
+                      'flex items-end gap-2',
+                      msg.role === 'user' ? 'flex-row-reverse' : 'flex-row',
                     )}
                   >
-                    {msg.content}
+                    {msg.role === 'assistant' ? (
+                      <ChatAIAvatar />
+                    ) : (
+                      <UserAvatar />
+                    )}
+                    <div
+                      className={cn(
+                        'text-sm leading-relaxed max-w-[85%] p-3 rounded-2xl',
+                        msg.role === 'user'
+                          ? 'bg-accent-600 text-white rounded-br-md shadow-lg shadow-accent-600/20'
+                          : 'bg-white/5 text-gray-200 rounded-bl-md border border-white/5',
+                      )}
+                    >
+                      {msg.content}
+                    </div>
                   </motion.div>
                 ))}
 
@@ -408,9 +485,12 @@ export default function AIAssistant() {
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="text-sm leading-relaxed max-w-[88%] p-3 rounded-2xl bg-white/5 text-gray-200 rounded-bl-md border border-white/5"
+                    className="flex items-end gap-2"
                   >
-                    <TypewriterText text={typingText} onDone={onTypeDone} />
+                    <ChatAIAvatar />
+                    <div className="text-sm leading-relaxed max-w-[85%] p-3 rounded-2xl bg-white/5 text-gray-200 rounded-bl-md border border-white/5">
+                      <TypewriterText text={typingText} onDone={onTypeDone} />
+                    </div>
                   </motion.div>
                 )}
 
@@ -419,9 +499,12 @@ export default function AIAssistant() {
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="text-sm max-w-[88%] p-3 rounded-2xl bg-white/5 text-gray-200 rounded-bl-md border border-white/5"
+                    className="flex items-end gap-2"
                   >
-                    <TypingDots />
+                    <ChatAIAvatar />
+                    <div className="text-sm max-w-[85%] p-3 rounded-2xl bg-white/5 text-gray-200 rounded-bl-md border border-white/5">
+                      <TypingDots />
+                    </div>
                   </motion.div>
                 )}
 
@@ -451,19 +534,21 @@ export default function AIAssistant() {
                 onSubmit={e => { e.preventDefault(); handleSend(input) }}
                 className="relative flex items-center gap-2 px-4 py-3 border-t border-white/5"
               >
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={input}
-                  onChange={e => setInput(e.target.value)}
-                  placeholder="Ask me anything..."
-                  className="flex-1 bg-transparent text-sm text-white/90 placeholder:text-white/25 outline-none"
-                />
+                <div className="flex-1 relative">
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={input}
+                    onChange={e => setInput(e.target.value)}
+                    placeholder="Ask me anything..."
+                    className="w-full bg-white/5 text-sm text-white/90 placeholder:text-white/25 outline-none rounded-xl px-4 py-2.5 border border-white/10 focus:border-accent-500/50 focus:shadow-[0_0_12px_rgba(99,102,241,0.3)] transition-all duration-300"
+                  />
+                </div>
                 <button
                   type="submit"
                   disabled={!input.trim() || typing}
                   className={cn(
-                    'p-2 rounded-lg transition-all duration-300',
+                    'p-2 rounded-xl transition-all duration-300',
                     input.trim() && !typing
                       ? 'bg-accent-600 text-white shadow-lg shadow-accent-600/30 hover:bg-accent-500'
                       : 'text-white/20',
