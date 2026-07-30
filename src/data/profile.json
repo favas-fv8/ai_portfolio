@@ -3,17 +3,16 @@
   "title": "Fullstack Web Developer",
   "tagline": "Crafting digital experiences with code & creativity",
   "bio": [
-    "A passionate fullstack web developer with expertise in building modern, scalable web applications. Focused on creating elegant solutions that deliver exceptional user experiences.",
-    "With a strong foundation in both frontend and backend technologies, I bridge the gap between design and engineering to build products that make a difference."
+    "I'm a passionate Full Stack Web Developer focused on building modern, scalable web applications with AI-powered capabilities. By combining expertise in frontend, backend, and artificial intelligence, I create smart, user-friendly solutions that deliver exceptional experiences. I love turning complex ideas into innovative products that are fast, reliable, and impactful."
   ],
   "avatar": "/ai_portfolio/images/profile/profile.png",
   "resumeUrl": "/ai_portfolio/resume.pdf",
-  "email": "hello@favas.dev",
-  "phone": "+91 00000 00000",
-  "location": "Kerala, India",
+  "email": "fv8favas@gmail.com",
+  "phone": "+91 7736316028",
+  "location": "Thrissur, Kerala, India",
   "available": true,
-  "experience": 5,
-  "projects": 20,
-  "clients": 15,
-  "technologies": 30
+  "experience": 1,
+  "projects": 6,
+  "certifications": 10,
+  "technologies": 20
 }

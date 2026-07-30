@@ -1,9 +1,10 @@
-import { useRef, useEffect } from 'react'
-import { Award, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react'
+import { useRef, useEffect, useState } from 'react'
+import { ExternalLink, ChevronLeft, ChevronRight, Eye } from 'lucide-react'
 import SectionLayout from '@/layouts/SectionLayout'
 import { SECTION_IDS } from '@/constants'
 import certificationsData from '@/data/certifications.json'
 import AnimatedSection from '@/components/ui/AnimatedSection'
+import CertPreviewModal from '@/components/ui/CertPreviewModal'
 
 const themes = ['indigo', 'purple', 'cyan', 'indigo', 'purple']
 
@@ -11,6 +12,7 @@ export default function Certifications() {
   const scrollRef = useRef<HTMLDivElement>(null!)
   const rafRef = useRef<number>(0)
   const pausedRef = useRef(false)
+  const [previewFile, setPreviewFile] = useState<{ url: string; title: string } | null>(null)
 
   const scrollBy = (dir: number) => {
     const el = scrollRef.current
@@ -90,15 +92,21 @@ export default function Certifications() {
                   </div>
 
                   <div className="content">
-                    <div className="icon-wrap">
-                      <Award size={40} />
-                    </div>
+                    {cert.image && (
+                      <div className="image-layer">
+                        {cert.image.endsWith('.pdf') ? (
+                          <embed src={`${cert.image}#toolbar=0&scrollbar=0&view=Fit`} type="application/pdf" className="pdf-embed" />
+                        ) : (
+                          <img src={cert.image} alt={cert.title} />
+                        )}
+                      </div>
+                    )}
 
                     <h3>{cert.title}</h3>
 
-                    <p className="date">{cert.date}</p>
+                    <p className="date">{cert.date.split('-')[0]}</p>
 
-                    {cert.credentialUrl && (
+                    {cert.credentialUrl && cert.credentialUrl !== '#' && (
                       <a
                         href={cert.credentialUrl}
                         target="_blank"
@@ -107,6 +115,16 @@ export default function Certifications() {
                       >
                         View Credential <ExternalLink size={12} />
                       </a>
+                    )}
+                    {cert.image && (
+                      <button
+                        onClick={() => setPreviewFile({ url: cert.image, title: cert.title })}
+                        className="preview-btn"
+                        aria-label="Preview certificate"
+                      >
+                        <Eye size={16} />
+                        <span className="preview-tooltip">Preview Certificate</span>
+                      </button>
                     )}
                   </div>
 
@@ -118,6 +136,13 @@ export default function Certifications() {
           </div>
         </div>
       </div>
+
+      <CertPreviewModal
+        isOpen={!!previewFile}
+        onClose={() => setPreviewFile(null)}
+        fileUrl={previewFile?.url || ''}
+        title={previewFile?.title || ''}
+      />
     </SectionLayout>
   )
 }

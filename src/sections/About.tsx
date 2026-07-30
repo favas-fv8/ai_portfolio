@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-import { Download, Award, Briefcase, Code, Users, User } from 'lucide-react'
+import { Download, Award, Briefcase, Code, User } from 'lucide-react'
 import { motion, useInView } from 'framer-motion'
 import SectionLayout from '@/layouts/SectionLayout'
 import { SECTION_IDS } from '@/constants'
@@ -9,7 +9,7 @@ import AnimatedSection from '@/components/ui/AnimatedSection'
 const stats = [
   { icon: Briefcase, label: 'Years Experience', value: profile.experience },
   { icon: Code, label: 'Projects Completed', value: profile.projects },
-  { icon: Users, label: 'Happy Clients', value: profile.clients },
+  { icon: Award, label: 'Certifications', value: profile.certifications },
   { icon: Award, label: 'Technologies', value: profile.technologies },
 ]
 
@@ -359,11 +359,11 @@ export default function About() {
             <p className="text-xs text-dark-400">{profile.title}</p>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3">
             {stats.map((stat, i) => (
               <motion.div
                 key={stat.label}
-                className="group relative glass rounded-2xl p-6 text-center overflow-hidden transition-all duration-300 hover:shadow-[0_0_25px_rgba(99,102,241,0.25)]"
+                className="group relative glass rounded-xl p-3 text-center overflow-hidden transition-all duration-300 hover:shadow-[0_0_25px_rgba(99,102,241,0.25)]"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -372,11 +372,11 @@ export default function About() {
                 <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.06] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                 </div>
-                <stat.icon className="mx-auto mb-3 text-accent-400" size={28} />
-                <div className="text-3xl font-bold text-text-primary mb-1">
+                <stat.icon className="mx-auto mb-1.5 text-accent-400" size={20} />
+                <div className="text-xl font-bold text-text-primary mb-0.5">
                   {stat.value}+
                 </div>
-                <div className="text-sm text-dark-400">{stat.label}</div>
+                <div className="text-xs text-dark-400">{stat.label}</div>
               </motion.div>
             ))}
           </div>

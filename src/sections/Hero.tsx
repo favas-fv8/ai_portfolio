@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { ArrowDown, Mail } from 'lucide-react'
-import { GithubIcon, LinkedinIcon, TwitterIcon, InstagramIcon } from '@/components/ui/SocialIcon'
+import { LinkedinIcon, TwitterIcon, InstagramIcon } from '@/components/ui/SocialIcon'
 import SectionLayout from '@/layouts/SectionLayout'
 import { siteConfig } from '@/config/site'
 import { SECTION_IDS } from '@/constants'
@@ -268,7 +268,6 @@ export default function Hero() {
         {/* Social icons */}
         <div className="flex items-center gap-5 mt-1">
           {([
-            { href: siteConfig.github, label: 'GitHub', Icon: GithubIcon },
             { href: siteConfig.linkedin, label: 'LinkedIn', Icon: LinkedinIcon },
             { href: siteConfig.twitter, label: 'X', Icon: TwitterIcon },
             { href: siteConfig.instagram, label: 'Instagram', Icon: InstagramIcon },

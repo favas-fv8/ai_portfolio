@@ -1,11 +1,13 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
-import { ExternalLink, Image as ImageIcon, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ExternalLink, Image as ImageIcon, ChevronLeft, ChevronRight, Play, Info } from 'lucide-react'
 import { GithubIcon } from '@/components/ui/SocialIcon'
 import SectionLayout from '@/layouts/SectionLayout'
 import { SECTION_IDS } from '@/constants'
 import projectsData from '@/data/projects.json'
 import { cn } from '@/utils/cn'
 import AnimatedSection from '@/components/ui/AnimatedSection'
+import ProjectDetailsModal from '@/components/ui/ProjectDetailsModal'
+import ProjectVideoModal from '@/components/ui/ProjectVideoModal'
 
 const categories = ['all', 'fullstack', 'frontend', 'backend'] as const
 
@@ -16,6 +18,8 @@ export default function Projects() {
   const rafRef = useRef<number>(0)
   const pausedRef = useRef(false)
   const posRef = useRef(0)
+  const [detailsProject, setDetailsProject] = useState<typeof projectsData[0] | null>(null)
+  const [videoProject, setVideoProject] = useState<typeof projectsData[0] | null>(null)
 
   const filtered = active === 'all'
     ? projectsData
@@ -167,21 +171,33 @@ export default function Projects() {
                           href={project.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="project-link"
+                          className="project-link project-link-tooltip"
                         >
-                          <GithubIcon size={16} /> Code
+                          <GithubIcon size={16} /> <span className="project-link-tooltip-text">Code</span>
                         </a>
                       )}
                       {project.liveUrl && (
                         <a
                           href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="project-link"
+                          target={project.liveUrl.startsWith('http') ? '_blank' : undefined}
+                          rel={project.liveUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
+                          className="project-link project-link-tooltip"
                         >
-                          <ExternalLink size={16} /> Live Demo
+                          <ExternalLink size={16} /> <span className="project-link-tooltip-text">Live Demo</span>
                         </a>
                       )}
+                      <button
+                        onClick={() => setVideoProject(project)}
+                        className="project-link project-link-tooltip"
+                      >
+                        <Play size={16} /> <span className="project-link-tooltip-text">Video Record</span>
+                      </button>
+                      <button
+                        onClick={() => setDetailsProject(project)}
+                        className="project-link project-link-tooltip"
+                      >
+                        <Info size={16} /> <span className="project-link-tooltip-text">Details</span>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -190,6 +206,20 @@ export default function Projects() {
           </div>
         </div>
       </div>
+
+      <ProjectDetailsModal
+        isOpen={!!detailsProject}
+        onClose={() => setDetailsProject(null)}
+        title={detailsProject?.title || ''}
+        longDescription={detailsProject?.longDescription || ''}
+        technologies={detailsProject?.technologies || []}
+      />
+      <ProjectVideoModal
+        isOpen={!!videoProject}
+        onClose={() => setVideoProject(null)}
+        videoUrl={videoProject?.videoUrl || ''}
+        title={videoProject?.title || ''}
+      />
     </SectionLayout>
   )
 }

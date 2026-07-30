@@ -1,10 +1,10 @@
 import { useState, useRef, useCallback } from 'react'
 import {
-  SiReact, SiTypescript, SiJavascript, SiNextdotjs, SiTailwindcss,
-  SiHtml5, SiCss, SiNodedotjs, SiPython, SiPostgresql,
-  SiMongodb, SiGraphql, SiFigma, SiGit, SiDocker,
+  SiReact, SiTypescript, SiJavascript, SiTailwindcss,
+  SiHtml5, SiCss, SiPython, SiPostgresql, SiMysql,
+  SiGit, SiDocker, SiBootstrap, SiDjango, SiC,
 } from 'react-icons/si'
-import { FaAws } from 'react-icons/fa'
+import { FaJava } from 'react-icons/fa'
 import gsap from 'gsap'
 import { motion, AnimatePresence } from 'framer-motion'
 import SectionLayout from '@/layouts/SectionLayout'
@@ -14,23 +14,22 @@ import { cn } from '@/utils/cn'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; color?: string }>> = {
-  SiReact, SiTypescript, SiJavascript, SiNextdotjs, SiTailwindcss,
-  SiHtml5, SiCss, SiNodedotjs, SiPython, SiPostgresql,
-  SiMongodb, SiGraphql, SiFigma, SiGit, SiDocker,
-  SiAmazonwebservices: FaAws,
+  SiReact, SiTypescript, SiJavascript, SiTailwindcss,
+  SiHtml5, SiCss, SiPython, SiPostgresql, SiMysql,
+  SiGit, SiDocker, SiBootstrap, SiDjango, SiC,
+  FaJava,
 }
 
 const categories = [
   { key: 'all', label: 'All' },
   { key: 'frontend', label: 'Frontend' },
   { key: 'backend', label: 'Backend' },
-  { key: 'design', label: 'Design' },
   { key: 'tools', label: 'Tools' },
 ] as const
 
-const ringRadius = 68
+const ringRadius = 52
 const ringCircumference = 2 * Math.PI * ringRadius
-const cardSize = 160
+const cardSize = 120
 
 function SkillCard({ skill, index }: { skill: typeof skillsData[number]; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null!)
@@ -117,7 +116,7 @@ function SkillCard({ skill, index }: { skill: typeof skillsData[number]; index: 
           onMouseEnter={handleMouseEnter}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
-          className="relative w-40 h-40 rounded-full cursor-pointer"
+          className="relative w-28 h-28 rounded-full cursor-pointer"
           style={{
             scale: hovered ? 1.08 : 1,
             transform: `perspective(800px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) translate(${mag.x}px, ${mag.y}px)`,
@@ -196,13 +195,13 @@ function SkillCard({ skill, index }: { skill: typeof skillsData[number]; index: 
             >
               <div className="relative">
                 <div
-                  className="w-12 h-12 flex items-center justify-center rounded-full"
+                  className="w-10 h-10 flex items-center justify-center rounded-full"
                   style={{ backgroundColor: `${skill.color}18` }}
                 >
                 <span
                   style={{ display: 'inline-block', transform: hovered ? 'rotate(5deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease' }}
                 >
-                  <Icon size={26} color={skill.color} />
+                  <Icon size={22} color={skill.color} />
                 </span>
                 </div>
                 <div
@@ -210,7 +209,7 @@ function SkillCard({ skill, index }: { skill: typeof skillsData[number]; index: 
                   style={{ backgroundColor: `${skill.color}15` }}
                 />
               </div>
-              <span className="text-[11px] font-semibold text-text-primary/80 text-center leading-tight">
+              <span className="text-[10px] font-semibold text-text-primary/80 text-center leading-tight">
                 {skill.name}
               </span>
             </div>
@@ -226,7 +225,7 @@ function SkillCard({ skill, index }: { skill: typeof skillsData[number]; index: 
               }}
             >
               <span
-                className="text-3xl font-bold"
+                className="text-2xl font-bold"
                 style={{ color: skill.color, filter: `drop-shadow(0 0 12px ${skill.color}40)` }}
               >
                 {displayedLevel}%
@@ -296,7 +295,7 @@ export default function Skills() {
         ))}
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-2 sm:gap-3 lg:gap-4 justify-items-center">
+      <div className="grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-8 gap-2 sm:gap-2 lg:gap-3 justify-items-center">
         <AnimatePresence initial={false} mode="popLayout">
           {filtered.map((skill, i) => (
             <motion.div

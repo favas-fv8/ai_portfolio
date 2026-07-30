@@ -1,11 +1,11 @@
-import { Globe, Palette, Server, Lightbulb } from 'lucide-react'
+import { Globe, Palette, Server, Lightbulb, Brain } from 'lucide-react'
 import SectionLayout from '@/layouts/SectionLayout'
 import { SECTION_IDS } from '@/constants'
 import servicesData from '@/data/services.json'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
-  Globe, Palette, Server, Lightbulb,
+  Globe, Palette, Server, Lightbulb, Brain,
 }
 
 export default function Services() {
@@ -20,7 +20,7 @@ export default function Services() {
         </h2>
       </AnimatedSection>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
         {servicesData.map((service) => {
           const Icon = iconMap[service.icon]
           return (

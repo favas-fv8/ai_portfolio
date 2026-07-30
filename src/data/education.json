@@ -1,45 +1,44 @@
 [
   {
     "id": "edu-1",
-    "institution": "University of Technology",
-    "degree": "Bachelor of Technology",
-    "field": "Computer Science",
+    "institution": "IHRD College of Engineering, Karunagappally",
+    "degree": "B.Tech",
+    "field": "Computer Science and Engineering",
     "location": "Kerala, India",
-    "startDate": "2016",
-    "endDate": "2020",
-    "grade": "8.5 CGPA",
+    "startDate": "2022",
+    "endDate": "2026",
+    "grade": "7.3 CGPA | First Class",
     "achievements": [
-      "Dean's List for academic excellence",
-      "Led university tech club with 200+ members",
-      "Won hackathon for building accessibility tools"
+      "KTU University",
+      "AITHON 2022 – 24-Hour AI Hackathon (2nd Position), IEEE Computer Society CE Karunagappally — Problem: Human Facial Recognition."
     ]
   },
   {
     "id": "edu-2",
-    "institution": "Kerala State Board",
-    "degree": "Higher Secondary (12th)",
-    "field": "Science",
+    "institution": "Hira English School, Kaipamangalam",
+    "degree": "Higher Secondary Education",
+    "field": "",
     "location": "Kerala, India",
-    "startDate": "2014",
-    "endDate": "2016",
-    "grade": "92%",
-    "achievements": [
-      "State-level science fair participant",
-      "Mathematics club coordinator"
-    ]
+    "startDate": "2020",
+    "endDate": "2022",
+    "grade": "70%",
+    "achievements": ["CBSE Board"]
   },
   {
     "id": "edu-3",
-    "institution": "Kerala State Board",
-    "degree": "SSLC (10th)",
+    "institution": "Hira English School, Kaipamangalam",
+    "degree": "Secondary Education",
     "field": "",
     "location": "Kerala, India",
-    "startDate": "2014",
-    "endDate": "2014",
-    "grade": "9.2 CGPA",
+    "startDate": "2020",
+    "endDate": "2020",
+    "grade": "85%",
     "achievements": [
-      "School topper in Mathematics",
-      "National Science Olympiad qualifier"
+      "CBSE Board",
+      "State-Level Volleyball Player (Thrissur District) – 1st Place",
+      "Multiple Volleyball Tournament Winner (1st, 2nd & 3rd)",
+      "Drawing Competition Winner (1st, 2nd & 3rd)",
+      "School Athletics Medalist (1st, 2nd & 3rd)"
     ]
   }
 ]

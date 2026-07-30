@@ -41,6 +41,8 @@ export interface Project {
   featured: boolean
   githubUrl?: string
   liveUrl?: string
+  videoUrl?: string
+  detailsUrl?: string
   year: number
 }
 

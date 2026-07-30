@@ -26,5 +26,12 @@
     "description": "Providing expert guidance on technology stack, architecture, and best practices.",
     "icon": "Lightbulb",
     "features": ["Code Review", "Architecture Planning", "Technology Strategy", "Performance Audits"]
+  },
+  {
+    "id": "svc-5",
+    "title": "AI Services",
+    "description": "Integrating artificial intelligence and machine learning into web applications.",
+    "icon": "Brain",
+    "features": ["AI-Powered Chatbots", "Recommendation Systems", "Image Recognition", "Workflow Automation"]
   }
 ]

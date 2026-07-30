@@ -506,11 +506,6 @@
   gap: 0.4rem;
 }
 
-.flip-features li::before {
-  content: "\\2022";
-  font-size: 1rem;
-}
-
 .project-scroll {
   overflow-x: hidden;
   overflow-y: visible;
@@ -667,11 +662,53 @@
   color: var(--color-dark-300);
   text-decoration: none;
   transition: color 0.3s, filter 0.3s;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
 }
 
 .project-link:hover {
   color: var(--color-accent-400);
   filter: drop-shadow(0 0 6px var(--color-accent-400));
+}
+
+.project-link-tooltip {
+  position: relative;
+}
+
+.project-link-tooltip-text {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.8);
+  background: rgba(15, 15, 25, 0.95);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 10;
+}
+
+.project-link-tooltip-text::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: rgba(15, 15, 25, 0.95);
+}
+
+.project-link-tooltip:hover .project-link-tooltip-text {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
 }
 
 .cert-scroll {
@@ -831,18 +868,34 @@
 
 .cert-card .content {
   position: absolute;
-  top: 90px;
-  left: 55px;
-  width: 150px;
+  top: 75px;
+  left: 45px;
+  width: 165px;
   color: #fff;
-  z-index: 20;
+  z-index: 5;
+  text-align: right;
 }
 
-.cert-card .content .icon-wrap {
-  font-size: 40px;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: flex-end;
+.cert-card .content .image-layer {
+  width: 100%;
+  height: 120px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: -35px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.cert-card .content .image-layer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cert-card .content .image-layer .pdf-embed {
+  width: 100%;
+  height: 100%;
+  border: none;
+  overflow: hidden;
 }
 
 .cert-card .content h3 {
@@ -879,11 +932,69 @@
   opacity: .85;
   text-decoration: none;
   transition: opacity .3s, filter .3s;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
 }
 
 .cert-card .content .credential-link:hover {
   opacity: 1;
   filter: drop-shadow(0 0 6px currentColor);
+}
+
+.cert-card .content .preview-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 6px 10px;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+  position: relative;
+}
+
+.cert-card .content .preview-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  filter: drop-shadow(0 0 6px currentColor);
+}
+
+.cert-card .content .preview-btn .preview-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.8);
+  background: rgba(15, 15, 25, 0.95);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cert-card .content .preview-btn .preview-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: rgba(15, 15, 25, 0.95);
+}
+
+.cert-card .content .preview-btn:hover .preview-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
 }
 
 .cert-card .layer {

@@ -1,42 +1,114 @@
 [
   {
     "id": "cert-1",
-    "title": "AWS Certified Solutions Architect",
-    "issuer": "Amazon Web Services",
-    "date": "2024-06",
-    "credentialUrl": "https://aws.amazon.com/certification/",
-    "image": "/ai_portfolio/images/cert-1.jpg"
+    "title": "Novitech Data Analyst",
+    "issuer": "Novitech",
+    "date": "2025-06",
+    "credentialUrl": "#",
+    "image": "/ai_portfolio/pdf/novitech_da.pdf"
   },
   {
     "id": "cert-2",
-    "title": "Meta Frontend Developer",
-    "issuer": "Meta",
-    "date": "2024-03",
-    "credentialUrl": "https://www.coursera.org/meta",
-    "image": "/ai_portfolio/images/cert-2.jpg"
+    "title": "Full Stack Web Development Internship",
+    "issuer": "IntrnForte",
+    "date": "2026-03",
+    "credentialUrl": "#",
+    "image": "/ai_portfolio/pdf/internship_certificate_fullstack.pdf"
   },
   {
     "id": "cert-3",
-    "title": "Google Cloud Engineer",
-    "issuer": "Google Cloud",
-    "date": "2023-11",
-    "credentialUrl": "https://cloud.google.com/certification/",
-    "image": "/ai_portfolio/images/cert-3.jpg"
+    "title": "EA Software Engineering",
+    "issuer": "EA",
+    "date": "2025-11",
+    "credentialUrl": "#",
+    "image": "/ai_portfolio/pdf/ea_software_eng.pdf"
   },
   {
     "id": "cert-4",
-    "title": "Microsoft Azure Administrator",
-    "issuer": "Microsoft",
-    "date": "2023-08",
-    "credentialUrl": "https://learn.microsoft.com/en-us/certifications/",
-    "image": "/ai_portfolio/images/cert-4.jpg"
+    "title": "deloitte Data Analytics",
+    "issuer": "Deloitte",
+    "date": "2025-08",
+    "credentialUrl": "#",
+    "image": "/ai_portfolio/pdf/deloitte.pdf"
   },
   {
     "id": "cert-5",
-    "title": "Oracle Cloud Infrastructure",
-    "issuer": "Oracle",
-    "date": "2023-05",
-    "credentialUrl": "https://education.oracle.com/",
-    "image": "/ai_portfolio/images/cert-5.jpg"
+    "title": "be10x Al TOOLS WORKSHOP",
+    "issuer": "BE10X",
+    "date": "2025-05",
+    "credentialUrl": "#",
+    "image": "/ai_portfolio/pdf/be10x.pdf"
+  },
+  {
+    "id": "cert-6",
+    "title": "aws Solutions Architecture",
+    "issuer": "Amazon Web Services",
+    "date": "2025-01",
+    "credentialUrl": "#",
+    "image": "/ai_portfolio/pdf/aws.pdf"
+  },
+  {
+    "id": "cert-7",
+    "title": "AI with ChatGPT Internship",
+    "issuer": "IntrnForte",
+    "date": "2026-12",
+    "credentialUrl": "#",
+    "image": "/ai_portfolio/pdf/5565904_Artificial_Intelligence_with_ChatGPT-MOHAMMED_FAVAS_KS.pdf"
+  },
+  {
+    "id": "cert-8",
+    "title": "AITHON 2nd Place AI based Hackathon",
+    "issuer": "AITHON",
+    "date": "2022-02",
+    "credentialUrl": "#",
+    "image": "/ai_portfolio/pdf/aithon_2nd.pdf"
+  },
+  {
+    "id": "cert-9",
+    "title": "AI Appreciate Certificate",
+    "issuer": "intel,digital india",
+    "date": "2022-04",
+    "credentialUrl": "#",
+    "image": "/ai_portfolio/pdf/FAVAS_AI_APPRICIATE_CERTIFICATE.png"
+  },
+  {
+    "id": "cert-10",
+    "title": "IEEE Membership",
+    "issuer": "IEEE",
+    "date": "2024-10",
+    "credentialUrl": "#",
+    "image": "/ai_portfolio/pdf/ieee.jpeg"
+  },
+  {
+    "id": "cert-11",
+    "title": "NxtWave ai workshop",
+    "issuer": "NxtWave",
+    "date": "2024-05",
+    "credentialUrl": "#",
+    "image": "/ai_portfolio/pdf/nxt_wave.jpeg"
+  },
+  {
+    "id": "cert-12",
+    "title": "Fawstech app development",
+    "issuer": "Fawstech",
+    "date": "2023-09",
+    "credentialUrl": "#",
+    "image": "/ai_portfolio/pdf/fawstech.jpeg"
+  },
+  {
+    "id": "cert-13",
+    "title": "aithon 3.o AI based Hackathon",
+    "issuer": "AITHON",
+    "date": "2025-06",
+    "credentialUrl": "#",
+    "image": "/ai_portfolio/pdf/aithon_3.jpeg"
+  },
+  {
+    "id": "cert-14",
+    "title": "spaceup workshop & quizzes",
+    "issuer": "CUSAT",
+    "date": "2024-07",
+    "credentialUrl": "#",
+    "image": "/ai_portfolio/pdf/cusat.pdf"
   }
 ]

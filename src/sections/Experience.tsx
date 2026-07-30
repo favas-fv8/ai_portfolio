@@ -134,7 +134,7 @@ export default function Experience() {
           Career
         </p>
         <h2 className="text-4xl md:text-5xl font-bold">
-          Work <span className="text-gradient">Experience</span>
+          Project <span className="text-gradient">Experience</span>
         </h2>
       </AnimatedSection>
 
