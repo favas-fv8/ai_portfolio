@@ -33,10 +33,17 @@ export interface Skill {
 export interface Project {
   id: string
   title: string
+  tagline: string
   description: string
   longDescription: string
+  problemStatement: string
   image: string
   technologies: string[]
+  keyFeatures: string[]
+  myRole: string
+  challengesAndSolutions: { challenge: string; solution: string }[]
+  resultsAndImpact: string[]
+  architecture: string
   category: string
   featured: boolean
   githubUrl?: string
@@ -86,6 +93,8 @@ export interface Certification {
   date: string
   credentialUrl?: string
   image: string
+  highlight?: string
+  extraImages?: string[]
 }
 
 export interface Testimonial {

@@ -21,7 +21,7 @@ function ExperienceCard({ exp, index }: { exp: typeof experienceData[number]; in
   return (
     <motion.div
       ref={cardRef}
-      className="relative pl-12"
+      className="relative pl-10 md:pl-12"
       initial={{ opacity: 0, x: -40 }}
       animate={isCardVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
       transition={{ duration: 0.6, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] }}
@@ -129,7 +129,7 @@ export default function Experience() {
   return (
     <SectionLayout id={SECTION_IDS.experience} className="bg-dark-900">
       {/* Section header */}
-      <AnimatedSection className="text-center mb-16">
+      <AnimatedSection className="text-center mb-8 md:mb-16">
         <p className="text-sm font-mono text-accent-400 tracking-widest uppercase mb-4">
           Career
         </p>
@@ -143,7 +143,7 @@ export default function Experience() {
         {/* Static vertical line */}
         <div className="absolute left-[24px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-accent-500/60 via-accent-700/30 to-transparent" />
 
-        <div className="space-y-10">
+        <div className="space-y-6 md:space-y-10">
           {experienceData.map((exp, i) => (
             <ExperienceCard key={exp.id} exp={exp} index={i} />
           ))}

@@ -5,7 +5,7 @@
     "issuer": "Novitech",
     "date": "2025-06",
     "credentialUrl": "#",
-    "image": "/ai_portfolio/pdf/novitech_da.pdf"
+    "image": "/ai_portfolio/pdf/novitech_da.jpg"
   },
   {
     "id": "cert-2",
@@ -13,7 +13,9 @@
     "issuer": "IntrnForte",
     "date": "2026-03",
     "credentialUrl": "#",
-    "image": "/ai_portfolio/pdf/internship_certificate_fullstack.pdf"
+    "image": "/ai_portfolio/pdf/internship_certificate_fullstack.jpg",
+    "highlight": "Internship",
+    "extraImages": ["/ai_portfolio/pdf/internship_certificate_fullstack.jpg", "/ai_portfolio/pdf/fulstack_internship.jpg"]
   },
   {
     "id": "cert-3",
@@ -21,7 +23,7 @@
     "issuer": "EA",
     "date": "2025-11",
     "credentialUrl": "#",
-    "image": "/ai_portfolio/pdf/ea_software_eng.pdf"
+    "image": "/ai_portfolio/pdf/ea software eng.jpg"
   },
   {
     "id": "cert-4",
@@ -29,7 +31,7 @@
     "issuer": "Deloitte",
     "date": "2025-08",
     "credentialUrl": "#",
-    "image": "/ai_portfolio/pdf/deloitte.pdf"
+    "image": "/ai_portfolio/pdf/deloitte.jpg"
   },
   {
     "id": "cert-5",
@@ -37,7 +39,7 @@
     "issuer": "BE10X",
     "date": "2025-05",
     "credentialUrl": "#",
-    "image": "/ai_portfolio/pdf/be10x.pdf"
+    "image": "/ai_portfolio/pdf/be10x.jpg"
   },
   {
     "id": "cert-6",
@@ -45,7 +47,7 @@
     "issuer": "Amazon Web Services",
     "date": "2025-01",
     "credentialUrl": "#",
-    "image": "/ai_portfolio/pdf/aws.pdf"
+    "image": "/ai_portfolio/pdf/aws.jpg"
   },
   {
     "id": "cert-7",
@@ -53,15 +55,18 @@
     "issuer": "IntrnForte",
     "date": "2026-12",
     "credentialUrl": "#",
-    "image": "/ai_portfolio/pdf/5565904_Artificial_Intelligence_with_ChatGPT-MOHAMMED_FAVAS_KS.pdf"
+    "image": "/ai_portfolio/pdf/5565904_Artificial_Intelligence_with_ChatGPT-MOHAMMED_FAVAS_KS.jpg",
+    "highlight": "Internship",
+    "extraImages": ["/ai_portfolio/pdf/5565904_Artificial_Intelligence_with_ChatGPT-MOHAMMED_FAVAS_KS.jpg", "/ai_portfolio/pdf/ai_internship.jpg"]
   },
   {
     "id": "cert-8",
-    "title": "AITHON 2nd Place AI based Hackathon",
+    "title": "AITHON AI based Hackathon 2nd Place",
     "issuer": "AITHON",
     "date": "2022-02",
     "credentialUrl": "#",
-    "image": "/ai_portfolio/pdf/aithon_2nd.pdf"
+    "image": "/ai_portfolio/pdf/aithon_2nd.jpg",
+    "highlight": "2nd Place"
   },
   {
     "id": "cert-9",
@@ -109,6 +114,6 @@
     "issuer": "CUSAT",
     "date": "2024-07",
     "credentialUrl": "#",
-    "image": "/ai_portfolio/pdf/cusat.pdf"
+    "image": "/ai_portfolio/pdf/cusat.jpg"
   }
 ]

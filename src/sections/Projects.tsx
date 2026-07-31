@@ -9,7 +9,7 @@ import AnimatedSection from '@/components/ui/AnimatedSection'
 import ProjectDetailsModal from '@/components/ui/ProjectDetailsModal'
 import ProjectVideoModal from '@/components/ui/ProjectVideoModal'
 
-const categories = ['all', 'fullstack', 'frontend', 'backend'] as const
+const categories = ['all', 'fullstack', 'frontend'] as const
 
 export default function Projects() {
   const [active, setActive] = useState<string>('all')
@@ -29,8 +29,8 @@ export default function Projects() {
     const track = trackRef.current
     if (!track) return
     const oneSet = track.scrollWidth / 3
-    const cardWidth = 340
-    const gap = 32
+    const cardWidth = window.innerWidth < 640 ? Math.min(340, window.innerWidth * 0.85) : 340
+    const gap = window.innerWidth < 640 ? 16 : 32
     const step = (cardWidth + gap) * dir
     posRef.current += step
     if (posRef.current < -oneSet) posRef.current += oneSet
@@ -80,7 +80,7 @@ export default function Projects() {
 
   return (
     <SectionLayout id={SECTION_IDS.projects} className="bg-dark-900">
-      <AnimatedSection className="text-center mb-16">
+      <AnimatedSection className="text-center mb-8 md:mb-16">
         <p className="text-sm font-mono text-accent-400 tracking-widest uppercase mb-4">
           Portfolio
         </p>
@@ -89,7 +89,7 @@ export default function Projects() {
         </h2>
       </AnimatedSection>
 
-      <div className="flex justify-center gap-2 mb-12 flex-wrap">
+      <div className="flex justify-center gap-2 mb-6 md:mb-12 flex-wrap">
         {categories.map(cat => (
           <button
             key={cat}
@@ -106,17 +106,17 @@ export default function Projects() {
         ))}
       </div>
 
-      <div className="relative">
+      <div className="relative px-2 md:px-0">
         <button
           onClick={() => scrollBy(-1)}
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full glass text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 -ml-5"
+          className="absolute left-0 md:-left-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full glass text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300"
           aria-label="Scroll left"
         >
           <ChevronLeft size={20} />
         </button>
         <button
           onClick={() => scrollBy(1)}
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full glass text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 -mr-5"
+          className="absolute right-0 md:-right-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full glass text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300"
           aria-label="Scroll right"
         >
           <ChevronRight size={20} />
@@ -210,9 +210,7 @@ export default function Projects() {
       <ProjectDetailsModal
         isOpen={!!detailsProject}
         onClose={() => setDetailsProject(null)}
-        title={detailsProject?.title || ''}
-        longDescription={detailsProject?.longDescription || ''}
-        technologies={detailsProject?.technologies || []}
+        project={detailsProject}
       />
       <ProjectVideoModal
         isOpen={!!videoProject}

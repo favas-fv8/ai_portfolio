@@ -51,7 +51,7 @@ export default function Loader() {
           </div>
         </div>
       </div>
-      <div className="mt-16 w-48 h-1 bg-dark-700 rounded-full overflow-hidden">
+      <div className="mt-12 md:mt-16 w-32 md:w-48 h-1 bg-dark-700 rounded-full overflow-hidden">
         <div
           className="h-full bg-accent-500 rounded-full transition-all duration-300 ease-flux"
           style={{ width: `${Math.min(progress, 100)}%` }}

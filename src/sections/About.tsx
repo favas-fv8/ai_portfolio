@@ -19,8 +19,8 @@ export default function About() {
   const isHovered = useInView(profileRef, { once: false, amount: 0.3 })
 
   return (
-    <SectionLayout id={SECTION_IDS.about} className="bg-dark-900">
-      <div className="grid lg:grid-cols-2 gap-16 items-center">
+    <SectionLayout id={SECTION_IDS.about} className="bg-dark-900 overflow-visible">
+      <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
         <div>
           <AnimatedSection>
             <p className="text-sm font-mono text-accent-400 tracking-widest uppercase mb-4">
@@ -54,7 +54,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="relative mx-auto w-56 h-56 rounded-full group flex items-center justify-center"
+            className="relative mx-auto w-40 h-40 md:w-56 md:h-56 rounded-full group flex items-center justify-center"
             style={{ perspective: '600px' }}
           >
             {/* Tilt group — glass bg + SVG ring + border tilt together backward */}

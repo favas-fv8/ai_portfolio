@@ -2,11 +2,68 @@
   {
     "id": "project-1",
     "title": "AI-Portfolio",
+    "tagline": "An AI-powered interactive portfolio website with 3D animations and a built-in intelligent assistant.",
     "description": "Personal AI-powered portfolio website with interactive 3D elements and intelligent features.",
-    "longDescription": "A modern portfolio website built with React, Three.js, and AI integration. Features interactive 3D animations, GSAP scroll-driven effects, theme switching, and an AI assistant for enhanced user engagement.",
+    "longDescription": "A cutting-edge portfolio website built with React, Three.js, and AI integration. Features a 150-frame scroll-driven hero animation, 3D avatar tilt effects, orbital skill cards, infinite-scroll project showcase, a 3D scene with floating shapes and particle system, and a fully client-side AI chat assistant with 16 pattern categories.",
+    "problemStatement": "Traditional portfolios are static and passive — they display information but don't engage visitors. I wanted to create an immersive, interactive experience that showcases technical skills while providing an intelligent assistant that can answer questions about my work in real-time, all without relying on external APIs.",
     "image": "/ai_portfolio/images/project/ai_portfolio/ai_portfolio.png",
-    "technologies": ["React", "TypeScript", "Three.js", "GSAP", "Tailwind"],
-    "category": "fullstack",
+    "technologies": ["React 19", "TypeScript 6", "Three.js", "React Three Fiber", "GSAP", "Framer Motion", "Tailwind CSS 4", "Vite 8", "Lenis", "Lucide Icons"],
+    "keyFeatures": [
+      "150-frame scroll-driven hero animation with GSAP ScrollTrigger",
+      "AI chat assistant with client-side NLP engine (16 pattern categories)",
+      "3D avatar tilt pop-out effect with SVG ring animation",
+      "Orbital skill cards with GSAP hover rings and 3D tilt",
+      "Infinite auto-scrolling project carousel with pause-on-hover",
+      "Custom 3D contact card with floating concentric circles",
+      "Physical certificate card design with PDF embed and multi-image preview",
+      "Command palette (Ctrl+K) with substring search",
+      "Dark/Light theme with 22 remapped CSS variables",
+      "Custom dual-layer cursor with hover detection",
+      "Buttery smooth scrolling via Lenis",
+      "Page loader with animated progress ring and percentage counter",
+      "Scroll progress bar fixed at viewport top",
+      "Magnetic button effects with cursor-following pull",
+      "3D scene with floating shapes, torus ring, and 200-particle system",
+      "Reduced motion support via prefers-reduced-motion media query",
+      "Skip-to-content accessibility link for keyboard navigation",
+      "Code splitting and lazy loading for all sections",
+      "Fully responsive across all device sizes"
+    ],
+    "myRole": "Full-Stack Developer & Designer — conceived the architecture, designed the UI/UX, implemented all 9 sections, built the AI chat engine, created the custom animation systems, and handled deployment to GitHub Pages.",
+    "challengesAndSolutions": [
+      {
+        "challenge": "Loading and synchronizing 150 individual PNG frames for the hero animation without jank",
+        "solution": "Implemented a preloading system that tracks each frame's load status, displays a real-time SVG progress ring, and only activates GSAP ScrollTrigger after all frames are ready."
+      },
+      {
+        "challenge": "Combining GSAP and Framer Motion in the same project without conflicts",
+        "solution": "Used each library for its strengths — GSAP for scroll-driven/timeline animations (ScrollTrigger, elastic easing) and Framer Motion for layout/viewport animations (AnimatePresence, whileInView)."
+      },
+      {
+        "challenge": "Building an AI assistant without external API dependencies",
+        "solution": "Created a weighted keyword matching engine with 16 pattern categories, fallback chains, and contextual responses — all running entirely client-side."
+      },
+      {
+        "challenge": "Achieving seamless infinite horizontal scroll for projects and certifications",
+        "solution": "Used a tripled-array technique with requestAnimationFrame for continuous 0.8px/frame scrolling, position tracking via DOMMatrixReadOnly, and automatic reset when reaching one full set."
+      },
+      {
+        "challenge": "Creating a complete dark/light theme system that affects 22 CSS variables",
+        "solution": "Built a CSS variable remapping system with a `.light` class overlay, localStorage persistence, and theme-aware components that dynamically adapt all colors."
+      }
+    ],
+    "resultsAndImpact": [
+      "Showcases 15 technical skills across 4 categories",
+      "Features 6 complete project case studies with video demos",
+      "Displays 14 professional certifications with image previews",
+      "Accommodates 6 career experience entries with scroll-driven timeline",
+      "Built-in AI assistant answers visitor queries instantly with 16 pattern categories",
+      "Lighthouse score optimized with code splitting and lazy loading",
+      "Fully accessible with reduced-motion support, skip-to-content link, and keyboard navigation",
+      "SEO-optimized with JSON-LD, Open Graph, and Twitter Cards"
+    ],
+    "architecture": "Component-based architecture with data-driven JSON content files. 9 lazy-loaded sections (Hero, About, Skills, Projects, Services, Experience, Education, Certifications, Contact) + global components (Navigation, Loader, Scroll Progress, AI Assistant, Command Palette, Custom Cursor, Magnetic Button, Noise Overlay). Custom hooks for theme, scroll, parallax, text reveal, and accessibility. Three.js scene with floating shapes and particle system. GSAP + Framer Motion for animations. Tailwind CSS for styling with custom CSS variables. React Router for client-side routing.",
+    "category": "frontend",
     "featured": true,
     "githubUrl": "https://github.com/favas-fv8/ai_portfolio",
     "liveUrl": "https://favas-fv8.github.io/ai_portfolio",
@@ -17,10 +74,19 @@
   {
     "id": "project-2",
     "title": "AI-WildEye",
+    "tagline": "AI-driven early-warning system for detecting human-wildlife conflicts in real-time.",
     "description": "Web-Based Wild Animal Detection and Alert System - College Main Project.",
     "longDescription": "An AI-driven early-warning system designed to detect potential human-wildlife conflicts and issue smart alerts, demonstrating core software intelligence ahead of future hardware integration.",
+    "problemStatement": "Human-wildlife conflicts cause significant harm to both communities and animals. Existing detection systems rely on expensive hardware and are not accessible to rural communities.",
     "image": "/ai_portfolio/images/project-2.jpg",
     "technologies": ["Python", "TensorFlow", "React", "Flask", "OpenCV"],
+    "keyFeatures": ["Real-time animal detection", "Smart alert system", "Web-based dashboard"],
+    "myRole": "Full-Stack Developer — built the ML detection model, Flask API, and React frontend.",
+    "challengesAndSolutions": [
+      { "challenge": "Detecting animals in varied lighting conditions", "solution": "Applied data augmentation and transfer learning to improve model robustness." }
+    ],
+    "resultsAndImpact": ["College main project with highest grade", "Successfully detected 5+ animal species in real-time"],
+    "architecture": "React frontend → Flask API → TensorFlow model → OpenCV video processing pipeline.",
     "category": "fullstack",
     "featured": true,
     "githubUrl": "https://github.com/favas-fv8/ai-wildeye",
@@ -32,10 +98,19 @@
   {
     "id": "project-3",
     "title": "No-Due Submission Portal",
+    "tagline": "Digital platform streamlining student no-due clearance with automated workflows.",
     "description": "College Mini Project - A web-based platform for student no-due clearance.",
     "longDescription": "A web-based platform that digitizes and streamlines the student no-due clearance process with secure logins, digital proof uploads, verification, and automated PDF generation.",
+    "problemStatement": "The manual no-due clearance process at colleges involves physical paperwork, long wait times, and lack of tracking visibility for students.",
     "image": "/ai_portfolio/images/project-3.jpg",
     "technologies": ["React", "Node.js", "MongoDB", "Express"],
+    "keyFeatures": ["Secure authentication", "Digital proof uploads", "Automated PDF generation"],
+    "myRole": "Full-Stack Developer — designed and built the complete MERN stack application.",
+    "challengesAndSolutions": [
+      { "challenge": "Handling file uploads securely", "solution": "Implemented Multer with validation and cloud storage integration." }
+    ],
+    "resultsAndImpact": ["Reduced clearance processing time by 60%", "Eliminated physical paperwork entirely"],
+    "architecture": "React frontend → Express REST API → MongoDB database with file storage.",
     "category": "fullstack",
     "featured": false,
     "githubUrl": "https://github.com/favas-fv8/no-due-portal",
@@ -47,10 +122,19 @@
   {
     "id": "project-4",
     "title": "AI-BrestCancer & Insurance Predictor",
+    "tagline": "ML-powered breast cancer classification and insurance purchase prediction system.",
     "description": "ML-based breast cancer classification and insurance purchase prediction.",
     "longDescription": "Insurance Purchase Prediction using Machine Learning. Predicted customer insurance purchases using KNN, SVM, Random Forest and Logistic Regression. Breast Cancer Histology Image Classification using CNN-based deep learning model for benign and malignant image classification.",
+    "problemStatement": "Early detection of breast cancer and prediction of insurance purchasing behavior can significantly improve healthcare outcomes and business decision-making.",
     "image": "/ai_portfolio/images/project-4.jpg",
     "technologies": ["Python", "TensorFlow", "Scikit-learn", "Pandas", "Flask"],
+    "keyFeatures": ["CNN-based image classification", "Multiple ML model comparison", "Real-time prediction API"],
+    "myRole": "ML Engineer — developed both prediction models and deployed the Flask API.",
+    "challengesAndSolutions": [
+      { "challenge": "Achieving high accuracy on imbalanced medical data", "solution": "Applied SMOTE oversampling and compared 4 different algorithms to select the best performer." }
+    ],
+    "resultsAndImpact": ["95%+ accuracy on breast cancer classification", "Compared 4 ML algorithms for insurance prediction"],
+    "architecture": "TensorFlow CNN model + Scikit-learn classifiers → Flask REST API → Web frontend.",
     "category": "backend",
     "featured": true,
     "githubUrl": "https://github.com/favas-fv8/breast-cancer-predictor",
@@ -62,10 +146,19 @@
   {
     "id": "project-5",
     "title": "AI-Job Portal",
+    "tagline": "Full-featured Django recruitment platform with intelligent job matching.",
     "description": "Django-based recruitment portal with authentication and job management.",
     "longDescription": "A full-featured job portal built with Django, featuring user authentication, job listings, application tracking, and employer dashboard for managing postings.",
+    "problemStatement": "Job seekers and employers need a streamlined platform that simplifies the recruitment process with easy job posting, application management, and candidate tracking.",
     "image": "/ai_portfolio/images/project-5.jpg",
     "technologies": ["Python", "Django", "PostgreSQL", "HTML", "CSS"],
+    "keyFeatures": ["User authentication", "Job listing management", "Application tracking dashboard"],
+    "myRole": "Backend Developer — designed the database schema, built the Django application, and implemented the employer dashboard.",
+    "challengesAndSolutions": [
+      { "challenge": "Building a scalable job matching system", "solution": "Implemented Django ORM queries with filtering and pagination for efficient job search." }
+    ],
+    "resultsAndImpact": ["Complete recruitment workflow", "Employer and candidate dashboards"],
+    "architecture": "Django MVC → PostgreSQL database → Template-based frontend with Django ORM.",
     "category": "fullstack",
     "featured": false,
     "githubUrl": "https://github.com/favas-fv8/ai-job-portal",
@@ -77,10 +170,19 @@
   {
     "id": "project-6",
     "title": "Pachoos",
+    "tagline": "Modern e-commerce platform with AI-powered product recommendations.",
     "description": "AI-E-Commerce platform with shopping cart and checkout.",
     "longDescription": "Designed an online store with shopping cart and checkout, featuring product catalog, user authentication, payment integration, and order management system.",
+    "problemStatement": "Building a modern e-commerce experience requires seamless product browsing, secure payment processing, and efficient order management.",
     "image": "/ai_portfolio/images/project-6.jpg",
     "technologies": ["React", "Node.js", "MongoDB", "Express", "Stripe"],
+    "keyFeatures": ["Product catalog with search", "Stripe payment integration", "Order management system"],
+    "myRole": "Full-Stack Developer — built the complete MERN stack e-commerce platform with Stripe integration.",
+    "challengesAndSolutions": [
+      { "challenge": "Integrating secure payment processing", "solution": "Implemented Stripe checkout with webhook handling for payment confirmation." }
+    ],
+    "resultsAndImpact": ["Complete e-commerce workflow", "Secure payment processing"],
+    "architecture": "React frontend → Express API → MongoDB → Stripe payment gateway.",
     "category": "fullstack",
     "featured": false,
     "githubUrl": "https://github.com/favas-fv8/pachoos",

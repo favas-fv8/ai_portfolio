@@ -8,11 +8,23 @@ import CertPreviewModal from '@/components/ui/CertPreviewModal'
 
 const themes = ['indigo', 'purple', 'cyan', 'indigo', 'purple']
 
+function renderTitle(title: string, highlight?: string) {
+  if (!highlight || !title.includes(highlight)) return title
+  const parts = title.split(highlight)
+  return (
+    <>
+      {parts[0]}
+      <span className="cert-highlight">{highlight}</span>
+      {parts[1] || ''}
+    </>
+  )
+}
+
 export default function Certifications() {
   const scrollRef = useRef<HTMLDivElement>(null!)
   const rafRef = useRef<number>(0)
   const pausedRef = useRef(false)
-  const [previewFile, setPreviewFile] = useState<{ url: string; title: string } | null>(null)
+  const [previewFile, setPreviewFile] = useState<{ url: string; title: string; extraImages?: string[] } | null>(null)
 
   const scrollBy = (dir: number) => {
     const el = scrollRef.current
@@ -52,7 +64,7 @@ export default function Certifications() {
 
   return (
     <SectionLayout id={SECTION_IDS.certifications} className="bg-dark-900">
-      <AnimatedSection className="text-center mb-16">
+      <AnimatedSection className="text-center mb-8 md:mb-16">
         <p className="text-sm font-mono text-accent-400 tracking-widest uppercase mb-4">
           Certifications
         </p>
@@ -61,17 +73,17 @@ export default function Certifications() {
         </h2>
       </AnimatedSection>
 
-      <div className="relative">
+      <div className="relative px-2 md:px-0">
         <button
           onClick={() => scrollBy(-1)}
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full glass text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 -ml-5"
+          className="absolute left-0 md:-left-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full glass text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300"
           aria-label="Scroll left"
         >
           <ChevronLeft size={20} />
         </button>
         <button
           onClick={() => scrollBy(1)}
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full glass text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 -mr-5"
+          className="absolute right-0 md:-right-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full glass text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300"
           aria-label="Scroll right"
         >
           <ChevronRight size={20} />
@@ -102,7 +114,7 @@ export default function Certifications() {
                       </div>
                     )}
 
-                    <h3>{cert.title}</h3>
+                    <h3>{renderTitle(cert.title, cert.highlight)}</h3>
 
                     <p className="date">{cert.date.split('-')[0]}</p>
 
@@ -118,7 +130,7 @@ export default function Certifications() {
                     )}
                     {cert.image && (
                       <button
-                        onClick={() => setPreviewFile({ url: cert.image, title: cert.title })}
+                        onClick={() => setPreviewFile({ url: cert.image, title: cert.title, extraImages: cert.extraImages })}
                         className="preview-btn"
                         aria-label="Preview certificate"
                       >
@@ -142,6 +154,7 @@ export default function Certifications() {
         onClose={() => setPreviewFile(null)}
         fileUrl={previewFile?.url || ''}
         title={previewFile?.title || ''}
+        extraImages={previewFile?.extraImages}
       />
     </SectionLayout>
   )

@@ -118,7 +118,7 @@ export default function Hero() {
       {/* Full-screen background layout: side panels + centered animation */}
       <div className="absolute inset-0 w-full h-full z-0 pointer-events-none select-none flex">
         {/* Left panel */}
-        <div className="flex-shrink-0 w-[15%] h-full transition-colors duration-500" style={{ background: panelBg }} />
+        <div className="flex-shrink-0 hidden md:block w-[15%] h-full transition-colors duration-500" style={{ background: panelBg }} />
 
         {/* Center: animation */}
         <div className="relative flex-1 h-full overflow-hidden flex items-center justify-center">
@@ -178,21 +178,21 @@ export default function Hero() {
         </div>
 
         {/* Right panel */}
-        <div className="flex-shrink-0 w-[15%] h-full transition-colors duration-500" style={{ background: panelBg }} />
+        <div className="flex-shrink-0 hidden md:block w-[15%] h-full transition-colors duration-500" style={{ background: panelBg }} />
       </div>
 
       {/* Foreground content: left-aligned overlay */}
-      <div className="absolute bottom-5 ml-[20vh] left-0 z-10 w-full flex flex-col items-start text-left gap-7 max-w-2xl overflow-visible">
+      <div className="absolute bottom-5 ml-4 md:ml-[20vh] left-0 z-10 w-full flex flex-col items-start text-left gap-5 md:gap-7 max-w-2xl overflow-visible px-2 md:px-0">
         {/* Label */}
         <p
-          className="text-sm font-mono tracking-widest uppercase transition-colors duration-500"
+          className="text-xs md:text-sm font-mono tracking-widest uppercase transition-colors duration-500"
           style={{ color: labelColor }}
         >
           {siteConfig.title}
         </p>
 
         {/* Name */}
-        <h1 ref={nameRef} className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-none whitespace-nowrap">
+        <h1 ref={nameRef} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-none whitespace-normal md:whitespace-nowrap">
           {/* First word — blue gradient */}
           {siteConfig.name.split(' ')[0].split('').map((char, i) => (
             <span
@@ -238,11 +238,11 @@ export default function Hero() {
         </p>
 
         {/* Buttons */}
-        <div className="flex items-center gap-4 flex-wrap">
+        <div className="flex items-center gap-3 md:gap-4 flex-wrap">
           {/* Primary: violet (dark) → blue (light) */}
           <button
             onClick={scrollToAbout}
-            className="px-7 py-3 rounded-full text-sm font-semibold text-white transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-glow"
+            className="px-5 md:px-7 py-2.5 md:py-3 rounded-full text-xs md:text-sm font-semibold text-white transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-glow"
             style={{ background: btnPrimaryBg }}
             onMouseEnter={e => (e.currentTarget.style.background = btnPrimaryHover)}
             onMouseLeave={e => (e.currentTarget.style.background = btnPrimaryBg)}
@@ -254,7 +254,7 @@ export default function Hero() {
             href={siteConfig.resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-7 py-3 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105 active:scale-95"
+            className="px-5 md:px-7 py-2.5 md:py-3 rounded-full text-xs md:text-sm font-semibold transition-all duration-300 hover:scale-105 active:scale-95"
             style={{
               background: isLight ? 'rgba(124,58,237,0.08)' : 'rgba(255,255,255,0.08)',
               border: `1px solid ${isLight ? 'rgba(124,58,237,0.35)' : 'rgba(255,255,255,0.15)'}`,

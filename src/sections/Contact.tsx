@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, ExternalLink } from 'lucide-react'
+import { Mail, Phone, MapPin } from 'lucide-react'
 import SectionLayout from '@/layouts/SectionLayout'
 import { SECTION_IDS } from '@/constants'
 import { siteConfig } from '@/config/site'
@@ -22,7 +22,7 @@ const contactInfo = [
 export default function Contact() {
   return (
     <SectionLayout id={SECTION_IDS.contact} className="bg-dark-950">
-      <AnimatedSection className="text-center mb-16">
+      <AnimatedSection className="text-center mb-8 md:mb-16">
         <p className="text-sm font-mono text-accent-400 tracking-widest uppercase mb-4">
           Contact
         </p>
@@ -79,13 +79,6 @@ export default function Contact() {
                   </a>
                 ))}
               </div>
-              <a
-                href={`mailto:${siteConfig.email}`}
-                className="contact-view-more"
-              >
-                <span>Send Email</span>
-                <ExternalLink size={14} />
-              </a>
             </div>
           </div>
         </div>

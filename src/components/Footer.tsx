@@ -12,7 +12,7 @@ export default function Footer() {
 
   return (
     <footer className="relative border-t border-border">
-      <div className="mx-auto max-w-7xl px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="mx-auto max-w-7xl px-4 md:px-6 py-8 md:py-12 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
         <button
           onClick={scrollToTop}
           className="text-xl font-bold tracking-wider text-gradient"

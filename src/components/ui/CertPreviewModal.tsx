@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -6,10 +7,24 @@ interface CertPreviewModalProps {
   onClose: () => void
   fileUrl: string
   title: string
+  extraImages?: string[]
 }
 
-export default function CertPreviewModal({ isOpen, onClose, fileUrl, title }: CertPreviewModalProps) {
+export default function CertPreviewModal({ isOpen, onClose, fileUrl, title, extraImages }: CertPreviewModalProps) {
   const isPdf = fileUrl.endsWith('.pdf')
+  const allImages = extraImages && extraImages.length > 0 ? extraImages : [fileUrl]
+  const hasMultiple = allImages.length > 1
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isOpen])
 
   return (
     <AnimatePresence>
@@ -23,7 +38,7 @@ export default function CertPreviewModal({ isOpen, onClose, fileUrl, title }: Ce
         >
           <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
           <motion.div
-            className="relative w-full max-w-2xl max-h-[80vh] glass rounded-2xl overflow-hidden border border-white/10"
+            className={`relative w-full glass rounded-2xl overflow-hidden border border-white/10 ${hasMultiple ? 'max-w-4xl' : 'max-w-2xl'} max-h-[85vh]`}
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
@@ -38,12 +53,14 @@ export default function CertPreviewModal({ isOpen, onClose, fileUrl, title }: Ce
                 <X size={18} />
               </button>
             </div>
-            <div className="p-4 overflow-auto max-h-[calc(80vh-60px)]">
-              {isPdf ? (
-                <embed src={fileUrl} type="application/pdf" className="w-full h-[70vh] rounded-lg" />
-              ) : (
-                <img src={fileUrl} alt={title} className="w-full h-auto rounded-lg" />
-              )}
+            <div className={`p-4 overflow-auto max-h-[calc(85vh-60px)] ${hasMultiple ? 'grid grid-cols-2 gap-4' : ''}`}>
+              {allImages.map((img, idx) => (
+                isPdf ? (
+                  <embed key={idx} src={img} type="application/pdf" className="w-full h-[70vh] rounded-lg" />
+                ) : (
+                  <img key={idx} src={img} alt={`${title} ${idx + 1}`} className={`w-full h-auto rounded-lg ${hasMultiple ? 'object-contain' : ''}`} />
+                )
+              ))}
             </div>
           </motion.div>
         </motion.div>

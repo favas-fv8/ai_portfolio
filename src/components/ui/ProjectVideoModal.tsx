@@ -20,6 +20,17 @@ export default function ProjectVideoModal({ isOpen, onClose, videoUrl, title }: 
   const [showControls, setShowControls] = useState(true)
   const [showMore, setShowMore] = useState(false)
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isOpen])
+
   const fmt = (s: number) => {
     const m = Math.floor(s / 60)
     const sec = Math.floor(s % 60)
@@ -167,8 +178,8 @@ export default function ProjectVideoModal({ isOpen, onClose, videoUrl, title }: 
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between px-4 py-2">
-                  <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center justify-between px-3 md:px-4 py-2 gap-2">
+                  <div className="flex items-center gap-2 md:gap-3 flex-wrap">
                     <button onClick={togglePlay} className="text-white/80 hover:text-white transition-colors">
                       {playing ? <Pause size={18} /> : <Play size={18} />}
                     </button>

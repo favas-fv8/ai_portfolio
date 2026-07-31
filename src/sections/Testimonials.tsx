@@ -27,7 +27,7 @@ export default function Testimonials() {
 
   return (
     <SectionLayout id={SECTION_IDS.testimonials}>
-      <AnimatedSection className="text-center mb-16">
+      <AnimatedSection className="text-center mb-8 md:mb-16">
         <p className="text-sm font-mono text-accent-400 tracking-widest uppercase mb-4">
           Testimonials
         </p>
