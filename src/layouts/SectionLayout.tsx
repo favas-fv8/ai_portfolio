@@ -14,9 +14,9 @@ const SectionLayout = forwardRef<HTMLElement, SectionLayoutProps>(
       <section
         id={id}
         ref={ref}
-        className={cn('relative', className)}
+        className={cn('relative w-full overflow-hidden', className)}
       >
-        <div className={cn('mx-auto max-w-7xl section-padding', containerClassName)}>
+        <div className={cn('mx-auto max-w-7xl w-full section-padding', containerClassName)}>
           {children}
         </div>
       </section>

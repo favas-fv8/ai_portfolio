@@ -64,7 +64,7 @@ export default function Navigation() {
           ))}
         </ul>
 
-        <div className="flex items-center gap-2 absolute right-6 md:right-8 top-1/2 -translate-y-1/2">
+        <div className="flex items-center gap-3">
           <div className="toggle-cont">
             <input
               className="toggle-input"
@@ -112,7 +112,7 @@ export default function Navigation() {
 
       <div
         className={cn(
-          'md:hidden transition-all duration-500 overflow-hidden',
+          'md:hidden transition-all duration-500 overflow-hidden absolute top-full left-0 right-0 z-[299]',
           mobileOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0',
           isLight ? 'bg-[#e5e7eb]/80 backdrop-blur-xl border-b border-black/5' : 'glass',
         )}

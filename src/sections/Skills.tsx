@@ -295,7 +295,7 @@ export default function Skills() {
         ))}
       </div>
 
-      <div className="grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-8 gap-2 sm:gap-2 lg:gap-3 justify-items-center">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-8 gap-2 sm:gap-2 lg:gap-3 justify-items-center">
         <AnimatePresence initial={false} mode="popLayout">
           {filtered.map((skill, i) => (
             <motion.div
