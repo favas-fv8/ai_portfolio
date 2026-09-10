@@ -1,32 +1,95 @@
-# React + TypeScript + Vite
+# AI Portfolio — Interactive React + TypeScript Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A modern, interactive developer portfolio built with React, TypeScript, and Vite. The site is organized as a single polished experience with dedicated sections for projects, skills, services, experience, education, certifications, and contact.
 
-Currently, two official plugins are available:
+## Highlights
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Interactive portfolio navigation and scroll progress
+- Project, skills, services, experience, education, and certification sections
+- Animated transitions and motion effects
+- Three.js-powered 3D experiences
+- Lenis-based smooth scrolling
+- Floating AI portfolio assistant with predefined responses
+- Command palette for quick navigation
+- Lazy-loaded page sections for a smoother initial experience
+- Responsive UI with Tailwind CSS
+- Accessibility detail including a skip-to-content link
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend:** React 19, TypeScript, Vite 8
+- **Styling:** Tailwind CSS 4
+- **Motion:** Framer Motion, GSAP
+- **3D:** Three.js, React Three Fiber, React Three Drei, postprocessing
+- **Scrolling:** Lenis
+- **Icons:** Lucide React, React Icons
+- **Quality:** Oxlint
+- **Deployment:** GitHub Pages via `gh-pages`
 
-## Expanding the Oxlint configuration
+## Project Structure
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```text
+ai_portfolio/
+├── src/
+│   ├── ai/            # Portfolio AI assistant and response engine
+│   ├── components/    # Navigation, footer, loaders, utilities, UI
+│   ├── hooks/         # Reusable browser and scrolling hooks
+│   ├── layouts/       # Main application layout
+│   ├── pages/         # Route-level pages
+│   ├── sections/      # Hero, About, Skills, Projects, etc.
+│   └── utils/         # Shared helpers
+├── public/            # Static assets
+├── package.json
+├── tsconfig.json
+└── vite.config.*
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Getting Started
+
+### Requirements
+
+- Node.js and npm
+
+### Install
+
+```bash
+npm install
+```
+
+### Development
+
+```bash
+npm run dev
+```
+
+### Production build
+
+```bash
+npm run build
+```
+
+### Preview the build
+
+```bash
+npm run preview
+```
+
+### Deploy to GitHub Pages
+
+```bash
+npm run deploy
+```
+
+The deployment script builds the application and publishes the `dist` directory to the `gh-pages` branch.
+
+## AI Assistant
+
+The portfolio includes a client-side AI-style assistant that answers questions about the portfolio using the local response engine in `src/ai/engine`.
+
+## Current Scope
+
+This repository is a portfolio website rather than a general-purpose application template. The root route renders the complete portfolio experience, with a dedicated `/not-live` route also available.
+
+## License
+
+No license file is currently defined in the repository. Please contact the repository owner for reuse or licensing questions.
