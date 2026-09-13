@@ -3,6 +3,12 @@ import {
   SiReact, SiTypescript, SiJavascript, SiTailwindcss,
   SiHtml5, SiCss, SiPython, SiPostgresql, SiMysql,
   SiGit, SiDocker, SiBootstrap, SiDjango, SiC,
+  SiVite, SiReactrouter, SiRedux, SiReactquery, SiThreedotjs,
+  SiFramer, SiJsonwebtokens, SiCelery, SiRedis, SiGunicorn,
+  SiTensorflow, SiKeras, SiScikitlearn, SiNumpy, SiPandas,
+  SiOpencv, SiScipy, SiGooglegemini, SiSqlite, SiGithub,
+  SiGithubactions, SiRender, SiVercel, SiFirebase, SiAxios,
+  SiTestinglibrary, SiPytest,
 } from 'react-icons/si'
 import { FaJava } from 'react-icons/fa'
 import gsap from 'gsap'
@@ -17,14 +23,22 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; color?: strin
   SiReact, SiTypescript, SiJavascript, SiTailwindcss,
   SiHtml5, SiCss, SiPython, SiPostgresql, SiMysql,
   SiGit, SiDocker, SiBootstrap, SiDjango, SiC,
+  SiVite, SiReactrouter, SiRedux, SiReactquery, SiThreedotjs,
+  SiFramer, SiJsonwebtokens, SiCelery, SiRedis, SiGunicorn,
+  SiTensorflow, SiKeras, SiScikitlearn, SiNumpy, SiPandas,
+  SiOpencv, SiScipy, SiGooglegemini, SiSqlite, SiGithub,
+  SiGithubactions, SiRender, SiVercel, SiFirebase, SiAxios,
+  SiTestinglibrary, SiPytest,
   FaJava,
 }
 
 const categories = [
-  { key: 'all', label: 'All' },
   { key: 'frontend', label: 'Frontend' },
   { key: 'backend', label: 'Backend' },
-  { key: 'tools', label: 'Tools' },
+  { key: 'ai-ml', label: 'AI / ML' },
+  { key: 'database', label: 'Database' },
+  { key: 'devops', label: 'DevOps / Tools' },
+  { key: 'other', label: 'Other' },
 ] as const
 
 const ringRadius = 52
@@ -262,10 +276,8 @@ function SkillCard({ skill, index }: { skill: typeof skillsData[number]; index: 
 }
 
 export default function Skills() {
-  const [active, setActive] = useState<string>('all')
-  const filtered = active === 'all'
-    ? skillsData
-    : skillsData.filter(s => s.category === active)
+  const [active, setActive] = useState<string>('frontend')
+  const filtered = skillsData.filter(s => s.category === active)
 
   return (
     <SectionLayout id={SECTION_IDS.skills} className="bg-dark-950">
