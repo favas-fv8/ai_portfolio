@@ -11,6 +11,13 @@ import ProjectVideoModal from '@/components/ui/ProjectVideoModal'
 
 const categories = ['all', 'fullstack', 'frontend'] as const
 
+const MANUAL_PAUSE_MS = 3000
+const MANUAL_ANIMATION_MS = 600
+
+function easeInOutCubic(t: number) {
+  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
+}
+
 function ProjectCover({ project }: { project: (typeof projectsData)[number] }) {
   const [failed, setFailed] = useState(false)
 
@@ -40,8 +47,16 @@ export default function Projects() {
   const rafRef = useRef<number>(0)
   const pausedRef = useRef(false)
   const posRef = useRef(0)
+  const manualHoldRef = useRef(false)
+  const resumeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const manualAnimRef = useRef<number>(0)
   const [detailsProject, setDetailsProject] = useState<typeof projectsData[0] | null>(null)
   const [videoProject, setVideoProject] = useState<typeof projectsData[0] | null>(null)
+
+  const totalCount = projectsData.length
+
+  const getCategoryCount = (cat: string) =>
+    cat === 'all' ? totalCount : projectsData.filter(p => p.category === cat).length
 
   const filtered = active === 'all'
     ? projectsData
@@ -52,14 +67,43 @@ export default function Projects() {
   const scrollBy = useCallback((dir: number) => {
     const track = trackRef.current
     if (!track) return
+    // Hold auto-scroll for a few seconds so the manual step stays visible
+    manualHoldRef.current = true
+    if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current)
+    resumeTimeoutRef.current = setTimeout(() => {
+      manualHoldRef.current = false
+      resumeTimeoutRef.current = null
+    }, MANUAL_PAUSE_MS)
     const oneSet = track.scrollWidth / 3
     const cardWidth = window.innerWidth < 640 ? Math.min(340, window.innerWidth * 0.85) : 340
     const gap = window.innerWidth < 640 ? 16 : 32
-    const step = (cardWidth + gap) * dir
-    posRef.current += step
-    if (posRef.current < -oneSet) posRef.current += oneSet
-    if (posRef.current > 0) posRef.current -= oneSet
-    track.style.transform = `translateX(${posRef.current}px)`
+    // Half-card step for slower manual scrolling + smooth eased animation
+    const step = ((cardWidth + gap) / 2) * dir
+    if (manualAnimRef.current) cancelAnimationFrame(manualAnimRef.current)
+    const start = posRef.current
+    const rawTarget = start + step
+    // Wrapped position is visually identical (track holds 3 copies), so we
+    // animate past the boundary then snap back silently — no visible jump.
+    let end = rawTarget
+    if (end < -oneSet) end += oneSet
+    if (end > 0) end -= oneSet
+    const animateTarget = rawTarget < -oneSet || rawTarget > 0 ? rawTarget : end
+    const startTime = performance.now()
+    const animate = (now: number) => {
+      const progress = Math.min((now - startTime) / MANUAL_ANIMATION_MS, 1)
+      const eased = easeInOutCubic(progress)
+      posRef.current = start + (animateTarget - start) * eased
+      track.style.transform = `translateX(${posRef.current}px)`
+      if (progress < 1) {
+        manualAnimRef.current = requestAnimationFrame(animate)
+      } else {
+        // Snap to wrapped position (identical visuals, keeps loop range valid)
+        posRef.current = end
+        track.style.transform = `translateX(${posRef.current}px)`
+        manualAnimRef.current = 0
+      }
+    }
+    manualAnimRef.current = requestAnimationFrame(animate)
   }, [])
 
   useEffect(() => {
@@ -72,7 +116,7 @@ export default function Projects() {
     const oneSet = track.scrollWidth / 3
 
     const scroll = () => {
-      if (!pausedRef.current) {
+      if (!pausedRef.current && !manualHoldRef.current) {
         posRef.current -= 0.8
         if (Math.abs(posRef.current) >= oneSet) {
           posRef.current = 0
@@ -86,6 +130,15 @@ export default function Projects() {
 
     return () => {
       cancelAnimationFrame(rafRef.current)
+      if (manualAnimRef.current) {
+        cancelAnimationFrame(manualAnimRef.current)
+        manualAnimRef.current = 0
+      }
+      if (resumeTimeoutRef.current) {
+        clearTimeout(resumeTimeoutRef.current)
+        resumeTimeoutRef.current = null
+      }
+      manualHoldRef.current = false
     }
   }, [filtered, isSingle])
 
@@ -112,9 +165,13 @@ export default function Projects() {
         <h2 className="text-4xl md:text-5xl font-bold">
           Featured <span className="text-gradient">Projects</span>
         </h2>
+        <p className="mt-4 text-sm font-mono text-dark-400 tracking-wide">
+          <span className="text-accent-400 font-semibold">{totalCount}</span>{' '}
+          {totalCount === 1 ? 'project' : 'projects'} built & shipped
+        </p>
       </AnimatedSection>
 
-      <div className="flex justify-center gap-2 mb-6 md:mb-12 flex-wrap">
+      <div className="flex justify-center gap-2 mb-4 md:mb-8 flex-wrap">
         {categories.map(cat => (
           <button
             key={cat}
@@ -127,9 +184,22 @@ export default function Projects() {
             )}
           >
             {cat}
+            <span
+              className={cn(
+                'ml-2 rounded-full px-2 py-0.5 text-xs font-mono',
+                active === cat ? 'bg-white/20 text-white' : 'bg-white/5 text-dark-400',
+              )}
+            >
+              {getCategoryCount(cat)}
+            </span>
           </button>
         ))}
       </div>
+
+      <p className="text-center text-xs font-mono text-dark-500 tracking-wide mb-6 md:mb-12">
+        Showing {filtered.length} of {totalCount} {totalCount === 1 ? 'project' : 'projects'}
+        {active !== 'all' && <span className="capitalize"> in {active}</span>}
+      </p>
 
       <div className="relative px-2 md:px-0">
         {!isSingle && (
