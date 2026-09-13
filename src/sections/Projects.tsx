@@ -19,7 +19,7 @@ function easeInOutCubic(t: number) {
   return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
 }
 
-function ProjectCover({ project }: { project: (typeof projectsData)[number] }) {
+function ProjectCover({ project, eager }: { project: (typeof projectsData)[number]; eager?: boolean }) {
   const [failed, setFailed] = useState(false)
 
   if (!project.image || project.image === '#' || failed) {
@@ -35,7 +35,8 @@ function ProjectCover({ project }: { project: (typeof projectsData)[number] }) {
       src={project.image}
       alt={project.title}
       className="project-cover-img"
-      loading="lazy"
+      loading={eager ? 'eager' : 'lazy'}
+      decoding="async"
       onError={() => setFailed(true)}
     />
   )
@@ -253,7 +254,7 @@ export default function Projects() {
               <div key={`${project.id}-${i}`} className="project-card-wrapper">
                 <div className="project-card-bg" />
                 <div className="project-card-cover">
-                  <ProjectCover project={project} />
+                  <ProjectCover project={project} eager={i < filtered.length} />
                 </div>
                 <div className="project-card">
                   <div className="project-content">
