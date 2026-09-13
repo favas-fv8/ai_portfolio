@@ -25,6 +25,8 @@ export default function Projects() {
     ? projectsData
     : projectsData.filter(p => p.category === active)
 
+  const isSingle = filtered.length <= 1
+
   const scrollBy = useCallback((dir: number) => {
     const track = trackRef.current
     if (!track) return
@@ -44,6 +46,7 @@ export default function Projects() {
 
     posRef.current = 0
     track.style.transform = 'translateX(0px)'
+    if (isSingle) return
     const oneSet = track.scrollWidth / 3
 
     const scroll = () => {
@@ -62,7 +65,7 @@ export default function Projects() {
     return () => {
       cancelAnimationFrame(rafRef.current)
     }
-  }, [filtered])
+  }, [filtered, isSingle])
 
   const handleMouseEnter = () => {
     pausedRef.current = true
@@ -107,20 +110,24 @@ export default function Projects() {
       </div>
 
       <div className="relative px-2 md:px-0">
-        <button
-          onClick={() => scrollBy(-1)}
-          className="absolute left-0 md:-left-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full glass text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300"
-          aria-label="Scroll left"
-        >
-          <ChevronLeft size={20} />
-        </button>
-        <button
-          onClick={() => scrollBy(1)}
-          className="absolute right-0 md:-right-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full glass text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300"
-          aria-label="Scroll right"
-        >
-          <ChevronRight size={20} />
-        </button>
+        {!isSingle && (
+          <>
+            <button
+              onClick={() => scrollBy(-1)}
+              className="absolute left-0 md:-left-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full glass text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300"
+              aria-label="Scroll left"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <button
+              onClick={() => scrollBy(1)}
+              className="absolute right-0 md:-right-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full glass text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300"
+              aria-label="Scroll right"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </>
+        )}
 
         <div
           ref={scrollRef}
@@ -128,8 +135,12 @@ export default function Projects() {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <div ref={trackRef} className="project-track">
-            {[...filtered, ...filtered, ...filtered].map((project, i) => (
+          <div
+            ref={trackRef}
+            className="project-track"
+            style={isSingle ? { margin: '0 auto', transform: 'none' } : undefined}
+          >
+            {(isSingle ? filtered : [...filtered, ...filtered, ...filtered]).map((project, i) => (
               <div key={`${project.id}-${i}`} className="project-card-wrapper">
                 <div className="project-card-bg" />
                 <div className="project-card-cover">
@@ -157,11 +168,7 @@ export default function Projects() {
                           {tech}
                         </span>
                       ))}
-                      {project.featured && (
-                        <span className="project-featured-tag">
-                          Featured
-                        </span>
-                      )}
+
                     </div>
                     <h3 className="project-title">{project.title}</h3>
                     <p className="project-desc">{project.description}</p>
@@ -198,6 +205,17 @@ export default function Projects() {
                       >
                         <Info size={16} /> <span className="project-link-tooltip-text">Details</span>
                       </button>
+                      {project.liveUrl && project.liveUrl !== '/ai_portfolio/not-live' && (
+                        <a
+                          href={project.liveUrl}
+                          target={project.liveUrl.startsWith('http') ? '_blank' : undefined}
+                          rel={project.liveUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
+                          className="project-live-tag ml-auto"
+                        >
+                          <span className="project-live-dot" />
+                          Live
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>

@@ -7,9 +7,9 @@
     "startDate": "2026",
     "endDate": "2026",
     "current": false,
-    "description": "AI-E-Commerce platform with shopping cart and checkout.",
+    "description": "Production-oriented full-stack bakery and fruit ordering platform for managing customers, products, inventory, carts, orders, payments, wallets and business operations.",
     "achievements": [],
-    "technologies": ["React", "Node.js", "MongoDB", "Express"]
+    "technologies": ["React", "Django", "PostgreSQL", "Celery", "Redis"]
   },
   {
     "id": "exp-5",
@@ -19,21 +19,33 @@
     "startDate": "2026",
     "endDate": null,
     "current": true,
-    "description": "Personal AI-powered portfolio website with interactive 3D elements and intelligent features.",
+    "description": "Interactive personal developer portfolio designed to present projects, skills, experience and developer identity through a modern animated interface.",
     "achievements": [],
-    "technologies": ["React", "TypeScript", "Three.js", "GSAP", "Tailwind"]
+    "technologies": ["React 19", "TypeScript", "Three.js", "GSAP", "Tailwind CSS"]
   },
   {
     "id": "exp-4",
     "company": "IntrnForte Internship",
-    "role": "AI-BrestCancer & Insurance Predictor",
+    "role": "AI-BrestCancer Predictor",
     "location": "Internship Project",
     "startDate": "2026",
     "endDate": "2026",
     "current": false,
-    "description": "ML-based breast cancer classification and insurance purchase prediction.",
+    "description": "Full-stack research and educational application for classifying breast histopathology image patches as Benign or Malignant using a CancerNet CNN model.",
     "achievements": [],
-    "technologies": ["Python", "TensorFlow", "Scikit-learn", "Pandas", "Flask"]
+    "technologies": ["Python", "Django", "TensorFlow", "Keras", "PostgreSQL"]
+  },
+  {
+    "id": "exp-7",
+    "company": "IntrnForte Internship",
+    "role": "AI-Insurance Predictor",
+    "location": "Internship Project",
+    "startDate": "2026",
+    "endDate": "2026",
+    "current": false,
+    "description": "Full-stack machine-learning application for predicting insurance purchase outcomes from customer age and estimated salary.",
+    "achievements": [],
+    "technologies": ["Python", "Django", "Scikit-learn", "React", "PostgreSQL"]
   },
   {
     "id": "exp-3",
@@ -43,9 +55,9 @@
     "startDate": "2026",
     "endDate": "2026",
     "current": false,
-    "description": "Django-based recruitment portal with authentication and job management.",
+    "description": "AI-powered job marketplace connecting job seekers and recruiters through role-based dashboards, job management, applications, resume processing and intelligent recommendations.",
     "achievements": [],
-    "technologies": ["Python", "Django", "PostgreSQL", "HTML", "CSS"]
+    "technologies": ["React", "Django", "PostgreSQL", "Google Gemini", "SimpleJWT"]
   },
   {
     "id": "exp-2",
@@ -55,9 +67,9 @@
     "startDate": "2026",
     "endDate": "2026",
     "current": false,
-    "description": "Web-Based Wild Animal Detection and Alert System.",
+    "description": "AI-based wildlife image recognition application combining Django with computer vision and TensorFlow-based machine learning.",
     "achievements": [],
-    "technologies": ["Python", "TensorFlow", "React", "Flask", "OpenCV"]
+    "technologies": ["Python", "Django", "TensorFlow", "OpenCV", "Pillow"]
   },
   {
     "id": "exp-1",
@@ -67,8 +79,8 @@
     "startDate": "2025",
     "endDate": "2025",
     "current": false,
-    "description": "A web-based platform for student no-due clearance.",
+    "description": "Role-based college no-due clearance platform that digitizes a multi-department student clearance process.",
     "achievements": [],
-    "technologies": ["React", "Node.js", "MongoDB", "Express"]
+    "technologies": ["React", "Django", "SQLite", "SimpleJWT", "Axios"]
   }
 ]
