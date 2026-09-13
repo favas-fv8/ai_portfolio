@@ -207,7 +207,7 @@
     "featured": false,
     "githubUrl": "https://github.com/favas-fv8/no_due",
     "liveUrl": "/ai_portfolio/not-live",
-    "videoUrl": "#",
+    "videoUrl": "/ai_portfolio/videos/noDue.webm",
     "detailsUrl": "#",
     "year": 2024
   },
@@ -284,7 +284,7 @@
     "featured": true,
     "githubUrl": "https://github.com/favas-fv8/ai_breastCancer",
     "liveUrl": "/ai_portfolio/not-live",
-    "videoUrl": "#",
+    "videoUrl": "/ai_portfolio/videos/breastCancer.webm",
     "detailsUrl": "#",
     "year": 2025
   },
@@ -355,7 +355,7 @@
     "featured": false,
     "githubUrl": "https://github.com/favas-fv8/ai_jobPortal",
     "liveUrl": "/ai_portfolio/not-live",
-    "videoUrl": "#",
+    "videoUrl": "/ai_portfolio/videos/jobPortal.mp4",
     "detailsUrl": "#",
     "year": 2024
   },
@@ -427,7 +427,7 @@
     "featured": true,
     "githubUrl": "https://github.com/favas-fv8/ai_insurance",
     "liveUrl": "https://ai-insurance-lime.vercel.app",
-    "videoUrl": "#",
+    "videoUrl": "/ai_portfolio/videos/insurance.webm",
     "detailsUrl": "#",
     "year": 2024
   },
@@ -529,7 +529,7 @@
     "featured": false,
     "githubUrl": "https://github.com/favas-fv8/pachoos_ai",
     "liveUrl": "/ai_portfolio/not-live",
-    "videoUrl": "#",
+    "videoUrl": "/ai_portfolio/videos/pachoos.webm",
     "detailsUrl": "#",
     "year": 2024
   }

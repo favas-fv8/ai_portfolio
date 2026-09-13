@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react'
-import { X, Play, Pause, Volume2, VolumeX, Maximize, SkipBack, SkipForward, MoreVertical } from 'lucide-react'
+import { X, Play, Pause, Volume2, VolumeX, Maximize, SkipBack, SkipForward, MoreVertical, RotateCcw, RotateCw } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 interface ProjectVideoModalProps {
@@ -156,6 +156,33 @@ export default function ProjectVideoModal({ isOpen, onClose, videoUrl, title }: 
                 </button>
               )}
 
+              {playing && (
+                <>
+                  <button
+                    onClick={e => { e.stopPropagation(); skip(-10) }}
+                    aria-label="Skip back 10 seconds"
+                    title="Skip back 10s"
+                    className={`absolute left-1/4 top-1/2 -translate-x-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/55 hover:bg-black/75 border border-white/15 flex items-center justify-center text-white/90 hover:text-white transition-all duration-300 ${showControls ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+                  >
+                    <span className="relative inline-flex">
+                      <RotateCcw size={20} />
+                      <span className="absolute inset-0 flex items-center justify-center text-[8px] font-bold pt-[1px]">10</span>
+                    </span>
+                  </button>
+                  <button
+                    onClick={e => { e.stopPropagation(); skip(10) }}
+                    aria-label="Skip forward 10 seconds"
+                    title="Skip forward 10s"
+                    className={`absolute right-1/4 top-1/2 translate-x-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/55 hover:bg-black/75 border border-white/15 flex items-center justify-center text-white/90 hover:text-white transition-all duration-300 ${showControls ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+                  >
+                    <span className="relative inline-flex">
+                      <RotateCw size={20} />
+                      <span className="absolute inset-0 flex items-center justify-center text-[8px] font-bold pt-[1px]">10</span>
+                    </span>
+                  </button>
+                </>
+              )}
+
               <div
                 className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent transition-opacity duration-300 ${showControls ? 'opacity-100' : 'opacity-0'}`}
               >
@@ -202,19 +229,7 @@ export default function ProjectVideoModal({ isOpen, onClose, videoUrl, title }: 
                       <MoreVertical size={16} />
                     </button>
                     {showMore && (
-                      <div className="absolute bottom-full right-0 mb-2 w-40 glass rounded-lg border border-white/10 overflow-hidden z-10">
-                        <button
-                          onClick={() => { skip(-10); setShowMore(false) }}
-                          className="w-full text-left px-3 py-2 text-xs text-white/80 hover:bg-white/10 transition-colors"
-                        >
-                          Skip Back 10s
-                        </button>
-                        <button
-                          onClick={() => { skip(10); setShowMore(false) }}
-                          className="w-full text-left px-3 py-2 text-xs text-white/80 hover:bg-white/10 transition-colors"
-                        >
-                          Skip Forward 10s
-                        </button>
+                      <div className="absolute bottom-full right-0 mb-2 w-40 rounded-lg border border-white/10 overflow-hidden z-10 bg-dark-800 shadow-xl" style={{ backgroundColor: '#1a1a24' }}>
                         <button
                           onClick={() => { if (videoRef.current) videoRef.current.playbackRate = 1; setShowMore(false) }}
                           className="w-full text-left px-3 py-2 text-xs text-white/80 hover:bg-white/10 transition-colors"
