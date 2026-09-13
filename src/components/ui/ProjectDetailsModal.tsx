@@ -3,6 +3,7 @@ import { X, ExternalLink, Lightbulb, Target, Layers, Wrench, BarChart3, GitBranc
 import { GithubIcon } from '@/components/ui/SocialIcon'
 import { motion, AnimatePresence } from 'framer-motion'
 import type { Project } from '@/types'
+import { useTheme } from '@/hooks/useTheme'
 
 interface ProjectDetailsModalProps {
   isOpen: boolean
@@ -35,6 +36,8 @@ function FeatureItem({ text, index }: { text: string; index: number }) {
 
 export default function ProjectDetailsModal({ isOpen, onClose, project }: ProjectDetailsModalProps) {
   const scrollRef = useRef<HTMLDivElement>(null)
+  const { theme } = useTheme()
+  const isLight = theme === 'light'
 
   useEffect(() => {
     if (isOpen) {
@@ -72,7 +75,7 @@ export default function ProjectDetailsModal({ isOpen, onClose, project }: Projec
         >
           <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
           <motion.div
-            className="relative w-full max-w-2xl max-h-[90vh] glass rounded-2xl overflow-hidden border border-white/10 flex flex-col"
+            className={`relative w-full max-w-2xl max-h-[90vh] glass rounded-2xl overflow-hidden border flex flex-col ${isLight ? 'border-black/10' : 'border-white/10'}`}
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
@@ -80,14 +83,14 @@ export default function ProjectDetailsModal({ isOpen, onClose, project }: Projec
             onWheel={e => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="shrink-0 flex items-center justify-between p-4 sm:p-5 border-b border-white/10 bg-dark-900/90 backdrop-blur-xl">
+            <div className={`shrink-0 flex items-center justify-between p-4 sm:p-5 border-b bg-dark-900/90 backdrop-blur-xl ${isLight ? 'border-black/10' : 'border-white/10'}`}>
               <div className="min-w-0 flex-1">
                 <h3 className="text-lg sm:text-xl font-bold text-text-primary truncate">{project.title}</h3>
                 <p className="text-xs sm:text-sm text-dark-400 mt-0.5 truncate">{project.tagline}</p>
               </div>
               <button
                 onClick={onClose}
-                className="shrink-0 w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors ml-3"
+                className={`shrink-0 w-8 h-8 flex items-center justify-center rounded-full transition-colors ml-3 ${isLight ? 'hover:bg-black/5' : 'hover:bg-white/10'}`}
               >
                 <X size={18} />
               </button>
@@ -120,7 +123,7 @@ export default function ProjectDetailsModal({ isOpen, onClose, project }: Projec
                   {project.technologies.map((tech, i) => (
                     <motion.span
                       key={tech}
-                      className="px-3 py-1.5 rounded-full text-xs font-medium bg-accent-600/20 text-accent-300 border border-accent-400/20"
+                      className={`px-3 py-1.5 rounded-full text-xs font-medium border ${isLight ? 'bg-accent-500/10 border-accent-500/25 text-accent-800' : 'bg-accent-600/20 border-accent-400/20 text-accent-300'}`}
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: i * 0.04 }}
@@ -154,7 +157,7 @@ export default function ProjectDetailsModal({ isOpen, onClose, project }: Projec
                   {project.challengesAndSolutions.map((item, idx) => (
                     <motion.div
                       key={idx}
-                      className="glass rounded-xl p-4 border border-white/5"
+                      className={`glass rounded-xl p-4 border ${isLight ? 'border-black/10' : 'border-white/5'}`}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: idx * 0.08 }}
@@ -197,7 +200,7 @@ export default function ProjectDetailsModal({ isOpen, onClose, project }: Projec
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium glass border border-white/10 text-dark-200 hover:text-accent-400 hover:border-accent-400/30 transition-all duration-300"
+                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium glass border text-dark-200 hover:text-accent-400 hover:border-accent-400/30 transition-all duration-300 ${isLight ? 'border-black/10' : 'border-white/10'}`}
                   >
                     <GithubIcon size={14} /> View Source
                   </a>

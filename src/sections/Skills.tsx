@@ -18,6 +18,7 @@ import { SECTION_IDS } from '@/constants'
 import skillsData from '@/data/skills.json'
 import { cn } from '@/utils/cn'
 import AnimatedSection from '@/components/ui/AnimatedSection'
+import { useTheme } from '@/hooks/useTheme'
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; color?: string }>> = {
   SiReact, SiTypescript, SiJavascript, SiTailwindcss,
@@ -55,6 +56,11 @@ function SkillCard({ skill, index }: { skill: typeof skillsData[number]; index: 
   const [displayedLevel, setDisplayedLevel] = useState(0)
   const [tilt, setTilt] = useState({ x: 0, y: 0 })
   const [mag, setMag] = useState({ x: 0, y: 0 })
+  const { theme } = useTheme()
+  const isLight = theme === 'light'
+  // Three.js, GitHub, Vercel use white icons — invisible on a light disc,
+  // so they keep a blackish disc in light mode. Dark theme unchanged.
+  const isWhiteSkill = skill.color.toLowerCase() === '#ffffff'
 
   const Icon = iconMap[skill.icon]
   if (!Icon) return null
@@ -141,13 +147,15 @@ function SkillCard({ skill, index }: { skill: typeof skillsData[number]; index: 
           <div
             className="absolute inset-0 rounded-full backdrop-blur-xl border transition-all duration-400"
             style={{
-              background: 'rgba(255,255,255,0.04)',
+              background: isLight ? (isWhiteSkill ? '#d8dde4' : 'rgba(15,23,42,0.05)') : 'rgba(255,255,255,0.04)',
               backdropFilter: hovered ? 'blur(24px)' : 'blur(16px)',
               WebkitBackdropFilter: hovered ? 'blur(24px)' : 'blur(16px)',
-              borderColor: hovered ? `${skill.color}66` : 'rgba(255,255,255,0.08)',
+              borderColor: hovered ? (isLight && isWhiteSkill ? 'rgba(15,23,42,0.35)' : `${skill.color}66`) : isLight ? 'rgba(15,23,42,0.12)' : 'rgba(255,255,255,0.08)',
               boxShadow: hovered
                 ? `0 0 40px ${skill.color}20, 0 8px 32px rgba(0,0,0,0.4)`
-                : '0 8px 32px rgba(0,0,0,0.4)',
+                : isLight
+                  ? '0 8px 24px rgba(15,23,42,0.12)'
+                  : '0 8px 32px rgba(0,0,0,0.4)',
             }}
           />
 
@@ -181,12 +189,12 @@ function SkillCard({ skill, index }: { skill: typeof skillsData[number]; index: 
             <defs>
               <linearGradient id={`ring-${skill.id}`} x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor={skill.color} />
-                <stop offset="100%" stopColor="#fff" stopOpacity="0.5" />
+                <stop offset="100%" stopColor={isLight ? '#64748b' : '#fff'} stopOpacity="0.5" />
               </linearGradient>
             </defs>
             <circle
               cx={cardSize / 2} cy={cardSize / 2} r={ringRadius}
-              fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="6"
+              fill="none" stroke={isLight ? 'rgba(15,23,42,0.08)' : 'rgba(255,255,255,0.05)'} strokeWidth="6"
             />
             <circle
               ref={ringRef}
@@ -215,7 +223,7 @@ function SkillCard({ skill, index }: { skill: typeof skillsData[number]; index: 
                 <span
                   style={{ display: 'inline-block', transform: hovered ? 'rotate(5deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease' }}
                 >
-                  <Icon size={22} color={skill.color} />
+                  <Icon size={22} color={isLight && isWhiteSkill ? '#0f172a' : skill.color} />
                 </span>
                 </div>
                 <div
@@ -240,7 +248,7 @@ function SkillCard({ skill, index }: { skill: typeof skillsData[number]; index: 
             >
               <span
                 className="text-2xl font-bold"
-                style={{ color: skill.color, filter: `drop-shadow(0 0 12px ${skill.color}40)` }}
+                style={{ color: isLight && isWhiteSkill ? '#0f172a' : skill.color, filter: `drop-shadow(0 0 12px ${skill.color}40)` }}
               >
                 {displayedLevel}%
               </span>

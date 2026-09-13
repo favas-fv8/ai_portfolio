@@ -8,6 +8,7 @@ import { cn } from '@/utils/cn'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import ProjectDetailsModal from '@/components/ui/ProjectDetailsModal'
 import ProjectVideoModal from '@/components/ui/ProjectVideoModal'
+import { useTheme } from '@/hooks/useTheme'
 
 const categories = ['all', 'fullstack', 'frontend'] as const
 
@@ -42,6 +43,8 @@ function ProjectCover({ project }: { project: (typeof projectsData)[number] }) {
 
 export default function Projects() {
   const [active, setActive] = useState<string>('all')
+  const { theme } = useTheme()
+  const isLight = theme === 'light'
   const scrollRef = useRef<HTMLDivElement>(null!)
   const trackRef = useRef<HTMLDivElement>(null!)
   const rafRef = useRef<number>(0)
@@ -187,7 +190,11 @@ export default function Projects() {
             <span
               className={cn(
                 'ml-2 rounded-full px-2 py-0.5 text-xs font-mono',
-                active === cat ? 'bg-white/20 text-white' : 'bg-white/5 text-dark-400',
+                active === cat
+                  ? 'bg-white/20 text-white'
+                  : isLight
+                    ? 'bg-black/5 text-dark-400'
+                    : 'bg-white/5 text-dark-400',
               )}
             >
               {getCategoryCount(cat)}
@@ -206,14 +213,24 @@ export default function Projects() {
           <>
             <button
               onClick={() => scrollBy(-1)}
-              className="absolute left-0 md:-left-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full glass text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300"
+              className={cn(
+                'absolute left-0 md:-left-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full glass transition-all duration-300',
+                isLight
+                  ? 'text-gray-900 hover:text-black hover:bg-black/5'
+                  : 'text-white/70 hover:text-white hover:bg-white/10',
+              )}
               aria-label="Scroll left"
             >
               <ChevronLeft size={20} />
             </button>
             <button
               onClick={() => scrollBy(1)}
-              className="absolute right-0 md:-right-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full glass text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300"
+              className={cn(
+                'absolute right-0 md:-right-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full glass transition-all duration-300',
+                isLight
+                  ? 'text-gray-900 hover:text-black hover:bg-black/5'
+                  : 'text-white/70 hover:text-white hover:bg-white/10',
+              )}
               aria-label="Scroll right"
             >
               <ChevronRight size={20} />

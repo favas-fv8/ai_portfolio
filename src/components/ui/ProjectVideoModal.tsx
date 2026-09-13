@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from 'react'
 import { X, Play, Pause, Volume2, VolumeX, Maximize, SkipBack, SkipForward, MoreVertical, RotateCcw, RotateCw } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useTheme } from '@/hooks/useTheme'
 
 interface ProjectVideoModalProps {
   isOpen: boolean
@@ -11,6 +12,8 @@ interface ProjectVideoModalProps {
 
 export default function ProjectVideoModal({ isOpen, onClose, videoUrl, title }: ProjectVideoModalProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
+  const { theme } = useTheme()
+  const isLight = theme === 'light'
   const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const [playing, setPlaying] = useState(false)
   const [muted, setMuted] = useState(false)
@@ -117,17 +120,17 @@ export default function ProjectVideoModal({ isOpen, onClose, videoUrl, title }: 
         >
           <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
           <motion.div
-            className="relative w-full max-w-2xl glass rounded-2xl overflow-hidden border border-white/10"
+            className={`relative w-full max-w-2xl glass rounded-2xl overflow-hidden border ${isLight ? 'border-black/10' : 'border-white/10'}`}
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            <div className="flex items-center justify-between p-4 border-b border-white/10">
+            <div className={`flex items-center justify-between p-4 border-b ${isLight ? 'border-black/10' : 'border-white/10'}`}>
               <h3 className="text-sm font-medium text-text-primary truncate pr-4">{title}</h3>
               <button
                 onClick={onClose}
-                className="shrink-0 w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors"
+                className={`shrink-0 w-8 h-8 flex items-center justify-center rounded-full transition-colors ${isLight ? 'hover:bg-black/5' : 'hover:bg-white/10'}`}
               >
                 <X size={18} />
               </button>

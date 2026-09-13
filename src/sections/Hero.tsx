@@ -97,11 +97,12 @@ export default function Hero() {
   const panelBg = isLight ? '#ffffff' : '#000000'
   // Label: violet in light, steel blue/grey in dark
   const labelColor = isLight ? '#7c3aed' : '#94a3b8'
-  // Subname & tagline: white in light, grey in dark
-  const subNameColor = isLight ? '#ffffff' : '#94a3b8'
-  const taglineColor = isLight ? '#e2e8f0' : '#64748b'
-  // Icon: white in light, grey in dark
-  const iconColor = isLight ? '#ffffff' : '#64748b'
+  // Subname, tagline & icons: dark ink in light mode (white panels),
+  // muted grey in dark mode. Dark theme values unchanged.
+  const subNameColor = isLight ? '#0f172a' : '#94a3b8'
+  const taglineColor = isLight ? '#334155' : '#64748b'
+  // Icon: dark ink in light, grey in dark
+  const iconColor = isLight ? '#0f172a' : '#64748b'
   // Primary button: blue in light, violet in dark
   const btnPrimaryBg = isLight ? '#3b82f6' : '#7c3aed'
   const btnPrimaryHover = isLight ? '#2563eb' : '#6d28d9'
@@ -256,9 +257,9 @@ export default function Hero() {
             rel="noopener noreferrer"
             className="px-5 md:px-7 py-2.5 md:py-3 rounded-full text-xs md:text-sm font-semibold transition-all duration-300 hover:scale-105 active:scale-95"
             style={{
-              background: isLight ? 'rgba(124,58,237,0.08)' : 'rgba(255,255,255,0.08)',
-              border: `1px solid ${isLight ? 'rgba(124,58,237,0.35)' : 'rgba(255,255,255,0.15)'}`,
-              color: isLight ? '#7c3aed' : '#ffffff',
+              background: isLight ? '#4c1d95' : 'rgba(255,255,255,0.08)',
+              border: `1px solid ${isLight ? '#4c1d95' : 'rgba(255,255,255,0.15)'}`,
+              color: isLight ? '#e9d5ff' : '#ffffff',
             }}
           >
             Resume

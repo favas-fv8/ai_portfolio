@@ -4,8 +4,11 @@ import SectionLayout from '@/layouts/SectionLayout'
 import { SECTION_IDS } from '@/constants'
 import experienceData from '@/data/experience.json'
 import AnimatedSection from '@/components/ui/AnimatedSection'
+import { useTheme } from '@/hooks/useTheme'
 
 function ExperienceCard({ exp, index }: { exp: typeof experienceData[number]; index: number }) {
+  const { theme } = useTheme()
+  const isLight = theme === 'light'
   // once: true for the card entrance animation (slides in once)
   const cardRef = useRef<HTMLDivElement>(null)
   const isCardVisible = useInView(cardRef, { once: true, margin: '-80px' })
@@ -79,10 +82,10 @@ function ExperienceCard({ exp, index }: { exp: typeof experienceData[number]; in
       </div>
 
       {/* Card */}
-      <div className="group relative glass rounded-2xl p-6 overflow-hidden border border-white/5 hover:border-accent-500/30 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(99,102,241,0.15)]">
+      <div className={`group relative glass rounded-2xl p-6 overflow-hidden border transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] ${isLight ? 'border-black/10 hover:border-accent-500/40' : 'border-white/5 hover:border-accent-500/30'}`}>
         {/* Sweep shimmer on hover */}
         <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.05] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+          <div className={`absolute inset-0 bg-gradient-to-r from-transparent to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ${isLight ? 'via-black/[0.06]' : 'via-white/[0.05]'}`} />
         </div>
 
         {/* Header */}
@@ -114,7 +117,7 @@ function ExperienceCard({ exp, index }: { exp: typeof experienceData[number]; in
           {exp.technologies.map(tech => (
             <span
               key={tech}
-              className="text-xs px-2.5 py-1 rounded-full bg-accent-900/40 text-accent-300 border border-accent-800/50"
+              className={`text-xs px-2.5 py-1 rounded-full border ${isLight ? 'bg-accent-500/10 border-accent-500/25 text-accent-800 font-medium' : 'bg-accent-900/40 border-accent-800/50 text-accent-300'}`}
             >
               {tech}
             </span>

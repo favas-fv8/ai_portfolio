@@ -5,6 +5,7 @@ import SectionLayout from '@/layouts/SectionLayout'
 import { SECTION_IDS } from '@/constants'
 import profile from '@/data/profile.json'
 import AnimatedSection from '@/components/ui/AnimatedSection'
+import { useTheme } from '@/hooks/useTheme'
 
 const stats = [
   { icon: Briefcase, label: 'Years Experience', value: profile.experience },
@@ -15,6 +16,8 @@ const stats = [
 
 export default function About() {
   const [imgError, setImgError] = useState(false)
+  const { theme } = useTheme()
+  const isLight = theme === 'light'
   const profileRef = useRef(null)
   const isHovered = useInView(profileRef, { once: false, amount: 0.3 })
 
@@ -72,10 +75,10 @@ export default function About() {
               <div
                 className="absolute inset-0 rounded-full"
                 style={{
-                  background: 'rgba(255,255,255,0.04)',
+                  background: isLight ? 'rgba(15,23,42,0.05)' : 'rgba(255,255,255,0.04)',
                   backdropFilter: 'blur(20px)',
                   WebkitBackdropFilter: 'blur(20px)',
-                  border: '1px solid rgba(255,255,255,0.08)',
+                  border: isLight ? '1px solid rgba(15,23,42,0.12)' : '1px solid rgba(255,255,255,0.08)',
                 }}
               />
               <svg className="absolute inset-0 w-full h-full" viewBox="0 0 224 224">
@@ -85,7 +88,7 @@ export default function About() {
                     <stop offset="100%" stopColor="rgba(139,92,246,0.25)" />
                   </linearGradient>
                 </defs>
-                <circle cx="112" cy="112" r="100" fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth="5" />
+                <circle cx="112" cy="112" r="100" fill="none" stroke={isLight ? 'rgba(15,23,42,0.08)' : 'rgba(255,255,255,0.04)'} strokeWidth="5" />
                 <circle
                   cx="112" cy="112" r="100"
                   fill="none" stroke="url(#ringGrad)" strokeWidth="5"
@@ -101,7 +104,11 @@ export default function About() {
               <div
                 className="absolute inset-0 rounded-full"
                 style={{
-                  border: isHovered ? '1px solid rgba(99,102,241,0.25)' : '1px solid rgba(255,255,255,0.06)',
+                  border: isHovered
+                    ? '1px solid rgba(99,102,241,0.25)'
+                    : isLight
+                      ? '1px solid rgba(15,23,42,0.10)'
+                      : '1px solid rgba(255,255,255,0.06)',
                   transition: 'border 0.5s ease',
                 }}
               />
@@ -370,7 +377,7 @@ export default function About() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
               >
                 <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.06] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                  <div className={`absolute inset-0 bg-gradient-to-r from-transparent to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ${isLight ? 'via-black/[0.06]' : 'via-white/[0.06]'}`} />
                 </div>
                 <stat.icon className="mx-auto mb-1.5 text-accent-400" size={20} />
                 <div className="text-xl font-bold text-text-primary mb-0.5">

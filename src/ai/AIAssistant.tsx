@@ -162,6 +162,7 @@ function AIOrb({ onClick, label }: { onClick: () => void; label: string }) {
       {/* tooltip */}
       <motion.div
         className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-lg bg-dark-800/90 backdrop-blur-sm border border-white/10 text-xs text-white/80 whitespace-nowrap pointer-events-none"
+        style={{ backgroundColor: '#14141f', borderColor: 'rgba(255,255,255,0.12)' }}
         initial={{ opacity: 0, y: 6, scale: 0.9 }}
         whileHover={{ opacity: 1, y: 0, scale: 1 }}
       >
@@ -366,6 +367,7 @@ export default function AIAssistant() {
             {showTooltip && (
               <motion.div
                 className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-lg bg-dark-800/90 backdrop-blur-sm border border-white/10 text-xs text-white/80 whitespace-nowrap pointer-events-none"
+                style={{ backgroundColor: '#14141f', borderColor: 'rgba(255,255,255,0.12)' }}
                 initial={{ opacity: 0, y: 6, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
               >

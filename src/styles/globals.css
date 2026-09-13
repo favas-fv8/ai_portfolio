@@ -1524,3 +1524,24 @@
   transform: translateY(calc((1 - var(--timeline-active-card, 0)) * 30px));
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
+
+/* ---------- LIGHT THEME visibility fixes (dark theme untouched) ----------
+   Only `.light`-scoped overrides. Dark rendering is unaffected. */
+.light .text-accent-400 {
+  /* Eyebrow labels, icons and markers use accent-400 (#818cf8), which is
+     too faint on light backgrounds — use the darker accent-700 instead. */
+  color: var(--color-accent-700);
+}
+
+.light .text-gradient {
+  /* Keep the same hue, deepen both stops so large gradient headings stay
+     legible on white. Background-clip must be re-declared because the
+     `background` shorthand resets it. */
+  background: linear-gradient(135deg, var(--color-accent-600), var(--color-accent-800));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.light .flip-hint {
+  color: rgba(15, 23, 42, 0.55);
+}
