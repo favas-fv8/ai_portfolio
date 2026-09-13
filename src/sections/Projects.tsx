@@ -11,6 +11,28 @@ import ProjectVideoModal from '@/components/ui/ProjectVideoModal'
 
 const categories = ['all', 'fullstack', 'frontend'] as const
 
+function ProjectCover({ project }: { project: (typeof projectsData)[number] }) {
+  const [failed, setFailed] = useState(false)
+
+  if (!project.image || project.image === '#' || failed) {
+    return (
+      <div className="project-cover-fallback">
+        <ImageIcon size={32} className="text-dark-500" />
+      </div>
+    )
+  }
+
+  return (
+    <img
+      src={project.image}
+      alt={project.title}
+      className="project-cover-img"
+      loading="lazy"
+      onError={() => setFailed(true)}
+    />
+  )
+}
+
 export default function Projects() {
   const [active, setActive] = useState<string>('all')
   const scrollRef = useRef<HTMLDivElement>(null!)
@@ -144,21 +166,7 @@ export default function Projects() {
               <div key={`${project.id}-${i}`} className="project-card-wrapper">
                 <div className="project-card-bg" />
                 <div className="project-card-cover">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="project-cover-img"
-                    loading="lazy"
-                    onError={e => {
-                      const img = e.target as HTMLImageElement
-                      img.style.display = 'none'
-                      const fallback = img.nextElementSibling
-                      if (fallback) fallback.classList.remove('hidden')
-                    }}
-                  />
-                  <div className="project-cover-fallback hidden">
-                    <ImageIcon size={32} className="text-dark-500" />
-                  </div>
+                  <ProjectCover project={project} />
                 </div>
                 <div className="project-card">
                   <div className="project-content">
