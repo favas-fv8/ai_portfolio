@@ -1,15 +1,15 @@
 [
   {
     "id": "exp-6",
-    "company": "Customer Project",
+    "company": "personal project, IntrnForte Internship",
     "role": "Pachoos",
     "location": "E-Commerce Platform",
-    "startDate": "2026",
-    "endDate": "2026",
+    "startDate": "2024",
+    "endDate": "2024",
     "current": false,
-    "description": "Production-oriented full-stack bakery and fruit ordering platform for managing customers, products, inventory, carts, orders, payments, wallets and business operations.",
+    "description": "Production-oriented full-stack bakery and fruit ordering platform for managing customers, products, inventory, carts, orders, payments, wallets and business operations. Includes shopping cart and checkout, role-based access, wallet/debt management, payment integration and admin dashboard.",
     "achievements": [],
-    "technologies": ["React", "Django", "PostgreSQL", "Celery", "Redis"]
+    "technologies": ["React", "TypeScript", "Django", "Django REST Framework", "PostgreSQL", "Celery", "Redis"]
   },
   {
     "id": "exp-5",
@@ -19,68 +19,68 @@
     "startDate": "2026",
     "endDate": null,
     "current": true,
-    "description": "Interactive personal developer portfolio designed to present projects, skills, experience and developer identity through a modern animated interface.",
+    "description": "Interactive personal developer portfolio designed to present projects, skills, experience and developer identity through a modern animated interface. Features interactive 3D visuals, smooth scrolling, AI-style assistant, command palette and responsive UI.",
     "achievements": [],
-    "technologies": ["React 19", "TypeScript", "Three.js", "GSAP", "Tailwind CSS"]
+    "technologies": ["React 19", "TypeScript", "Three.js", "Framer Motion", "GSAP", "Tailwind CSS 4"]
   },
   {
     "id": "exp-4",
     "company": "IntrnForte Internship",
     "role": "AI-BrestCancer Predictor",
     "location": "Internship Project",
-    "startDate": "2026",
-    "endDate": "2026",
+    "startDate": "2025",
+    "endDate": "2025",
     "current": false,
-    "description": "Full-stack research and educational application for classifying breast histopathology image patches as Benign or Malignant using a CancerNet CNN model.",
+    "description": "Full-stack research and educational application for classifying breast histopathology image patches as Benign or Malignant using a CancerNet CNN model. Includes image upload, prediction confidence, history tracking and performance dashboard.",
     "achievements": [],
-    "technologies": ["Python", "Django", "TensorFlow", "Keras", "PostgreSQL"]
+    "technologies": ["Python", "Django", "Django REST Framework", "React", "TensorFlow", "Keras", "PostgreSQL"]
   },
   {
     "id": "exp-7",
     "company": "IntrnForte Internship",
     "role": "AI-Insurance Predictor",
     "location": "Internship Project",
-    "startDate": "2026",
-    "endDate": "2026",
+    "startDate": "2024",
+    "endDate": "2024",
     "current": false,
-    "description": "Full-stack machine-learning application for predicting insurance purchase outcomes from customer age and estimated salary.",
+    "description": "Full-stack machine-learning application for predicting insurance purchase outcomes from customer age and estimated salary. Includes JWT authentication, prediction history, model comparison and performance metrics.",
     "achievements": [],
-    "technologies": ["Python", "Django", "Scikit-learn", "React", "PostgreSQL"]
+    "technologies": ["Python", "Django", "Django REST Framework", "React", "PostgreSQL", "scikit-learn"]
   },
   {
     "id": "exp-3",
     "company": "IntrnForte Internship",
     "role": "AI-Job Portal",
     "location": "Internship Project",
-    "startDate": "2026",
-    "endDate": "2026",
+    "startDate": "2024",
+    "endDate": "2024",
     "current": false,
-    "description": "AI-powered job marketplace connecting job seekers and recruiters through role-based dashboards, job management, applications, resume processing and intelligent recommendations.",
+    "description": "AI-powered job marketplace connecting job seekers and recruiters through role-based dashboards, job management, applications, resume processing and intelligent recommendations. Includes AI resume analysis, job matching and skill-gap analysis.",
     "achievements": [],
-    "technologies": ["React", "Django", "PostgreSQL", "Google Gemini", "SimpleJWT"]
+    "technologies": ["React 18", "Django", "Django REST Framework", "PostgreSQL", "SimpleJWT", "Google Gemini / Google GenAI"]
   },
   {
     "id": "exp-2",
     "company": "College Major Project",
     "role": "AI-WildEye",
     "location": "Academic Major Project",
-    "startDate": "2026",
-    "endDate": "2026",
+    "startDate": "2025",
+    "endDate": "2025",
     "current": false,
-    "description": "AI-based wildlife image recognition application combining Django with computer vision and TensorFlow-based machine learning.",
+    "description": "Web-based wild animal detection and alert system — AI-based wildlife image recognition combining Django with computer vision and TensorFlow-based machine learning. Includes image upload, preprocessing, classification and Django web integration.",
     "achievements": [],
-    "technologies": ["Python", "Django", "TensorFlow", "OpenCV", "Pillow"]
+    "technologies": ["Python", "Django", "TensorFlow CPU", "OpenCV", "Pillow", "NumPy"]
   },
   {
     "id": "exp-1",
     "company": "College Mini Project",
     "role": "No-Due Submission Portal",
     "location": "Academic Mini Project",
-    "startDate": "2025",
-    "endDate": "2025",
+    "startDate": "2024",
+    "endDate": "2024",
     "current": false,
-    "description": "Role-based college no-due clearance platform that digitizes a multi-department student clearance process.",
+    "description": "Role-based college no-due clearance platform that digitizes a multi-department student clearance process. Features JWT authentication, 11-section sequential workflow, role-based routing, audit history and certificate generation.",
     "achievements": [],
-    "technologies": ["React", "Django", "SQLite", "SimpleJWT", "Axios"]
+    "technologies": ["React", "Django", "Django REST Framework", "SQLite", "SimpleJWT", "Axios"]
   }
 ]

@@ -1,10 +1,10 @@
 import { Mail } from 'lucide-react'
-import { GithubIcon, LinkedinIcon, TwitterIcon, InstagramIcon } from '@/components/ui/SocialIcon'
+import { GithubIcon, LinkedinIcon, InstagramIcon } from '@/components/ui/SocialIcon'
 import { siteConfig } from '@/config/site'
 import socialsData from '@/data/socials.json'
 
 const iconMap: Record<string, React.ComponentType<{ size?: number }>> = {
-  Github: GithubIcon, Linkedin: LinkedinIcon, Twitter: TwitterIcon, Instagram: InstagramIcon, Mail,
+  Github: GithubIcon, Linkedin: LinkedinIcon, Instagram: InstagramIcon, Mail,
 }
 
 export default function Footer() {

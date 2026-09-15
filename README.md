@@ -15,6 +15,52 @@ A modern, interactive developer portfolio built with React, TypeScript, and Vite
 - Responsive UI with Tailwind CSS
 - Accessibility detail including a skip-to-content link
 
+## Demo / Video
+
+Watch a full walkthrough of the portfolio experience:
+
+[▶ Watch Portfolio Demo](captures/videos/portfolio.mp4)
+
+> Video file: `captures/videos/portfolio.mp4`
+
+## Screenshots
+
+### Home
+
+![Home — Hero landing section](captures/images/home.png)
+
+![Home — Alternate hero view](captures/images/home1.png)
+
+### About & Experience
+
+![About section overview](captures/images/about.png)
+
+![Experience section timeline](captures/images/experience.jpeg)
+
+### Skills & Services
+
+![Skills section with tech stack](captures/images/skills.png)
+
+![Services section offerings](captures/images/services.png)
+
+### Projects
+
+![Projects showcase section](captures/images/projects.png)
+
+### Education & Certificates
+
+![Education background section](captures/images/education.png)
+
+![Certifications showcase](captures/images/certificates.png)
+
+### AI Chatbot
+
+![Floating AI portfolio assistant chatbot](captures/images/chatbot.jpeg)
+
+### Contact
+
+![Contact section with form and details](captures/images/contact.png)
+
 ## Tech Stack
 
 - **Frontend:** React 19, TypeScript, Vite 8

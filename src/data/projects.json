@@ -63,7 +63,7 @@
     "featured": true,
     "githubUrl": "https://github.com/favas-fv8/ai_portfolio",
     "liveUrl": "https://favas-fv8.github.io/ai_portfolio",
-    "videoUrl": "#",
+    "videoUrl": "/ai_portfolio/videos/portfolio.mp4",
     "detailsUrl": "#",
     "year": 2026
   },
@@ -125,7 +125,7 @@
     "featured": true,
     "githubUrl": "https://github.com/favas-fv8/ai_wildEye",
     "liveUrl": "/ai_portfolio/not-live",
-    "videoUrl": "#",
+    "videoUrl": "/ai_portfolio/videos/ai_wildEye.mp4",
     "detailsUrl": "#",
     "year": 2025
   },

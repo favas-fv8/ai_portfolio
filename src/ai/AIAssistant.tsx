@@ -1,11 +1,145 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
+import type { ReactNode } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Send, X } from 'lucide-react'
 import gsap from 'gsap'
 import { cn } from '@/utils/cn'
 import { findBestResponse, suggestedQuestions, type Message } from './engine'
+
+/* ---------- Lightweight markdown renderer ---------- */
+/* Supports engine output: ### titles, **bold**, `badges`, [links](url),
+   - points, indented sub-points, 1. numbered, > quotes, | tables | */
+function renderInline(text: string, keyPrefix: string): ReactNode[] {
+  const out: ReactNode[] = []
+  // links, bold, code, italic
+  const re = /(\[([^\]]+)\]\(([^)]+)\))|(\*\*([^*]+)\*\*)|(`([^`]+)`)|(\*([^*\n]+)\*)/g
+  let last = 0
+  let m: RegExpExecArray | null
+  let k = 0
+  while ((m = re.exec(text)) !== null) {
+    if (m.index > last) out.push(text.slice(last, m.index))
+    if (m[1]) {
+      out.push(
+        <a key={`${keyPrefix}-a-${k++}`} href={m[3]} target="_blank" rel="noopener noreferrer" className="chat-md-link">
+          {m[2]}
+        </a>,
+      )
+    } else if (m[4]) {
+      out.push(<strong key={`${keyPrefix}-b-${k++}`} className="chat-md-strong">{m[5]}</strong>)
+    } else if (m[6]) {
+      out.push(<code key={`${keyPrefix}-c-${k++}`} className="chat-md-badge">{m[7]}</code>)
+    } else if (m[8]) {
+      out.push(<em key={`${keyPrefix}-i-${k++}`} className="chat-md-em">{m[9]}</em>)
+    }
+    last = m.index + m[0].length
+  }
+  if (last < text.length) out.push(text.slice(last))
+  return out
+}
+
+function ChatMarkdown({ text }: { text: string }) {
+  const lines = text.split('\n')
+  const blocks: ReactNode[] = []
+  let i = 0
+  let key = 0
+  while (i < lines.length) {
+    const line = lines[i]
+    const trimmed = line.trim()
+    // table block
+    if (trimmed.startsWith('|') && i + 1 < lines.length && /^\|?[\s:|-]+\|?[\s:|-]*$/.test(lines[i + 1].trim())) {
+      const header = trimmed.split('|').filter(Boolean).map(s => s.trim())
+      i += 2
+      const rows: string[][] = []
+      while (i < lines.length && lines[i].trim().startsWith('|')) {
+        rows.push(lines[i].trim().split('|').filter(Boolean).map(s => s.trim()))
+        i++
+      }
+      blocks.push(
+        <div key={key++} className="chat-md-table-wrap">
+          <table className="chat-md-table">
+            <thead><tr>{header.map((h, hi) => <th key={hi}>{renderInline(h, `th-${key}-${hi}`)}</th>)}</tr></thead>
+            <tbody>{rows.map((r, ri) => <tr key={ri}>{r.map((c, ci) => <td key={ci}>{renderInline(c, `td-${key}-${ri}-${ci}`)}</td>)}</tr>)}</tbody>
+          </table>
+        </div>,
+      )
+      continue
+    }
+    if (/^###\s+/.test(trimmed)) {
+      blocks.push(<h4 key={key++} className="chat-md-h">{renderInline(trimmed.replace(/^###\s+/, ''), `h-${key}`)}</h4>)
+      i++
+      continue
+    }
+    if (/^##\s+/.test(trimmed)) {
+      blocks.push(<h3 key={key++} className="chat-md-h">{renderInline(trimmed.replace(/^##\s+/, ''), `h-${key}`)}</h3>)
+      i++
+      continue
+    }
+    if (/^>\s?/.test(trimmed)) {
+      blocks.push(<blockquote key={key++} className="chat-md-quote">{renderInline(trimmed.replace(/^>\s?/, ''), `q-${key}`)}</blockquote>)
+      i++
+      continue
+    }
+    if (/^(\s*[-•]\s+)/.test(line)) {
+      const items: ReactNode[] = []
+      while (i < lines.length && /^(\s*[-•]\s+)/.test(lines[i])) {
+        const m = lines[i].match(/^(\s*)[-•]\s+(.*)$/)!
+        const indent = m[1].length
+        items.push(
+          <li key={`li-${key}-${items.length}`} className={indent >= 2 ? 'chat-md-sub' : undefined}>
+            {renderInline(m[2], `li-${key}-${items.length}`)}
+          </li>,
+        )
+        i++
+      }
+      blocks.push(<ul key={key++} className="chat-md-ul">{items}</ul>)
+      continue
+    }
+    if (/^\s*\d+\.\s+/.test(line)) {
+      const items: ReactNode[] = []
+      while (i < lines.length && /^\s*\d+\.\s+/.test(lines[i])) {
+        items.push(<li key={`ol-${key}-${items.length}`}>{renderInline(lines[i].replace(/^\s*\d+\.\s+/, ''), `ol-${key}-${items.length}`)}</li>)
+        i++
+      }
+      blocks.push(<ol key={key++} className="chat-md-ol">{items}</ol>)
+      continue
+    }
+    if (trimmed === '' || trimmed === '---') {
+      if (trimmed === '---') blocks.push(<hr key={key++} className="chat-md-hr" />)
+      i++
+      continue
+    }
+    blocks.push(<p key={key++} className="chat-md-p">{renderInline(line, `p-${key}`)}</p>)
+    i++
+  }
+  return (
+    <div className="chat-md">
+      {blocks}
+      <style>{`
+        .chat-md { display: flex; flex-direction: column; gap: 0.4rem; overflow-wrap: anywhere; }
+        .chat-md-h { font-size: 0.85rem; font-weight: 700; color: #fff; margin: 0.15rem 0 0.1rem; }
+        .chat-md-p { margin: 0; }
+        .chat-md-ul, .chat-md-ol { margin: 0; padding-left: 1.05rem; display: flex; flex-direction: column; gap: 0.25rem; }
+        .chat-md-ul { list-style: disc; }
+        .chat-md-ol { list-style: decimal; }
+        .chat-md-sub { margin-left: 0.85rem; list-style: circle; opacity: 0.92; }
+        .chat-md-strong { color: #fff; font-weight: 700; }
+        .chat-md-em { opacity: 0.85; }
+        .chat-md-badge { font-family: ui-monospace, monospace; font-size: 0.68rem; background: rgba(99,102,241,0.18); border: 1px solid rgba(99,102,241,0.35); color: #c7d2fe; padding: 0.05rem 0.4rem; border-radius: 9999px; white-space: nowrap; }
+        .chat-md-link { color: #93c5fd; text-decoration: underline; text-underline-offset: 2px; }
+        .chat-md-link:hover { color: #bfdbfe; }
+        .chat-md-quote { margin: 0; padding-left: 0.6rem; border-left: 2px solid rgba(99,102,241,0.6); opacity: 0.9; font-style: italic; }
+        .chat-md-hr { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 0.3rem 0; }
+        .chat-md-table-wrap { overflow-x: auto; margin: 0.15rem -0.25rem; padding: 0 0.25rem; }
+        .chat-md-table { width: 100%; border-collapse: collapse; font-size: 0.72rem; }
+        .chat-md-table th { text-align: left; font-weight: 700; color: #fff; background: rgba(99,102,241,0.15); padding: 0.3rem 0.45rem; border: 1px solid rgba(255,255,255,0.1); white-space: nowrap; }
+        .chat-md-table td { padding: 0.3rem 0.45rem; border: 1px solid rgba(255,255,255,0.08); vertical-align: top; }
+        .chat-md-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+      `}</style>
+    </div>
+  )
+}
 
 /* ---------- Orbiting particles ---------- */
 function OrbitalParticles() {
@@ -255,7 +389,7 @@ function TypingDots() {
   )
 }
 
-/* ---------- Character-by-character typing ---------- */
+/* ---------- Character-by-character typing (markdown-aware) ---------- */
 function TypewriterText({ text, onDone }: { text: string; onDone?: () => void }) {
   const [displayed, setDisplayed] = useState('')
   const idx = useRef(0)
@@ -270,13 +404,13 @@ function TypewriterText({ text, onDone }: { text: string; onDone?: () => void })
         clearInterval(interval)
         onDone?.()
       }
-    }, 15)
+    }, 8)
     return () => clearInterval(interval)
   }, [text, onDone])
 
   return (
     <span>
-      {displayed}
+      <ChatMarkdown text={displayed} />
       {displayed.length < text.length && (
         <span className="inline-block w-[2px] h-[1em] bg-accent-400/70 ml-0.5 align-middle animate-pulse" />
       )}
@@ -477,7 +611,7 @@ export default function AIAssistant() {
                           : 'bg-white/5 text-gray-200 rounded-bl-md border border-white/5',
                       )}
                     >
-                      {msg.content}
+                      {msg.role === 'user' ? msg.content : <ChatMarkdown text={msg.content} />}
                     </div>
                   </motion.div>
                 ))}

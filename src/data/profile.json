@@ -1,12 +1,12 @@
 {
   "name": "MOHAMMED FAVAS KS",
   "title": "Fullstack Web Developer",
-  "tagline": "Crafting digital experiences with code & creativity",
+  "tagline": "Building modern web applications powered by AI & creativity",
   "bio": [
-    "I'm a passionate Full Stack Web Developer focused on building modern, scalable web applications with AI-powered capabilities. By combining expertise in frontend, backend, and artificial intelligence, I create smart, user-friendly solutions that deliver exceptional experiences. I love turning complex ideas into innovative products that are fast, reliable, and impactful."
+    "I'm a passionate Full Stack Developer focused on building modern, scalable, and AI-powered web applications. I combine frontend, backend, and AI expertise to create smart, reliable, and user-friendly solutions that turn complex ideas into impactful real-world products."
   ],
   "avatar": "/ai_portfolio/images/profile/profile.png",
-  "resumeUrl": "/ai_portfolio/resume.pdf",
+  "resumeUrl": "/ai_portfolio/resume_FAVAS.pdf",
   "email": "fv8favas@gmail.com",
   "phone": "+91 7736316028",
   "location": "Thrissur, Kerala, India",
@@ -14,5 +14,5 @@
   "experience": 1,
   "projects": 7,
   "certifications": 10,
-  "technologies": 20
+  "technologies": 40
 }
