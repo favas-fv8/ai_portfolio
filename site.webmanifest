@@ -1,9 +1,17 @@
 {
   "name": "MOHAMMED FAVAS KS | Fullstack Web Developer",
   "short_name": "MF Portfolio",
+  "id": "/ai_portfolio/",
   "start_url": "/ai_portfolio/",
   "display": "standalone",
   "background_color": "#0a0a0f",
   "theme_color": "#0a0a0f",
-  "icons": []
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
 }
