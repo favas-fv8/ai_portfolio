@@ -7,6 +7,7 @@ import Footer from '@/components/Footer'
 import AIAssistant from '@/ai/AIAssistant'
 import CommandPalette from '@/components/CommandPalette'
 import { useLenis } from '@/hooks/useLenis'
+import { useHashScroll } from '@/hooks/useHashScroll'
 
 const Hero = lazy(() => import('@/sections/Hero'))
 const About = lazy(() => import('@/sections/About'))
@@ -22,6 +23,7 @@ const sectionLoader = <div className="h-64 flex items-center justify-center text
 
 export default function MainLayout() {
   useLenis()
+  useHashScroll()
 
   return (
     <>

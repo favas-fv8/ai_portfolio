@@ -123,6 +123,12 @@
     scroll-behavior: auto;
   }
 
+  /* Safety net for native anchor fallback + skip link under fixed header.
+     Programmatic Lenis scrolling already applies the same offset. */
+  section[id] {
+    scroll-margin-top: 80px;
+  }
+
   body {
     margin: 0;
     padding: 0;

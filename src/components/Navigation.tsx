@@ -3,6 +3,7 @@ import { Menu, X } from 'lucide-react'
 import { cn } from '@/utils/cn'
 import { navigationItems } from '@/config/navigation'
 import { useTheme } from '@/hooks/useTheme'
+import { clearSectionHash, scrollToSectionId } from '@/utils/scrollToSection'
 
 export default function Navigation() {
   const { theme, toggleTheme } = useTheme()
@@ -25,8 +26,12 @@ export default function Navigation() {
 
   const handleNavClick = (sectionId: string) => {
     setMobileOpen(false)
-    const el = document.getElementById(sectionId)
-    el?.scrollIntoView({ behavior: 'smooth' })
+    scrollToSectionId(sectionId)
+  }
+
+  const handleLogoClick = () => {
+    clearSectionHash()
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   const isLight = theme === 'light'
@@ -41,7 +46,7 @@ export default function Navigation() {
     >
       <nav className="mx-auto max-w-7xl flex items-center justify-between px-6 py-4">
         <button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={handleLogoClick}
           className="text-xl font-bold tracking-wider text-gradient"
           aria-label="Go to top"
         >

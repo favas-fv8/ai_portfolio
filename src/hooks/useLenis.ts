@@ -13,6 +13,9 @@ export function useLenis() {
     })
 
     lenisRef.current = lenis
+    // Exposed for programmatic deep-link scrolling (see useHashScroll /
+    // scrollToSection). Additive only — Lenis behaviour itself is unchanged.
+    ;(window as unknown as { __lenis?: Lenis }).__lenis = lenis
 
     function raf(time: number) {
       lenis.raf(time)
@@ -23,6 +26,9 @@ export function useLenis() {
 
     return () => {
       lenis.destroy()
+      if ((window as unknown as { __lenis?: Lenis }).__lenis === lenis) {
+        delete (window as unknown as { __lenis?: Lenis }).__lenis
+      }
     }
   }, [])
 

@@ -1,6 +1,7 @@
 import { Mail } from 'lucide-react'
 import { GithubIcon, LinkedinIcon, InstagramIcon } from '@/components/ui/SocialIcon'
 import { siteConfig } from '@/config/site'
+import { clearSectionHash } from '@/utils/scrollToSection'
 import socialsData from '@/data/socials.json'
 
 const iconMap: Record<string, React.ComponentType<{ size?: number }>> = {
@@ -8,7 +9,10 @@ const iconMap: Record<string, React.ComponentType<{ size?: number }>> = {
 }
 
 export default function Footer() {
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
+  const scrollToTop = () => {
+    clearSectionHash()
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
   return (
     <footer className="relative border-t border-border">

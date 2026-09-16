@@ -4,6 +4,7 @@ import { LinkedinIcon, GithubIcon, InstagramIcon } from '@/components/ui/SocialI
 import SectionLayout from '@/layouts/SectionLayout'
 import { siteConfig } from '@/config/site'
 import { SECTION_IDS } from '@/constants'
+import { scrollToSectionId } from '@/utils/scrollToSection'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useTheme } from '@/hooks/useTheme'
@@ -19,7 +20,9 @@ export default function Hero() {
   const isLight = theme === 'light'
 
   const scrollToAbout = () => {
-    document.getElementById(SECTION_IDS.about)?.scrollIntoView({ behavior: 'smooth' })
+    // Shared helper keeps Lenis + fixed-header offset consistent and
+    // mirrors `#about` into the URL so the section is shareable.
+    scrollToSectionId(SECTION_IDS.about)
   }
 
   // Preload all 150 frames
